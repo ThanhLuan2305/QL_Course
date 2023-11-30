@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.ARTICLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="all-title-box mb-3">
+    <div class="container text-center">
+        <h1>Blog<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+    </div>
+</div>
+
+<div id="overviews" class="section wb">
+    <div class="container" style="padding:0 7rem;">
+        <div class="section-title row text-center">
+            <div class="col-md-8 offset-md-2">
+                <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+            </div>
+        </div><!-- end title -->
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="blog-item mt-4">
+                        <div class="image-blog">
+                            <img src="~/Assets/images/blog_1.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="meta-info-blog">
+                            <span><i class="fa fa-calendar"></i> 
+                                <a href="#">
+                                    @Html.DisplayFor(modelItem => item.CREATED_AT) 
+                                </a>
+                            </span>
+                            <span><i class="fa fa-tag"></i>  <a href="#">News</a> </span>
+                            <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+                        </div>
+                        <div class="blog-title">
+                            <h3 style="height:58px; padding:0; margin-bottom:1rem"><a href="/blog/detail/@item.ID" title="">@item.TITLE </a></h3>
+                        </div>
+                        <div class="blog-desc">
+                            @if (item.CONTENT.Length > 155)
+                            {
+                                <p style="height:92px">@item.CONTENT.Substring(0, 152)...</p>
+                            }
+                            else
+                            {
+                                <p style="height:92px">@item.CONTENT</p>
+                            }
+                        </div>
+                        <div class="blog-button">
+                            <a class="hover-btn-new orange" href="/blog/detail/@item.ID"><span>Read More</span></a>
+                        </div>
+                    </div>
+                </div><!-- end col -->
+            }
+        </div><!-- end row -->
+
+        <hr class="hr3">
+    </div><!-- end container -->
+</div><!-- end section -->

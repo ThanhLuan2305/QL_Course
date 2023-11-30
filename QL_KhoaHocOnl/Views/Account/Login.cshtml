@@ -1,0 +1,33 @@
+﻿@model QL_KhoaHocOnl.ViewModel.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:10px;">ĐĂNG NHẬP</h2>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="row w-25 mx-auto">
+        <div class="col-md-12 login">
+            @Html.LabelFor(temp => temp.Username)
+            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Username, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-12 login">
+            @Html.LabelFor(temp => temp.Password)
+            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row w-25 mx-auto">
+        <div class="col-md-12">
+            @Html.ValidationSummary()
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-success" style="margin:10px 0;">Đăng nhập</button>
+        </div>
+    </div>
+}

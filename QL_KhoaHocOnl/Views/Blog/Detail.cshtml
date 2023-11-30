@@ -1,0 +1,211 @@
+﻿@model QL_KhoaHocOnl.Models.ARTICLE
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    h1 {
+        color:white;
+        padding:0;
+        margin-bottom:0.5rem;
+    }
+</style>
+<div class="container" style="margin: 2rem 6.5rem">
+    <div class="blog-title mb-2" style="background-color: #19202A; padding:1rem 1rem">
+        <h1>@Model.TITLE</h1>
+        <div class="meta-info-blog">
+            <span>
+                <i class="fa fa-calendar"></i>
+                <a href="#">
+                    @Model.CREATED_AT
+                </a>
+            </span>
+            <span><i class="fa fa-tag"></i>  <a href="#">News</a> </span>
+            <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+        </div>
+    </div>
+    <img style="width:100%; height:400px;object-fit:cover" src="~/Assets/images/blog_4.jpg" alt="Alternate Text" />
+    <div class="m-2">
+        <p>@Model.CONTENT</p>
+        <p>
+            Làm thế nào để trở thành một nhà phân tích dữ liệu?
+            Về việc mất bao lâu để trở thành một nhà phân tích, điều đó phụ thuộc rất nhiều vào từng cá nhân. Những người có một ít kiến ​​thức và kinh nghiệm sẵn có, có thể thành thạo các kỹ năng trong vòng vài tháng. Còn đối với những người khác, sẽ mất hơn vài năm học.
+
+            Tuy nhiên, về cơ bản, bạn sẽ cần một số thành phần để phát triển mạnh trong ngành, bao gồm:
+
+            Sự tò mò tự nhiên về dữ liệu
+            Ngôn ngữ và kỹ năng lập trình chính
+            Một danh mục đầu tư của các dự án có liên quan
+            Sơ yếu lý lịch được viết đúng cách
+            Hồ sơ hấp dẫn trên LinkedIn và các trang web tương tự
+            Kết nối với các chuyên gia dữ liệu khác
+            Bước 1: Tìm hiểu các kỹ năng phân tích dữ liệu cần thiết
+            Bắt đầu với những kiến thức cơ bản về phân tích dữ liệu
+
+            Chúng ta thường thấy, để bắt đầu học phân tích, người ta phải giỏi toán học, thống kê hoặc lập trình. Mặc dù đúng là nền tảng trong các lĩnh vực này cung cấp cơ sở kỹ thuật vững chắc, nhưng điều đó không có nghĩa là nghề nghiệp trong lĩnh vực data là không thể tiếp cận đối với những người có nền tảng giáo dục và chuyên môn khác.
+
+            Học cách phân tích dữ liệu sẽ đòi hỏi một số nghiên cứu chuyên sâu, cống hiến và rất nhiều thực hành. Bạn phải duy trì một mức độ lạc quan nhất định ngay cả khi bạn đang bế tắc, kiệt sức, chán nản hoặc không thấy tiến triển gì.
+
+            Bạn sẽ muốn bắt đầu bằng cách nắm vững một số kỹ năng phân tích dữ liệu cơ bản, chẳng hạn như các nguyên tắc cơ bản của thống kê. Bạn cũng có thể bắt đầu với những thứ như phân tích dữ liệu trong bảng tính để có cảm giác thu thập và sắp xếp lại, đồng thời tìm hiểu cách hoạt động của phân tích dữ liệu khám phá trong Power BI và các công cụ khác.
+
+            Chọn ngôn ngữ lập trình để học
+
+            Các nhà phân tích dữ liệu thường sẽ làm việc với một số ngôn ngữ lập trình, điều đó có nghĩa là không có lựa chọn đúng hay sai. Về cơ bản, bạn sẽ cần thành thạo SQL để truy vấn và thao tác với cơ sở dữ liệu, nhưng sau đó, bạn sẽ cần chọn giữa R và Python cho ngôn ngữ lập trình tiếp theo của mình.
+
+            Bạn cũng có thể học SQL miễn phí trong phân tích dữ liệu hoặc tự học Data Analytics với kỹ năng “Connecting The Dots” và các bài viết chia sẻ kiến thức khác của MDA tại đây.
+
+            Về cơ bản, tại thời điểm này, bạn sẽ học cách nhập, làm sạch, thao tác và trực quan hóa dữ liệu bằng ngôn ngữ lập trình ưa thích của mình. Bạn sẽ khám phá một số thư viện có thể giúp bạn thực hiện các tác vụ khác nhau và phát triển kỹ năng lập trình của mình.
+
+            Bước 2: Đạt đủ điều kiện trong phân tích dữ liệu
+            Hầu hết các nhà tuyển dụng sẽ muốn xem bằng chứng về trình độ của bạn trong phân tích dữ liệu. Có nhiều cách khác nhau để đạt được điều này và phần lớn phụ thuộc vào trình độ học vấn hiện tại của bạn và mức độ quen thuộc với chủ đề này.
+
+            Nếu đăng ký chương trình cử nhân, bạn sẽ phải đáp ứng các yêu cầu của khóa học ngoài phân tích dữ liệu.
+
+            Ngoài ra bạn cũng có thể đăng ký khóa học Business Intelligence (No-Code) tại Mastering Data Analytics, Học viên sẽ được học từ căn bản đến chuyên sâu với công nghệ phân tích dữ liệu Self-service mới nhất hiện nay.
+
+            80% nội dung của khóa học là hướng dẫn về kỹ thuật phân tích (Descriptive & Diagnostics Techniques Taxonomy), khai phá dữ liệu, tạo dashboard báo cáo, tìm insight giá trị, kể chuyện với dữ liệu (Storytelling Framework), thống kê kinh doanh, tư duy phân tích (Analytical Thinking Framework in Data Analytic) và 20% là technical skills.
+            Sau khóa học, học viên được trung tâm gửi tặng bộ tài liệu hướng dẫn chuyên sâu, gồm chuỗi video recording về SQL (SQL For Business Intelligence), Coding DAX (Building flexible business measures) do chính Giảng viên biên soạn kèm theo Samples Data và Curriculum Slides và series hướng dẫn vẽ chart từ cơ bản đến nâng cao với Python in Power BI. Một số tài liệu chỉ áp dụng đối với Học viên tham gia đầy đủ buổi học tối thiểu & làm bài tập, final test (chi tiết theo file điều khoản khóa học).
+            Bằng cấp không cần thiết để trở thành một nhà phân tích dữ liệu, nhưng nó chắc chắn có ích.
+
+            Vì vậy, nếu bạn đang tìm cách trở thành nhà phân tích dữ liệu mà không có kinh nghiệm, MDA tự tin rằng mình sẽ là nơi phù hợp nhất dành cho bạn khi bắt đầu từng bước chân đầu tiên vào nghề Data Analysis.
+
+            Bước 3: Thực hành kỹ năng phân tích dữ liệu của bạn
+            Khi bạn đã thành thạo một số kỹ năng cần thiết, bạn sẽ cần bắt đầu tự phát triển chúng. Có nhiều cách bạn có thể bắt đầu:
+
+            Làm việc trên các dự án cá nhân
+
+            Bạn sẽ có nhiều cơ hội để vận dụng các kỹ năng mới của mình bằng cách thực hiện nhiều bài tập khác nhau và hoàn thành các dự án phân tích dữ liệu do chương trình giảng dạy mà bạn tự đề xuất. Thực hành các kỹ năng của bạn và giải quyết các vấn đề giả định hoặc trong thế giới thực sẽ giúp bạn có cơ sở vững chắc cho kinh nghiệm làm việc trong tương lai.
+
+            Bạn sẽ cần thực hiện các dự án riêng lẻ trong đó mọi thứ sẽ do bạn chịu trách nhiệm: chọn chủ đề, tìm nạp dữ liệu cần thiết, cân nhắc hướng nghiên cứu, thiết kế cấu trúc dự án, đưa ra và kiểm tra các giả thuyết, truyền đạt hiệu quả những phát hiện của bạn và đặt ra con đường phía trước.
+
+            Do đó, các dự án cá nhân thường mất nhiều thời gian hơn so với các dự án được hướng dẫn, nhưng chúng sẽ giúp bạn nổi bật giữa đám đông khi đi xin việc.
+
+            Bước 4: Tạo danh mục dự án phân tích dữ liệu
+            Đến thời điểm này, bạn đã sẵn sàng để trở thành một nhà phân tích dữ liệu. Tuy nhiên, để đứng trước các nhà tuyển dụng tiềm năng, bạn cần có một danh mục công việc của mình.
+
+            Khi bạn lần đầu tiên đến thị trường việc làm với tư cách là một nhà phân tích dữ liệu cấp đầu vào (entry-level). Sẽ dễ hiểu nếu danh mục dự án ban đầu của bạn chứa hầu hết các dự án cơ bản, được hướng dẫn từ chương trình đào tạo trực tuyến hoặc công việc liên quan đến dữ liệu tại trường đại học của bạn.
+
+            Ở giai đoạn này, nó cũng hoàn toàn ổn và dự kiến ​​sẽ có nhiều dự án chương trình đào tạo khác nhau về các khái niệm được nghiên cứu khác nhau, cho thấy nhiều công cụ và kỹ thuật khác nhau.
+
+            Khi bạn cảm thấy rằng bạn đã sẵn sàng khám phá một lĩnh vực kinh doanh cụ thể mà bạn chọn, bạn có thể bắt đầu tập trung vào việc thu thập kiến ​​thức về lĩnh vực đó và thực hiện các dự án riêng lẻ liên quan đến lĩnh vực cụ thể đó.
+
+            Bạn có thể giữ danh mục các dự án phân tích dữ liệu của mình trên DataCamp Workspace , GitHub hoặc Kaggle miễn phí. Chúng không phải là nền tảng miễn phí duy nhất để lưu trữ các danh mục đầu tư như vậy, nhưng hai nền tảng này phổ biến rộng rãi và là lựa chọn tốt nhất cho chuyên gia dữ liệu cấp đầu vào vì chúng đảm bảo khả năng hiển thị tốt cho các dự án của bạn. Bạn cũng có thể muốn xem xét việc tạo một trang web cá nhân.
+
+            Bước 5: Bắt đầu đăng ký công việc phân tích dữ liệu cấp đầu vào
+            Khi bạn tự tin vào khả năng và danh mục đầu tư của mình, đã đến lúc nghĩ về cách kiếm được công việc là nhà phân tích dữ liệu. Chúng tôi có một số mẹo dưới đây:
+
+            Chắc chắn rằng bạn có các kỹ năng cần thiết
+
+            Trước khi bắt đầu quá trình tìm kiếm việc làm của mình, bạn có thể muốn sửa đổi nhanh các kỹ năng phân tích dữ liệu của mình và so sánh nó với các yêu cầu cho vai trò này trong thị trường hiện đại.
+
+            Một nơi tốt để bắt đầu là xem qua các mô tả về một số vị trí công việc cho nhà phân tích dữ liệu và viết ra các kỹ năng hiện đang được yêu cầu nhiều nhất. Bạn có thể xem mẫu mô tả công việc phân tích dữ liệu của Datacamp để tìm cảm hứng.
+
+            Để có được công việc là một nhà phân tích dữ liệu, đây là những kỹ năng kỹ thuật cơ bản mà các công ty thường mong đợi:
+
+            Python or R (especially their specialized libraries for data analysis)
+            SQL
+            The command line
+            Statistics
+            Data cleaning and wrangling
+            Data analysis
+            Data visualization
+            Web scraping
+            Debugging
+            Data storytelling
+            Dealing with unstructured data
+            Cách tốt nhất để tìm hiểu các yêu cầu cụ thể của một nhà tuyển dụng nào đó là đọc bản mô tả công việc tương ứng. Nếu tại thời điểm này, bạn cảm thấy mình thiếu một số kỹ năng quan trọng, hãy cân nhắc nâng cao kỹ năng.
+
+            Cuối cùng, đừng quên rằng cũng có một số kỹ năng mềm quan trọng của nhà phân tích dữ liệu:
+
+            Tư duy phân tích
+            Đa nhiệm
+            Tò mò
+            Sáng tạo
+            Kỹ năng giao tiếp
+            Linh hoạt
+            Có khả năng làm việc cả độc lập và theo nhóm
+            Quyết định
+            Kiến thức lĩnh vực kinh doanh
+            Tạo một sơ yếu lý lịch phân tích dữ liệu chuyên nghiệp
+
+            Bây giờ là lúc để viết sơ yếu lý lịch của bạn. Thoạt nhìn, nó có vẻ là một nhiệm vụ dễ dàng. Tuy nhiên, trên thực tế, bạn nên dành thời gian và công sức để xây dựng một sơ yếu lý lịch hấp dẫn và chuyên nghiệp có thể thu hút sự chú ý của nhà tuyển dụng.
+
+            Mặc dù bài viết này chủ yếu nói về việc tạo sơ yếu lý lịch cho vai trò nhà khoa học dữ liệu, nhưng phần lớn các mẹo từ đây có thể áp dụng cho bất kỳ nghề nào khác liên quan đến dữ liệu. Hãy phác thảo ngắn gọn những gợi ý quan trọng nhất từ bài viết:
+
+            Phù hợp với sơ yếu lý lịch của bạn trên một trang.
+            Chọn một mẫu sơ yếu lý lịch phù hợp. Bạn có thể tạo nó từ đầu hoặc sử dụng trình tạo sơ yếu lý lịch trực tuyến với nhiều mẫu sơ yếu lý lịch. Bạn có thể muốn xem xét các tài nguyên sau: Sơ yếu lý lịch , Zety , Trình tạo sơ yếu lý lịch , Canva , CakeResume , VisualCV , ResumeCoach .
+            Tạo sơ yếu lý lịch tổng thể của bạn. Đây có thể là một bản sơ yếu lý lịch dài, rất chi tiết với nhiều trang và nhiều gạch đầu dòng. Tại đây, bạn có thể bao gồm tất cả kinh nghiệm làm việc của mình (thậm chí cả kinh nghiệm làm việc không liên quan trước đây nếu bạn là người thay đổi nghề nghiệp), nghiên cứu, dự án, kỹ năng mềm và kỹ thuật cũng như các thông tin liên quan khác. Bạn có thể sử dụng phiên bản sơ yếu lý lịch này làm cơ sở cho các ứng dụng cho bất kỳ vị trí công việc nào của nhà phân tích dữ liệu.
+            Tùy chỉnh sơ yếu lý lịch phân tích dữ liệu của bạn cho phù hợp với từng mô tả công việc mà bạn ứng tuyển. Đọc kỹ mô tả công việc, tìm ra các yêu cầu mà công ty đang tìm kiếm ở ứng viên và kết hợp/làm nổi bật các kỹ năng và từ khóa cần thiết trong sơ yếu lý lịch của bạn. Ngoài ra, bạn có thể khám phá trang web của công ty (sứ mệnh, giá trị và sản phẩm của công ty) và tham khảo trang web đó để làm cho sơ yếu lý lịch của bạn phản ánh rằng bạn là người hoàn toàn phù hợp.
+            Hãy ngắn gọn nhưng đầy đủ thông tin.
+            Sử dụng ngôn ngữ đơn giản nhưng hiệu quả.
+            Kiểm tra lỗi và lỗi chính tả.
+            Xem xét bao gồm cả các phần sau:
+            Thông tin liên lạc
+            Khách quan
+            Kinh nghiệm làm việc
+            dự án
+            Kỹ năng
+            Giáo dục
+            Phát triển hồ sơ trực tuyến của bạn
+
+            LinkedIn/Kaggle/Medium/GitHub của bạn hoặc bất kỳ hồ sơ chuyên nghiệp có liên quan nào khác phải phù hợp với sơ yếu lý lịch phân tích dữ liệu của bạn hoặc thậm chí đại diện cho sơ yếu lý lịch của bạn ở dạng thu nhỏ. Mục tiêu chính ở đây là để người đọc biết rằng bạn là một nhà phân tích dữ liệu, ngay cả khi bạn chưa có kinh nghiệm làm việc thực tế trong lĩnh vực này.
+
+            Nói cách khác, bạn phải quảng bá bản thân và tạo ra một thương hiệu cá nhân độc đáo để tham gia vào thị trường lao động cạnh tranh về phân tích dữ liệu.
+
+            Dưới đây là một số lời khuyên hữu ích:
+
+            Luôn cập nhật hồ sơ chuyên nghiệp và danh mục dự án của bạn.
+            Trong dòng tiêu đề, hãy viết Nhà phân tích dữ liệu thay vì nghề nghiệp hiện tại của bạn, nếu bạn là người thay đổi nghề nghiệp. Tránh thêm từ khao khát vào tiêu đề của bạn.
+            Bao gồm ảnh của bạn và có thể là ảnh bìa liên quan đến dữ liệu.
+            Cung cấp một cách chuyên nghiệp để liên lạc với bạn.
+            Bao gồm mọi giấy phép, chứng chỉ, kỹ năng, thành tích, đề xuất và liên kết chéo có liên quan đến các hồ sơ chuyên nghiệp khác của bạn.
+            Một số gợi ý để viết một sơ yếu lý lịch hiệu quả cũng có thể áp dụng ở đây. Hãy ngắn gọn nhưng đầy đủ thông tin, sử dụng ngôn ngữ đơn giản nhưng hiệu quả, kiểm tra lỗi và lỗi chính tả, kiểm tra kỹ chi tiết liên hệ của bạn.
+
+            Kết nối với các chuyên gia dữ liệu khác
+
+            Vì bạn đang cố gắng bước vào một lĩnh vực hoàn toàn mới, nên bạn cần bắt đầu phát triển mạng lưới chuyên nghiệp của mình trong thế giới dữ liệu. Tạo một hồ sơ LinkedIn, GitHub hoặc hồ sơ tương tự hấp dẫn là bước đầu tiên tuyệt vời.
+
+            Tuy nhiên, bạn thậm chí có thể chủ động hơn bằng cách tham gia các cộng đồng hoặc nhóm dữ liệu khác nhau, tham gia các sự kiện và hội nghị gặp gỡ trực tuyến và trực tiếp, theo dõi và kết nối với đúng người trên mạng xã hội, nhận xét về nội dung liên quan đến dữ liệu truyền thông xã hội và xuất bản các bài báo trên chủ đề phân tích dữ liệu.
+
+            Bao quanh bạn là các chuyên gia dữ liệu có thể trợ giúp và DataCamp, cộng đồng những người đam mê dữ liệu có thể giúp đỡ và hỗ trợ, đồng thời mở rộng các mối liên hệ của bạn trong thế giới dữ liệu.
+
+            Giữ hồ sơ tốt và điều chỉnh chiến lược của bạn
+
+            Khi gửi sơ yếu lý lịch của bạn, cho dù đến các cổng thông tin việc làm khác nhau hay trực tiếp đến một tổ chức, hãy ghi lại các phiên bản sơ yếu lý lịch bạn đã gửi, tên công ty tương ứng và mô tả công việc.
+
+            Đừng nản lòng nếu bạn không thể tìm được công việc phân tích dữ liệu ngay lập tức. Hoàn toàn bình thường nếu quá trình tìm kiếm việc làm của bạn mất một khoảng thời gian và hãy nhớ rằng sự từ chối là một trở ngại không thể tránh khỏi đối với hầu hết mọi người. Những thất bại của bạn không nên làm bạn nản lòng hay mất hy vọng.
+
+            Tiếp tục nộp đơn cho các vị trí công việc mới và tiếp tục mài giũa các kỹ năng kỹ thuật của bạn. Cố gắng phân tích những gì có thể được cải thiện trong sơ yếu lý lịch, danh mục đầu tư hoặc quá trình tìm việc của bạn và thực hiện các thay đổi cho phù hợp.
+
+            Trong trường hợp bị từ chối, hãy luôn yêu cầu phản hồi và nếu bạn nhận được phản hồi, hãy cố gắng tận dụng tối đa thông tin này bằng cách củng cố điểm mạnh và khắc phục điểm yếu của bạn. Nếu bạn làm theo tất cả các gợi ý từ bài viết này, thì việc có được công việc đầu tiên với tư cách là nhà phân tích dữ liệu chỉ là vấn đề thời gian, sự kiên trì và chăm chỉ.
+
+            Trở thành nhà phân tích dữ liệu với Mastering Data Analytics
+            Mastering Data Analytics – Dẫn đầu thị trường về khóa học phân tích dữ liệu kinh doanh:
+
+            Nơi duy nhất tập trung vào cách phân tích bài bản, chuyên sâu và thực tế.
+            Không chỉ dạy cách sử dụng tool và kiến thức hàn lâm.
+            Học viên nhận xét khối lượng kiến thức trong khóa học không thua bất cứ một chương trình MBA nào.
+            Kiến thức được cập nhật liên tục qua mỗi khóa, khóa sau update hơn 30% so với khóa trước.
+            Đặc biệt, Khóa học Business Intelligence/ Data Analytics được khai giảng thường xuyên. Mỗi lớp học thu hút hơn 100 anh/chị học viên đang là người trong và ngoài ngành Data Analysis. Sau gần 3 năm hoạt động, chính thức khai giảng 38 khóa học public cho hơn 1200 học viên.
+        </p>
+    </div>
+    <div class="comment mt-2 mb-2">
+        <h2 style="margin:0 !important">Comment: </h2>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Comments</label>
+        </div>
+        <div class="row" style="margin:20px 0 !important">
+            <div class="col-1">
+                <img class="object-fit-cover" style="width:70px; height:70px;border-radius:50%; margin:auto; line-height:20px" src="~/Assets/images/avatar-02.jpg" alt="Alternate Text" />
+            </div>
+            <div class="col-11">
+                <div class="row">
+                    <h5 style="margin-left:12px; padding:0; margin-bottom:5px !important">Tên user</h5>
+                </div>
+                <div class="row mb-0"><p>cho mình hỏi, khi console.log(typeof index) ra thì đang là kiểu string (trong video cũng vậy). tại sao index trong vòng lặp là số mà console.log() ra thì lại là kiểu string vậy ạ</p></div>
+            </div>
+        </div>
+    </div>
+</div>

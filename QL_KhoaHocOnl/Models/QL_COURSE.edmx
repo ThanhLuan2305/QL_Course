@@ -1,0 +1,915 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QL_COURSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARTICLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_USER" Type="int" />
+          <Property Name="TITLE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CONTENT" Type="nvarchar(max)" />
+          <Property Name="CREATED_AT" Type="datetime" />
+          <Property Name="UPDATED_AT" Type="datetime" />
+          <Property Name="STATUS_ARTICLE" Type="nvarchar" MaxLength="64" />
+          <Property Name="THUMBNAIL" Type="varchar" MaxLength="64" />
+          <Property Name="TYPE_ARTICLE" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="CART_OF_USER">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="ID_COURSE" />
+          </Key>
+          <Property Name="ID_USER" Type="int" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMMENT_LESSON">
+          <Key>
+            <PropertyRef Name="ID_COMMENT" />
+          </Key>
+          <Property Name="ID_COMMENT" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_LESSON" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="CONTENT" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CREATED_AT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="ID_COURSE" />
+          </Key>
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_TYPECOURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_TEACHER" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="NAME_COURSE" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DESCRIPTION_COURSE" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PRICE_COURSE" Type="float" Nullable="false" />
+          <Property Name="STATUS_COURSE" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="COUNT_LESSON_COURSE" Type="int" Nullable="false" />
+          <Property Name="LEVEL_COURSE" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="CREATED_AT_COURSE" Type="datetime" />
+          <Property Name="UPDATE_AT_COURSE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FEEDBACK">
+          <Key>
+            <PropertyRef Name="FEEDBACKID" />
+          </Key>
+          <Property Name="FEEDBACKID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_USER" Type="int" Nullable="false" />
+          <Property Name="ID_ORDER" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="DATE_FEEDBACK" Type="datetime" Nullable="false" />
+          <Property Name="CONTENT_FEEDBACK" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="RATE_FEEDBACK" Type="int" />
+        </EntityType>
+        <EntityType Name="GRADES">
+          <Key>
+            <PropertyRef Name="GRADEID" />
+          </Key>
+          <Property Name="GRADEID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_USER" Type="int" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ASSIGNMENTID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="QUIZID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="GRADE" Type="float" />
+        </EntityType>
+        <EntityType Name="LESSON">
+          <Key>
+            <PropertyRef Name="ID_LESSON" />
+          </Key>
+          <Property Name="ID_LESSON" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="TITLE_LESSON" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DESCRIPTION_LESSON" Type="nvarchar" MaxLength="256" />
+          <Property Name="STATUS_LESSON" Type="nvarchar" MaxLength="256" />
+          <Property Name="SESSION_LESSON" Type="int" />
+          <Property Name="THUMBNAIL" Type="varchar" MaxLength="64" />
+          <Property Name="LINK_LESSON" Type="nvarchar" MaxLength="256" />
+          <Property Name="CREATED_AT" Type="datetime" />
+          <Property Name="UPDATED_AT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ORDER_COURSE">
+          <Key>
+            <PropertyRef Name="ID_ORDER" />
+          </Key>
+          <Property Name="ID_ORDER" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_USER" Type="int" Nullable="false" />
+          <Property Name="STATUS_ORDER" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TIME_AT_ORDER" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUIZZES">
+          <Key>
+            <PropertyRef Name="QUIZID" />
+          </Key>
+          <Property Name="QUIZID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="TITLE_QUIZID" Type="nvarchar" MaxLength="56" />
+          <Property Name="DESCRIPTION_QUIZID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DUEDATE_QUIZ" Type="datetime" />
+          <Property Name="QUESTION" Type="int" />
+          <Property Name="POINTS_QUIZ" Type="float" />
+        </EntityType>
+        <EntityType Name="TEACHER">
+          <Key>
+            <PropertyRef Name="ID_TEACHER" />
+          </Key>
+          <Property Name="ID_TEACHER" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="NAME_TEACHER" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="STATUS_TEACHER" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="D_CREATED" Type="datetime" Nullable="false" />
+          <Property Name="LEVEL_TEACHER" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DESCRIPTION_TEACHER" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="TYPE_COURSE">
+          <Key>
+            <PropertyRef Name="ID_TYPECOURSE" />
+          </Key>
+          <Property Name="ID_TYPECOURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="NAME_TYPECOURSE" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER_COURSE">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FULLNAME_USER" Type="nvarchar" MaxLength="64" />
+          <Property Name="PASSWORD" Type="varchar(max)" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="date" />
+          <Property Name="NUMBER_OF_COURSE" Type="int" />
+          <Property Name="EMAIL_USER" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PHONE_USER" Type="varchar" MaxLength="64" />
+          <Property Name="ROLE_USER" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="STATUS_USER" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <Association Name="FK_ARTICLE_USER">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="0..1" />
+          <End Role="ARTICLE" Type="Self.ARTICLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="ARTICLE">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CART_OF_USER_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="CART_OF_USER" Type="Self.CART_OF_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="CART_OF_USER">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CM_LS">
+          <End Role="LESSON" Type="Self.LESSON" Multiplicity="1" />
+          <End Role="COMMENT_LESSON" Type="Self.COMMENT_LESSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LESSON">
+              <PropertyRef Name="ID_LESSON" />
+            </Principal>
+            <Dependent Role="COMMENT_LESSON">
+              <PropertyRef Name="ID_LESSON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURSE_TEACHER">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="ID_TEACHER" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="ID_TEACHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURSE_TYPE_COURSE">
+          <End Role="TYPE_COURSE" Type="Self.TYPE_COURSE" Multiplicity="1" />
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_COURSE">
+              <PropertyRef Name="ID_TYPECOURSE" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="ID_TYPECOURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEDBACK_ORDER_COURSE">
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="1" />
+          <End Role="FEEDBACK" Type="Self.FEEDBACK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_COURSE">
+              <PropertyRef Name="ID_ORDER" />
+            </Principal>
+            <Dependent Role="FEEDBACK">
+              <PropertyRef Name="ID_ORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="GRADES" Type="Self.GRADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="GRADES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADES_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="GRADES" Type="Self.GRADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="GRADES">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LESSON_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="LESSON">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUIZZES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="QUIZZES" Type="Self.QUIZZES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="QUIZZES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDER_COURSE_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="ORDER_COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDER_COURSE_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="ORDER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_COURSEModelStoreContainer">
+          <EntitySet Name="ARTICLE" EntityType="Self.ARTICLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMMENT_LESSON" EntityType="Self.COMMENT_LESSON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COURSE" EntityType="Self.COURSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FEEDBACK" EntityType="Self.FEEDBACK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRADES" EntityType="Self.GRADES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LESSON" EntityType="Self.LESSON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEACHER" EntityType="Self.TEACHER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ARTICLE_USER" Association="Self.FK_ARTICLE_USER">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="ARTICLE" EntitySet="ARTICLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CART_OF_USER_USER_COURSE" Association="Self.FK_CART_OF_USER_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="CART_OF_USER" EntitySet="CART_OF_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CM_LS" Association="Self.FK_CM_LS">
+            <End Role="LESSON" EntitySet="LESSON" />
+            <End Role="COMMENT_LESSON" EntitySet="COMMENT_LESSON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURSE_TEACHER" Association="Self.FK_COURSE_TEACHER">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURSE_TYPE_COURSE" Association="Self.FK_COURSE_TYPE_COURSE">
+            <End Role="TYPE_COURSE" EntitySet="TYPE_COURSE" />
+            <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEDBACK_ORDER_COURSE" Association="Self.FK_FEEDBACK_ORDER_COURSE">
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+            <End Role="FEEDBACK" EntitySet="FEEDBACK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADES_COURSE" Association="Self.FK_GRADES_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="GRADES" EntitySet="GRADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADES_USER_COURSE" Association="Self.FK_GRADES_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="GRADES" EntitySet="GRADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LESSON_COURSE" Association="Self.FK_LESSON_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="LESSON" EntitySet="LESSON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUIZZES_COURSE" Association="Self.FK_QUIZZES_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="QUIZZES" EntitySet="QUIZZES" />
+          </AssociationSet>
+          <AssociationSet Name="ORDER_COURSE_COURSE" Association="Self.ORDER_COURSE_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="ORDER_COURSE_USER_COURSE" Association="Self.ORDER_COURSE_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QL_COURSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ARTICLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_USER" Type="Int32" />
+          <Property Name="TITLE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_AT" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_AT" Type="DateTime" Precision="3" />
+          <Property Name="STATUS_ARTICLE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE_ARTICLE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_COURSE" Relationship="Self.FK_ARTICLE_USER" FromRole="ARTICLE" ToRole="USER_COURSE" />
+        </EntityType>
+        <EntityType Name="CART_OF_USER">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="ID_COURSE" />
+          </Key>
+          <Property Name="ID_USER" Type="Int32" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USER_COURSE" Relationship="Self.FK_CART_OF_USER_USER_COURSE" FromRole="CART_OF_USER" ToRole="USER_COURSE" />
+        </EntityType>
+        <EntityType Name="COMMENT_LESSON">
+          <Key>
+            <PropertyRef Name="ID_COMMENT" />
+          </Key>
+          <Property Name="ID_COMMENT" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_LESSON" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTENT" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CREATED_AT" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LESSON" Relationship="Self.FK_CM_LS" FromRole="COMMENT_LESSON" ToRole="LESSON" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="ID_COURSE" />
+          </Key>
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TYPECOURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TEACHER" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_COURSE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPTION_COURSE" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PRICE_COURSE" Type="Double" Nullable="false" />
+          <Property Name="STATUS_COURSE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COUNT_LESSON_COURSE" Type="Int32" Nullable="false" />
+          <Property Name="LEVEL_COURSE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CREATED_AT_COURSE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATE_AT_COURSE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TEACHER" Relationship="Self.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="TEACHER" />
+          <NavigationProperty Name="TYPE_COURSE" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="COURSE" ToRole="TYPE_COURSE" />
+          <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_COURSE" FromRole="COURSE" ToRole="GRADES" />
+          <NavigationProperty Name="LESSONs" Relationship="Self.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
+          <NavigationProperty Name="QUIZZES" Relationship="Self.FK_QUIZZES_COURSE" FromRole="COURSE" ToRole="QUIZZES" />
+          <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="COURSE" ToRole="ORDER_COURSE" />
+        </EntityType>
+        <EntityType Name="FEEDBACK">
+          <Key>
+            <PropertyRef Name="FEEDBACKID" />
+          </Key>
+          <Property Name="FEEDBACKID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_USER" Type="Int32" Nullable="false" />
+          <Property Name="ID_ORDER" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_FEEDBACK" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CONTENT_FEEDBACK" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RATE_FEEDBACK" Type="Int32" />
+          <NavigationProperty Name="ORDER_COURSE" Relationship="Self.FK_FEEDBACK_ORDER_COURSE" FromRole="FEEDBACK" ToRole="ORDER_COURSE" />
+        </EntityType>
+        <EntityType Name="GRADE">
+          <Key>
+            <PropertyRef Name="GRADEID" />
+          </Key>
+          <Property Name="GRADEID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_USER" Type="Int32" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ASSIGNMENTID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GRADE1" Type="Double" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_GRADES_COURSE" FromRole="GRADES" ToRole="COURSE" />
+          <NavigationProperty Name="USER_COURSE" Relationship="Self.FK_GRADES_USER_COURSE" FromRole="GRADES" ToRole="USER_COURSE" />
+        </EntityType>
+        <EntityType Name="LESSON">
+          <Key>
+            <PropertyRef Name="ID_LESSON" />
+          </Key>
+          <Property Name="ID_LESSON" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TITLE_LESSON" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPTION_LESSON" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS_LESSON" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SESSION_LESSON" Type="Int32" />
+          <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="LINK_LESSON" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_AT" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_AT" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="COMMENT_LESSON" Relationship="Self.FK_CM_LS" FromRole="LESSON" ToRole="COMMENT_LESSON" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_LESSON_COURSE" FromRole="LESSON" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="ORDER_COURSE">
+          <Key>
+            <PropertyRef Name="ID_ORDER" />
+          </Key>
+          <Property Name="ID_ORDER" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_USER" Type="Int32" Nullable="false" />
+          <Property Name="STATUS_ORDER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TIME_AT_ORDER" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="ORDER_COURSE" ToRole="COURSE" />
+          <NavigationProperty Name="FEEDBACKs" Relationship="Self.FK_FEEDBACK_ORDER_COURSE" FromRole="ORDER_COURSE" ToRole="FEEDBACK" />
+          <NavigationProperty Name="USER_COURSE" Relationship="Self.ORDER_COURSE_USER_COURSE" FromRole="ORDER_COURSE" ToRole="USER_COURSE" />
+        </EntityType>
+        <EntityType Name="QUIZZE">
+          <Key>
+            <PropertyRef Name="QUIZID" />
+          </Key>
+          <Property Name="QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TITLE_QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_QUIZID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DUEDATE_QUIZ" Type="DateTime" Precision="3" />
+          <Property Name="QUESTION" Type="Int32" />
+          <Property Name="POINTS_QUIZ" Type="Double" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_QUIZZES_COURSE" FromRole="QUIZZES" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="TEACHER">
+          <Key>
+            <PropertyRef Name="ID_TEACHER" />
+          </Key>
+          <Property Name="ID_TEACHER" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_TEACHER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STATUS_TEACHER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LEVEL_TEACHER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPTION_TEACHER" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_TEACHER" FromRole="TEACHER" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="TYPE_COURSE">
+          <Key>
+            <PropertyRef Name="ID_TYPECOURSE" />
+          </Key>
+          <Property Name="ID_TYPECOURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_TYPECOURSE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="TYPE_COURSE" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="USER_COURSE">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FULLNAME_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="DateTime" Precision="0" />
+          <Property Name="NUMBER_OF_COURSE" Type="Int32" />
+          <Property Name="EMAIL_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PHONE_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ROLE_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ARTICLEs" Relationship="Self.FK_ARTICLE_USER" FromRole="USER_COURSE" ToRole="ARTICLE" />
+          <NavigationProperty Name="CART_OF_USER" Relationship="Self.FK_CART_OF_USER_USER_COURSE" FromRole="USER_COURSE" ToRole="CART_OF_USER" />
+          <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_USER_COURSE" FromRole="USER_COURSE" ToRole="GRADES" />
+          <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_USER_COURSE" FromRole="USER_COURSE" ToRole="ORDER_COURSE" />
+        </EntityType>
+        <Association Name="FK_ARTICLE_USER">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="0..1" />
+          <End Role="ARTICLE" Type="Self.ARTICLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="ARTICLE">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CART_OF_USER_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="CART_OF_USER" Type="Self.CART_OF_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="CART_OF_USER">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CM_LS">
+          <End Role="LESSON" Type="Self.LESSON" Multiplicity="1" />
+          <End Role="COMMENT_LESSON" Type="Self.COMMENT_LESSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LESSON">
+              <PropertyRef Name="ID_LESSON" />
+            </Principal>
+            <Dependent Role="COMMENT_LESSON">
+              <PropertyRef Name="ID_LESSON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURSE_TEACHER">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="ID_TEACHER" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="ID_TEACHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURSE_TYPE_COURSE">
+          <End Role="TYPE_COURSE" Type="Self.TYPE_COURSE" Multiplicity="1" />
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_COURSE">
+              <PropertyRef Name="ID_TYPECOURSE" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="ID_TYPECOURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="GRADES" Type="Self.GRADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="GRADES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LESSON_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="LESSON" Type="Self.LESSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="LESSON">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUIZZES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="QUIZZES" Type="Self.QUIZZE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="QUIZZES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDER_COURSE_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="ORDER_COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEDBACK_ORDER_COURSE">
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="1" />
+          <End Role="FEEDBACK" Type="Self.FEEDBACK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_COURSE">
+              <PropertyRef Name="ID_ORDER" />
+            </Principal>
+            <Dependent Role="FEEDBACK">
+              <PropertyRef Name="ID_ORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADES_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="GRADES" Type="Self.GRADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="GRADES">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDER_COURSE_USER_COURSE">
+          <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
+          <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="ORDER_COURSE">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_COURSEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARTICLEs" EntityType="Self.ARTICLE" />
+          <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" />
+          <EntitySet Name="COMMENT_LESSON" EntityType="Self.COMMENT_LESSON" />
+          <EntitySet Name="COURSEs" EntityType="Self.COURSE" />
+          <EntitySet Name="FEEDBACKs" EntityType="Self.FEEDBACK" />
+          <EntitySet Name="GRADES" EntityType="Self.GRADE" />
+          <EntitySet Name="LESSONs" EntityType="Self.LESSON" />
+          <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" />
+          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZE" />
+          <EntitySet Name="TEACHERs" EntityType="Self.TEACHER" />
+          <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" />
+          <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" />
+          <AssociationSet Name="FK_ARTICLE_USER" Association="Self.FK_ARTICLE_USER">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="ARTICLE" EntitySet="ARTICLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CART_OF_USER_USER_COURSE" Association="Self.FK_CART_OF_USER_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="CART_OF_USER" EntitySet="CART_OF_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CM_LS" Association="Self.FK_CM_LS">
+            <End Role="LESSON" EntitySet="LESSONs" />
+            <End Role="COMMENT_LESSON" EntitySet="COMMENT_LESSON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURSE_TEACHER" Association="Self.FK_COURSE_TEACHER">
+            <End Role="TEACHER" EntitySet="TEACHERs" />
+            <End Role="COURSE" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURSE_TYPE_COURSE" Association="Self.FK_COURSE_TYPE_COURSE">
+            <End Role="TYPE_COURSE" EntitySet="TYPE_COURSE" />
+            <End Role="COURSE" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADES_COURSE" Association="Self.FK_GRADES_COURSE">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="GRADES" EntitySet="GRADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LESSON_COURSE" Association="Self.FK_LESSON_COURSE">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="LESSON" EntitySet="LESSONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUIZZES_COURSE" Association="Self.FK_QUIZZES_COURSE">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="QUIZZES" EntitySet="QUIZZES" />
+          </AssociationSet>
+          <AssociationSet Name="ORDER_COURSE_COURSE" Association="Self.ORDER_COURSE_COURSE">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEDBACK_ORDER_COURSE" Association="Self.FK_FEEDBACK_ORDER_COURSE">
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+            <End Role="FEEDBACK" EntitySet="FEEDBACKs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADES_USER_COURSE" Association="Self.FK_GRADES_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="GRADES" EntitySet="GRADES" />
+          </AssociationSet>
+          <AssociationSet Name="ORDER_COURSE_USER_COURSE" Association="Self.ORDER_COURSE_USER_COURSE">
+            <End Role="USER_COURSE" EntitySet="USER_COURSE" />
+            <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QL_COURSEModelStoreContainer" CdmEntityContainer="QL_COURSEEntities">
+          <EntitySetMapping Name="ARTICLEs">
+            <EntityTypeMapping TypeName="QL_COURSEModel.ARTICLE">
+              <MappingFragment StoreEntitySet="ARTICLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+                <ScalarProperty Name="UPDATED_AT" ColumnName="UPDATED_AT" />
+                <ScalarProperty Name="STATUS_ARTICLE" ColumnName="STATUS_ARTICLE" />
+                <ScalarProperty Name="THUMBNAIL" ColumnName="THUMBNAIL" />
+                <ScalarProperty Name="TYPE_ARTICLE" ColumnName="TYPE_ARTICLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CART_OF_USER">
+            <EntityTypeMapping TypeName="QL_COURSEModel.CART_OF_USER">
+              <MappingFragment StoreEntitySet="CART_OF_USER">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENT_LESSON">
+            <EntityTypeMapping TypeName="QL_COURSEModel.COMMENT_LESSON">
+              <MappingFragment StoreEntitySet="COMMENT_LESSON">
+                <ScalarProperty Name="ID_COMMENT" ColumnName="ID_COMMENT" />
+                <ScalarProperty Name="ID_LESSON" ColumnName="ID_LESSON" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COURSEs">
+            <EntityTypeMapping TypeName="QL_COURSEModel.COURSE">
+              <MappingFragment StoreEntitySet="COURSE">
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="ID_TYPECOURSE" ColumnName="ID_TYPECOURSE" />
+                <ScalarProperty Name="ID_TEACHER" ColumnName="ID_TEACHER" />
+                <ScalarProperty Name="NAME_COURSE" ColumnName="NAME_COURSE" />
+                <ScalarProperty Name="DESCRIPTION_COURSE" ColumnName="DESCRIPTION_COURSE" />
+                <ScalarProperty Name="PRICE_COURSE" ColumnName="PRICE_COURSE" />
+                <ScalarProperty Name="STATUS_COURSE" ColumnName="STATUS_COURSE" />
+                <ScalarProperty Name="THUMBNAIL" ColumnName="THUMBNAIL" />
+                <ScalarProperty Name="COUNT_LESSON_COURSE" ColumnName="COUNT_LESSON_COURSE" />
+                <ScalarProperty Name="LEVEL_COURSE" ColumnName="LEVEL_COURSE" />
+                <ScalarProperty Name="CREATED_AT_COURSE" ColumnName="CREATED_AT_COURSE" />
+                <ScalarProperty Name="UPDATE_AT_COURSE" ColumnName="UPDATE_AT_COURSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FEEDBACKs">
+            <EntityTypeMapping TypeName="QL_COURSEModel.FEEDBACK">
+              <MappingFragment StoreEntitySet="FEEDBACK">
+                <ScalarProperty Name="FEEDBACKID" ColumnName="FEEDBACKID" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="ID_ORDER" ColumnName="ID_ORDER" />
+                <ScalarProperty Name="DATE_FEEDBACK" ColumnName="DATE_FEEDBACK" />
+                <ScalarProperty Name="CONTENT_FEEDBACK" ColumnName="CONTENT_FEEDBACK" />
+                <ScalarProperty Name="RATE_FEEDBACK" ColumnName="RATE_FEEDBACK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRADES">
+            <EntityTypeMapping TypeName="QL_COURSEModel.GRADE">
+              <MappingFragment StoreEntitySet="GRADES">
+                <ScalarProperty Name="GRADEID" ColumnName="GRADEID" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="ASSIGNMENTID" ColumnName="ASSIGNMENTID" />
+                <ScalarProperty Name="QUIZID" ColumnName="QUIZID" />
+                <ScalarProperty Name="GRADE1" ColumnName="GRADE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LESSONs">
+            <EntityTypeMapping TypeName="QL_COURSEModel.LESSON">
+              <MappingFragment StoreEntitySet="LESSON">
+                <ScalarProperty Name="ID_LESSON" ColumnName="ID_LESSON" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="TITLE_LESSON" ColumnName="TITLE_LESSON" />
+                <ScalarProperty Name="DESCRIPTION_LESSON" ColumnName="DESCRIPTION_LESSON" />
+                <ScalarProperty Name="STATUS_LESSON" ColumnName="STATUS_LESSON" />
+                <ScalarProperty Name="SESSION_LESSON" ColumnName="SESSION_LESSON" />
+                <ScalarProperty Name="THUMBNAIL" ColumnName="THUMBNAIL" />
+                <ScalarProperty Name="LINK_LESSON" ColumnName="LINK_LESSON" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+                <ScalarProperty Name="UPDATED_AT" ColumnName="UPDATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_COURSE">
+            <EntityTypeMapping TypeName="QL_COURSEModel.ORDER_COURSE">
+              <MappingFragment StoreEntitySet="ORDER_COURSE">
+                <ScalarProperty Name="ID_ORDER" ColumnName="ID_ORDER" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="STATUS_ORDER" ColumnName="STATUS_ORDER" />
+                <ScalarProperty Name="TIME_AT_ORDER" ColumnName="TIME_AT_ORDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUIZZES">
+            <EntityTypeMapping TypeName="QL_COURSEModel.QUIZZE">
+              <MappingFragment StoreEntitySet="QUIZZES">
+                <ScalarProperty Name="QUIZID" ColumnName="QUIZID" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="TITLE_QUIZID" ColumnName="TITLE_QUIZID" />
+                <ScalarProperty Name="DESCRIPTION_QUIZID" ColumnName="DESCRIPTION_QUIZID" />
+                <ScalarProperty Name="DUEDATE_QUIZ" ColumnName="DUEDATE_QUIZ" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="POINTS_QUIZ" ColumnName="POINTS_QUIZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEACHERs">
+            <EntityTypeMapping TypeName="QL_COURSEModel.TEACHER">
+              <MappingFragment StoreEntitySet="TEACHER">
+                <ScalarProperty Name="ID_TEACHER" ColumnName="ID_TEACHER" />
+                <ScalarProperty Name="NAME_TEACHER" ColumnName="NAME_TEACHER" />
+                <ScalarProperty Name="STATUS_TEACHER" ColumnName="STATUS_TEACHER" />
+                <ScalarProperty Name="THUMBNAIL" ColumnName="THUMBNAIL" />
+                <ScalarProperty Name="D_CREATED" ColumnName="D_CREATED" />
+                <ScalarProperty Name="LEVEL_TEACHER" ColumnName="LEVEL_TEACHER" />
+                <ScalarProperty Name="DESCRIPTION_TEACHER" ColumnName="DESCRIPTION_TEACHER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYPE_COURSE">
+            <EntityTypeMapping TypeName="QL_COURSEModel.TYPE_COURSE">
+              <MappingFragment StoreEntitySet="TYPE_COURSE">
+                <ScalarProperty Name="ID_TYPECOURSE" ColumnName="ID_TYPECOURSE" />
+                <ScalarProperty Name="NAME_TYPECOURSE" ColumnName="NAME_TYPECOURSE" />
+                <ScalarProperty Name="THUMBNAIL" ColumnName="THUMBNAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_COURSE">
+            <EntityTypeMapping TypeName="QL_COURSEModel.USER_COURSE">
+              <MappingFragment StoreEntitySet="USER_COURSE">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="FULLNAME_USER" ColumnName="FULLNAME_USER" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="NUMBER_OF_COURSE" ColumnName="NUMBER_OF_COURSE" />
+                <ScalarProperty Name="EMAIL_USER" ColumnName="EMAIL_USER" />
+                <ScalarProperty Name="PHONE_USER" ColumnName="PHONE_USER" />
+                <ScalarProperty Name="ROLE_USER" ColumnName="ROLE_USER" />
+                <ScalarProperty Name="STATUS_USER" ColumnName="STATUS_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

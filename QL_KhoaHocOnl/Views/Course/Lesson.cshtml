@@ -1,0 +1,9 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.LESSON>
+
+    @foreach (var item in Model)
+    {
+        <div class="aHover">
+            <a style="color:black" href="/course/detaillesson/@item.ID_LESSON"><p><img style="width:15px; color:gray" src="~/Assets/images/circle-play-regular.svg"/> @item.TITLE_LESSON</p></a>
+        </div>
+    }
+

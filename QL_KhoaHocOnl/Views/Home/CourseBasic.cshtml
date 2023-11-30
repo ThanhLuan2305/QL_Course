@@ -1,0 +1,55 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+            <div class="course-item">
+                <div class="image-blog">
+                    <img style="width:500px; height: 400px;" src="~/Assets/images/@item.THUMBNAIL" alt="" class="img-fluid object-fit-cover">
+                </div>
+                <div class="course-br " style="padding-top :0; ">
+                    <div class="course-title" style="height:70px">
+                        <h2>@Html.ActionLink(item.NAME_COURSE, "Detail", new { id = item.ID_COURSE })</h2>
+                    </div>
+                    <div class="course-desc">
+                        @if (item.DESCRIPTION_COURSE.Length > 90)
+                        {
+                            <p>@item.DESCRIPTION_COURSE.Substring(0, 86)...</p>
+                        }
+                        else
+                        {
+                            <p style="height:50px">@item.DESCRIPTION_COURSE</p>
+                        }
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p> Cấp: <span class="text-primary">@item.LEVEL_COURSE</span></p>
+                        </div>
+                        <div class="col-6">
+                            @if (@item.STATUS_COURSE == "ACTIVE")
+                            {
+                                <p>Tình trạng: <span class="text-success">@item.STATUS_COURSE</span> </p>
+                            }
+                            else
+                            {
+                                <p>Tình trạng: <span class="text-danger">@item.STATUS_COURSE</span> </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="course-meta-bot">
+                    <div class="row">
+                        <div class="col-6" style="text-align:center; margin:0 !important;">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.PRICE_COURSE, new { @class = "fixmargin" }) VND
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-success">Thêm giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end col -->
+    }

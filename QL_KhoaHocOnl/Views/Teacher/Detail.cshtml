@@ -1,0 +1,25 @@
+﻿@model QL_KhoaHocOnl.Models.TEACHER
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-3 mb-2">
+        <div class="col-4">
+            <img style="width:95%" src="~/Assets/images/@Model.THUMBNAIL" alt="Alternate Text" />
+        </div>
+        <div class="col-6">
+            <h1>@Model.NAME_TEACHER</h1>
+            <p>Trình độ: <span class="text-danger text">@Model.LEVEL_TEACHER</span></p>
+            <p>Tình trạng: @Model.STATUS_TEACHER</p>
+            <p>Mô tả: @Model.DESCRIPTION_TEACHER</p>
+        </div>
+    </div>
+
+    <p class="mt-2">
+        <a class="btn btn-primary" href="\course\index">Quay lai</a>
+    </p>
+</div>
+

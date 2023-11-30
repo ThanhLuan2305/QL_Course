@@ -1,0 +1,54 @@
+﻿@model QL_KhoaHocOnl.Models.COURSE
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-8">
+            <div class=" text-light px-2" style="width: 100%; background-color: #0B0F59 ; padding:10px 0; border-radius:3px">
+                <h1 class="m-1 p-0">@Model.NAME_COURSE</h1>
+                <p class="m-2">Giảng viên: @Model.TEACHER.NAME_TEACHER <span class="mx-lg-4 text">Bằng cấp: @Model.TEACHER.LEVEL_TEACHER</span></p> 
+            </div> 
+            <iframe style="width:100%; height:450px; margin-top:10px" src="https://www.youtube.com/embed/1n2YBuR8m-w?autoplay=1">
+            </iframe>
+            <div class="mt-2 mb-2">
+                <h3 class="m-0 p-0">Mô tả khóa học:</h3>
+                <p>@Model.DESCRIPTION_COURSE</p>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" style="margin: 0 !important; padding: 0 !important">
+                        <button class="accordion-button text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="margin: 0 !important; padding: 5px 10px !important; background-color: #0B0F59;">
+                            <h3 class="m-0 p-0">Bài học</h3>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body ">
+                            @{
+
+                                Html.RenderAction("Lesson", "Course", new { id = Session["ID"] });
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-2">
+                <a class="btn btn-primary" href="\course\index">Quay lai</a>
+            </p>
+        </div>
+        <div class="col-4">
+            <div class="card" style="width: 100%; margin: auto">
+                <img src="~/Assets/images/@Model.THUMBNAIL" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-text">Học ngay giá chỉ: <span class="text-danger">@Model.PRICE_COURSE VND</span></h4>
+                    <a href="#" class="btn btn-primary">Mua ngay</a>
+                    <a href="#" class="btn btn-success">Thêm giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

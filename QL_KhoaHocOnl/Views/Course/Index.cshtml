@@ -1,0 +1,161 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    p {
+        margin: 0 !important;
+        margin-bottom:5px ;
+    }
+    span {
+        font-weight:500;
+    }
+    .fixmargin {
+        margin: 0 !important;
+    }
+    h2 {
+        margin: 5px 0 !important
+    }
+</style>
+
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1>Khóa học<span class="m_1">Ở đây có rất nhiều khóa học hay cho bạn khám phá!</span></h1>
+    </div>
+</div>
+<div id="overviews" class="section wb">
+    <div class="container" style="padding:0 5rem;">
+        <div class="sort mb-2">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sắp xếp
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item course-title" style="color:black !important"  href="/course/index?Sort=Up">Giá tăng dần</a></li>
+                    <li><a class="dropdown-item course-title" style="color:black !important" href="/course/index?Sort=Down">Giá giẩm dần</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="course-item">
+                        <div class="image-blog">
+                            <img style="width:500px; height: 400px;" src="~/Assets/images/@item.THUMBNAIL" alt="" class="img-fluid object-fit-cover">
+                        </div>
+                        <div class="course-br " style="padding-top :0; ">
+                            <div class="course-title" style="height:70px">
+                                <h2>@Html.ActionLink(item.NAME_COURSE, "Detail", new { id = item.ID_COURSE })</h2>
+                            </div>
+                            <div class="course-desc">
+                                @if (item.DESCRIPTION_COURSE.Length > 90)
+                                {
+                                    <p>@item.DESCRIPTION_COURSE.Substring(0, 86)...</p>
+                                }
+                                else
+                                {
+                                    <p style="height:50px">@item.DESCRIPTION_COURSE</p>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p> Cấp: <span class="text-primary">@item.LEVEL_COURSE</span></p>
+                                </div>
+                                <div class="col-6">
+                                    @if (@item.STATUS_COURSE == "ACTIVE")
+                                    {
+                                        <p>Tình trạng: <span class="text-success">@item.STATUS_COURSE</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>Tình trạng: <span class="text-danger">@item.STATUS_COURSE</span> </p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-meta-bot">
+                            <div class="row">
+                                <div class="col-6" style="text-align:center; margin:0 !important;">
+                                    <p>
+                                        @Html.DisplayFor(modelItem => item.PRICE_COURSE, new { @class = "fixmargin" }) VND
+                                    </p>
+                                </div>
+                                @{
+                                    if (Session["checkCart"] != "0")
+                                    {
+                                        Session["checkCart"] = "0";
+                                        <script>
+                                            window.alert("Sản phẩm đã có trong giỏ hàng");
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-6">
+                                            <a href="@Url.Action("AddCart", "Cart", new { @idCourse = item.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end col -->
+            }
+        </div><!-- end row -->
+        <div style="width:50%; margin:20px auto;text-align:center">
+            @{
+                int PrevPage = ViewBag.Page - 1;
+                if (PrevPage <= 0)
+                {
+                    PrevPage = 1;
+                }
+                int NextPage = ViewBag.Page + 1;
+                if (NextPage > ViewBag.NoOfPages)
+                {
+                    NextPage = ViewBag.NoOfPages;
+                }
+            }
+            <ul class="pagination justify-content-center align-items-center">
+                <li class="page-item">
+                    <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@PrevPage">
+                        «
+                    </a>
+                </li>
+                @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                {
+                    if (i + 1 == ViewBag.Page)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@(i+1)">
+                                @(i+1)
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@(i+1)">
+                                @(i+1)
+                            </a>
+                        </li>
+                    }
+
+                }
+                <li class="page-item">
+                    <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@NextPage">
+                        »
+                    </a>
+                </li>
+            </ul>
+        </div>
+        @*
+        @Html.DisplayFor(modelItem => item.STATUS_COURSE)
+        @Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)
+        @Html.DisplayFor(modelItem => item.LEVEL_COURSE)
+        @Html.DisplayFor(modelItem => item.CREATED_AT_COURSE)
+        @Html.DisplayFor(modelItem => item.UPDATE_AT_COURSE)*@
+    </div><!-- end container -->
+</div><!-- end section -->

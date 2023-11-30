@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.TEACHER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="all-title-box">
+    <div class="container text-center" style="padding:0 7rem;">
+        <h1>Teachers<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+    </div>
+</div>
+<div id="teachers" class="section wb">
+    <div class="container" style="padding:0 7rem;">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="our-team">
+                        <div class="team-img">
+                            <img class="object-fit-cover" style="height:20rem" src="~/Assets/images/@item.THUMBNAIL">
+                            @*@Html.DisplayFor(modelItem => item.THUMBNAIL)*@
+                            <div class="social">
+                                <ul>
+                                    <li><a href="#" class="fa fa-facebook"></a></li>
+                                    <li><a href="#" class="fa fa-twitter"></a></li>
+                                    <li><a href="#" class="fa fa-linkedin"></a></li>á
+                                    <li><a href="#" class="fa fa-skype"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="team-content">
+                            <h3 class="title">  @Html.ActionLink(item.NAME_TEACHER, "Detail", new { id = item.ID_TEACHER })</h3>
+                            <span class="post"> @Html.DisplayFor(modelItem => item.LEVEL_TEACHER)</span>
+                        </div>                                      
+                    </div>
+                </div>
+            }
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->

@@ -1,0 +1,39 @@
+﻿@model QL_KhoaHocOnl.ViewModel.RegisterVM
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:10px;">ĐĂNG KÝ</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    <div class="row" style="display:block; margin:0 auto; width:70%;">
+        <div class="col-md-6 register">
+            @Html.LabelFor(temp => temp.Username)
+            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Username, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 register">
+            @Html.LabelFor(temp => temp.Email)
+            @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 register">
+            @Html.LabelFor(temp => temp.Password)
+            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 register">
+            @Html.LabelFor(temp => temp.ConfirmPassword)
+            @Html.PasswordFor(temp => temp.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 register">
+            @Html.LabelFor(temp => temp.Fullname)
+            @Html.TextBoxFor(temp => temp.Fullname, new { placeholder = "Fullname", @class = "form-control" })
+            @Html.ValidationMessageFor(temp => temp.Fullname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success" style="display:block; margin:10px auto">Đăng ký</button>
+}
