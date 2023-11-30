@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4f9869ffc9e64694b3d9c91485ff81f8" Name="Diagram1" ZoomLevel="95">
+      <Diagram DiagramId="41b9c3ae7ac249049d9295aea07ef5b5" Name="Diagram1" ZoomLevel="47">
         <EntityTypeShape EntityType="QL_COURSEModel.ARTICLE" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.CART_OF_USER" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_COURSEModel.COMMENT_LESSON" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_COURSEModel.COMMENT_LESSON" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.COURSE" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.FEEDBACK" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_COURSEModel.GRADE" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_COURSEModel.LESSON" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_COURSEModel.GRADES" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_COURSEModel.LESSON" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.ORDER_COURSE" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_COURSEModel.QUIZZE" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_COURSEModel.QUIZZES" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.TEACHER" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.TYPE_COURSE" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.USER_COURSE" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />

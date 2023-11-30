@@ -17,7 +17,7 @@ namespace QL_KhoaHocOnl.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ORDER_COURSE()
         {
-            this.FEEDBACKs = new HashSet<FEEDBACK>();
+            this.FEEDBACK = new HashSet<FEEDBACK>();
         }
     
         public string ID_ORDER { get; set; }
@@ -28,7 +28,7 @@ namespace QL_KhoaHocOnl.Models
     
         public virtual COURSE COURSE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FEEDBACK> FEEDBACKs { get; set; }
+        public virtual ICollection<FEEDBACK> FEEDBACK { get; set; }
         public virtual USER_COURSE USER_COURSE { get; set; }
     }
 }

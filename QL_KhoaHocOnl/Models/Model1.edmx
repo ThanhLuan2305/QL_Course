@@ -71,7 +71,6 @@
           <Property Name="GRADEID" Type="varchar" MaxLength="56" Nullable="false" />
           <Property Name="ID_USER" Type="int" Nullable="false" />
           <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
-          <Property Name="ASSIGNMENTID" Type="varchar" MaxLength="56" Nullable="false" />
           <Property Name="QUIZID" Type="varchar" MaxLength="56" Nullable="false" />
           <Property Name="GRADE" Type="float" />
         </EntityType>
@@ -106,10 +105,10 @@
           </Key>
           <Property Name="QUIZID" Type="varchar" MaxLength="56" Nullable="false" />
           <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
-          <Property Name="TITLE_QUIZID" Type="nvarchar" MaxLength="56" />
-          <Property Name="DESCRIPTION_QUIZID" Type="nvarchar" MaxLength="255" />
+          <Property Name="QUESTION" Type="nvarchar(max)" />
           <Property Name="DUEDATE_QUIZ" Type="datetime" />
-          <Property Name="QUESTION" Type="int" />
+          <Property Name="ANSWER_TRUE" Type="nvarchar(max)" />
+          <Property Name="ANSWER_FALSE" Type="nvarchar(max)" />
           <Property Name="POINTS_QUIZ" Type="float" />
         </EntityType>
         <EntityType Name="TEACHER">
@@ -411,7 +410,7 @@
           <NavigationProperty Name="TEACHER" Relationship="Self.FK_COURSE_TEACHER" FromRole="COURSE" ToRole="TEACHER" />
           <NavigationProperty Name="TYPE_COURSE" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="COURSE" ToRole="TYPE_COURSE" />
           <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_COURSE" FromRole="COURSE" ToRole="GRADES" />
-          <NavigationProperty Name="LESSONs" Relationship="Self.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
+          <NavigationProperty Name="LESSON" Relationship="Self.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
           <NavigationProperty Name="QUIZZES" Relationship="Self.FK_QUIZZES_COURSE" FromRole="COURSE" ToRole="QUIZZES" />
           <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="COURSE" ToRole="ORDER_COURSE" />
         </EntityType>
@@ -427,16 +426,15 @@
           <Property Name="RATE_FEEDBACK" Type="Int32" />
           <NavigationProperty Name="ORDER_COURSE" Relationship="Self.FK_FEEDBACK_ORDER_COURSE" FromRole="FEEDBACK" ToRole="ORDER_COURSE" />
         </EntityType>
-        <EntityType Name="GRADE">
+        <EntityType Name="GRADES">
           <Key>
             <PropertyRef Name="GRADEID" />
           </Key>
           <Property Name="GRADEID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_USER" Type="Int32" Nullable="false" />
           <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ASSIGNMENTID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GRADE1" Type="Double" />
+          <Property Name="GRADE" Type="Double" />
           <NavigationProperty Name="COURSE" Relationship="Self.FK_GRADES_COURSE" FromRole="GRADES" ToRole="COURSE" />
           <NavigationProperty Name="USER_COURSE" Relationship="Self.FK_GRADES_USER_COURSE" FromRole="GRADES" ToRole="USER_COURSE" />
         </EntityType>
@@ -467,19 +465,19 @@
           <Property Name="STATUS_ORDER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TIME_AT_ORDER" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="ORDER_COURSE" ToRole="COURSE" />
-          <NavigationProperty Name="FEEDBACKs" Relationship="Self.FK_FEEDBACK_ORDER_COURSE" FromRole="ORDER_COURSE" ToRole="FEEDBACK" />
+          <NavigationProperty Name="FEEDBACK" Relationship="Self.FK_FEEDBACK_ORDER_COURSE" FromRole="ORDER_COURSE" ToRole="FEEDBACK" />
           <NavigationProperty Name="USER_COURSE" Relationship="Self.ORDER_COURSE_USER_COURSE" FromRole="ORDER_COURSE" ToRole="USER_COURSE" />
         </EntityType>
-        <EntityType Name="QUIZZE">
+        <EntityType Name="QUIZZES">
           <Key>
             <PropertyRef Name="QUIZID" />
           </Key>
           <Property Name="QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TITLE_QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_QUIZID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="QUESTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DUEDATE_QUIZ" Type="DateTime" Precision="3" />
-          <Property Name="QUESTION" Type="Int32" />
+          <Property Name="ANSWER_TRUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ANSWER_FALSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="POINTS_QUIZ" Type="Double" />
           <NavigationProperty Name="COURSE" Relationship="Self.FK_QUIZZES_COURSE" FromRole="QUIZZES" ToRole="COURSE" />
         </EntityType>
@@ -494,7 +492,7 @@
           <Property Name="D_CREATED" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LEVEL_TEACHER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DESCRIPTION_TEACHER" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_TEACHER" FromRole="TEACHER" ToRole="COURSE" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_COURSE_TEACHER" FromRole="TEACHER" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="TYPE_COURSE">
           <Key>
@@ -503,7 +501,7 @@
           <Property Name="ID_TYPECOURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NAME_TYPECOURSE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="THUMBNAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="COURSEs" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="TYPE_COURSE" ToRole="COURSE" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="TYPE_COURSE" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="USER_COURSE">
           <Key>
@@ -519,7 +517,7 @@
           <Property Name="PHONE_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ROLE_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="STATUS_USER" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ARTICLEs" Relationship="Self.FK_ARTICLE_USER" FromRole="USER_COURSE" ToRole="ARTICLE" />
+          <NavigationProperty Name="ARTICLE" Relationship="Self.FK_ARTICLE_USER" FromRole="USER_COURSE" ToRole="ARTICLE" />
           <NavigationProperty Name="CART_OF_USER" Relationship="Self.FK_CART_OF_USER_USER_COURSE" FromRole="USER_COURSE" ToRole="CART_OF_USER" />
           <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_USER_COURSE" FromRole="USER_COURSE" ToRole="GRADES" />
           <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_USER_COURSE" FromRole="USER_COURSE" ToRole="ORDER_COURSE" />
@@ -586,7 +584,7 @@
         </Association>
         <Association Name="FK_GRADES_COURSE">
           <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
-          <End Role="GRADES" Type="Self.GRADE" Multiplicity="*" />
+          <End Role="GRADES" Type="Self.GRADES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COURSE">
               <PropertyRef Name="ID_COURSE" />
@@ -610,7 +608,7 @@
         </Association>
         <Association Name="FK_QUIZZES_COURSE">
           <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
-          <End Role="QUIZZES" Type="Self.QUIZZE" Multiplicity="*" />
+          <End Role="QUIZZES" Type="Self.QUIZZES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COURSE">
               <PropertyRef Name="ID_COURSE" />
@@ -646,7 +644,7 @@
         </Association>
         <Association Name="FK_GRADES_USER_COURSE">
           <End Role="USER_COURSE" Type="Self.USER_COURSE" Multiplicity="1" />
-          <End Role="GRADES" Type="Self.GRADE" Multiplicity="*" />
+          <End Role="GRADES" Type="Self.GRADES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER_COURSE">
               <PropertyRef Name="ID_USER" />
@@ -669,57 +667,57 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QL_COURSEEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ARTICLEs" EntityType="Self.ARTICLE" />
+          <EntitySet Name="ARTICLE" EntityType="Self.ARTICLE" />
           <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" />
           <EntitySet Name="COMMENT_LESSON" EntityType="Self.COMMENT_LESSON" />
-          <EntitySet Name="COURSEs" EntityType="Self.COURSE" />
-          <EntitySet Name="FEEDBACKs" EntityType="Self.FEEDBACK" />
-          <EntitySet Name="GRADES" EntityType="Self.GRADE" />
-          <EntitySet Name="LESSONs" EntityType="Self.LESSON" />
+          <EntitySet Name="COURSE" EntityType="Self.COURSE" />
+          <EntitySet Name="FEEDBACK" EntityType="Self.FEEDBACK" />
+          <EntitySet Name="GRADES" EntityType="Self.GRADES" />
+          <EntitySet Name="LESSON" EntityType="Self.LESSON" />
           <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" />
-          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZE" />
-          <EntitySet Name="TEACHERs" EntityType="Self.TEACHER" />
+          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZES" />
+          <EntitySet Name="TEACHER" EntityType="Self.TEACHER" />
           <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" />
           <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" />
           <AssociationSet Name="FK_ARTICLE_USER" Association="Self.FK_ARTICLE_USER">
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
-            <End Role="ARTICLE" EntitySet="ARTICLEs" />
+            <End Role="ARTICLE" EntitySet="ARTICLE" />
           </AssociationSet>
           <AssociationSet Name="FK_CART_OF_USER_USER_COURSE" Association="Self.FK_CART_OF_USER_USER_COURSE">
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
             <End Role="CART_OF_USER" EntitySet="CART_OF_USER" />
           </AssociationSet>
           <AssociationSet Name="FK_CM_LS" Association="Self.FK_CM_LS">
-            <End Role="LESSON" EntitySet="LESSONs" />
+            <End Role="LESSON" EntitySet="LESSON" />
             <End Role="COMMENT_LESSON" EntitySet="COMMENT_LESSON" />
           </AssociationSet>
           <AssociationSet Name="FK_COURSE_TEACHER" Association="Self.FK_COURSE_TEACHER">
-            <End Role="TEACHER" EntitySet="TEACHERs" />
-            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="COURSE" EntitySet="COURSE" />
           </AssociationSet>
           <AssociationSet Name="FK_COURSE_TYPE_COURSE" Association="Self.FK_COURSE_TYPE_COURSE">
             <End Role="TYPE_COURSE" EntitySet="TYPE_COURSE" />
-            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="COURSE" EntitySet="COURSE" />
           </AssociationSet>
           <AssociationSet Name="FK_GRADES_COURSE" Association="Self.FK_GRADES_COURSE">
-            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="COURSE" EntitySet="COURSE" />
             <End Role="GRADES" EntitySet="GRADES" />
           </AssociationSet>
           <AssociationSet Name="FK_LESSON_COURSE" Association="Self.FK_LESSON_COURSE">
-            <End Role="COURSE" EntitySet="COURSEs" />
-            <End Role="LESSON" EntitySet="LESSONs" />
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="LESSON" EntitySet="LESSON" />
           </AssociationSet>
           <AssociationSet Name="FK_QUIZZES_COURSE" Association="Self.FK_QUIZZES_COURSE">
-            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="COURSE" EntitySet="COURSE" />
             <End Role="QUIZZES" EntitySet="QUIZZES" />
           </AssociationSet>
           <AssociationSet Name="ORDER_COURSE_COURSE" Association="Self.ORDER_COURSE_COURSE">
-            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="COURSE" EntitySet="COURSE" />
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
           </AssociationSet>
           <AssociationSet Name="FK_FEEDBACK_ORDER_COURSE" Association="Self.FK_FEEDBACK_ORDER_COURSE">
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
-            <End Role="FEEDBACK" EntitySet="FEEDBACKs" />
+            <End Role="FEEDBACK" EntitySet="FEEDBACK" />
           </AssociationSet>
           <AssociationSet Name="FK_GRADES_USER_COURSE" Association="Self.FK_GRADES_USER_COURSE">
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
@@ -736,7 +734,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QL_COURSEModelStoreContainer" CdmEntityContainer="QL_COURSEEntities">
-          <EntitySetMapping Name="ARTICLEs">
+          <EntitySetMapping Name="ARTICLE">
             <EntityTypeMapping TypeName="QL_COURSEModel.ARTICLE">
               <MappingFragment StoreEntitySet="ARTICLE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -769,7 +767,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COURSEs">
+          <EntitySetMapping Name="COURSE">
             <EntityTypeMapping TypeName="QL_COURSEModel.COURSE">
               <MappingFragment StoreEntitySet="COURSE">
                 <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
@@ -787,7 +785,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FEEDBACKs">
+          <EntitySetMapping Name="FEEDBACK">
             <EntityTypeMapping TypeName="QL_COURSEModel.FEEDBACK">
               <MappingFragment StoreEntitySet="FEEDBACK">
                 <ScalarProperty Name="FEEDBACKID" ColumnName="FEEDBACKID" />
@@ -800,18 +798,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GRADES">
-            <EntityTypeMapping TypeName="QL_COURSEModel.GRADE">
+            <EntityTypeMapping TypeName="QL_COURSEModel.GRADES">
               <MappingFragment StoreEntitySet="GRADES">
                 <ScalarProperty Name="GRADEID" ColumnName="GRADEID" />
                 <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
                 <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
-                <ScalarProperty Name="ASSIGNMENTID" ColumnName="ASSIGNMENTID" />
                 <ScalarProperty Name="QUIZID" ColumnName="QUIZID" />
-                <ScalarProperty Name="GRADE1" ColumnName="GRADE" />
+                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LESSONs">
+          <EntitySetMapping Name="LESSON">
             <EntityTypeMapping TypeName="QL_COURSEModel.LESSON">
               <MappingFragment StoreEntitySet="LESSON">
                 <ScalarProperty Name="ID_LESSON" ColumnName="ID_LESSON" />
@@ -839,19 +836,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QUIZZES">
-            <EntityTypeMapping TypeName="QL_COURSEModel.QUIZZE">
+            <EntityTypeMapping TypeName="QL_COURSEModel.QUIZZES">
               <MappingFragment StoreEntitySet="QUIZZES">
                 <ScalarProperty Name="QUIZID" ColumnName="QUIZID" />
                 <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
-                <ScalarProperty Name="TITLE_QUIZID" ColumnName="TITLE_QUIZID" />
-                <ScalarProperty Name="DESCRIPTION_QUIZID" ColumnName="DESCRIPTION_QUIZID" />
-                <ScalarProperty Name="DUEDATE_QUIZ" ColumnName="DUEDATE_QUIZ" />
                 <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="DUEDATE_QUIZ" ColumnName="DUEDATE_QUIZ" />
+                <ScalarProperty Name="ANSWER_TRUE" ColumnName="ANSWER_TRUE" />
+                <ScalarProperty Name="ANSWER_FALSE" ColumnName="ANSWER_FALSE" />
                 <ScalarProperty Name="POINTS_QUIZ" ColumnName="POINTS_QUIZ" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TEACHERs">
+          <EntitySetMapping Name="TEACHER">
             <EntityTypeMapping TypeName="QL_COURSEModel.TEACHER">
               <MappingFragment StoreEntitySet="TEACHER">
                 <ScalarProperty Name="ID_TEACHER" ColumnName="ID_TEACHER" />
@@ -903,7 +900,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

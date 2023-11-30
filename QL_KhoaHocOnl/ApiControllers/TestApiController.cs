@@ -15,11 +15,11 @@ namespace QL_KhoaHocOnl.ApiControllers
         QL_COURSEEntities db = new QL_COURSEEntities();
         public List<COURSE> Get()
         {
-            return db.COURSEs.ToList();
+            return db.COURSE.ToList();
         }
         public COURSE Get(string id)
         {
-            return db.COURSEs.Where(x => x.ID_COURSE == id).FirstOrDefault();
+            return db.COURSE.Where(x => x.ID_COURSE == id).FirstOrDefault();
         }
     }
 }

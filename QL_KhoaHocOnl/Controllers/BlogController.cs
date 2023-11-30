@@ -13,12 +13,12 @@ namespace QL_KhoaHocOnl.Controllers
         QL_COURSEEntities db = new QL_COURSEEntities();
         public ActionResult Index()
         {
-            var list = db.ARTICLEs.ToList();
+            var list = db.ARTICLE.ToList();
             return View(list);
         }
         public ActionResult Detail(int id)
         {
-            ARTICLE a = db.ARTICLEs.Where(x => x.ID == id).FirstOrDefault();
+            ARTICLE a = db.ARTICLE.Where(x => x.ID == id).FirstOrDefault();
             return View(a);
         }
     }

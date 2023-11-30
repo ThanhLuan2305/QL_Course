@@ -31,18 +31,19 @@ namespace QL_KhoaHocOnl.Controllers
         [HttpPost]
         public ActionResult Register(RegisterVM rgt)
         {
-            if (db.USER_COURSE.Where(x => x.ROLE_USER == "Admin") == null)
-            {
-                USER_COURSE u = new USER_COURSE();
-                u.ROLE_USER = "Admin";
-                u.USERNAME = "admin";
-                u.PASSWORD = mahoa("admin123");
-                u.EMAIL_USER = "admin@gmail.com";
-                db.USER_COURSE.Add(u);
-                db.SaveChanges();
-            }
+            
             if (ModelState.IsValid)
             {
+                if (db.USER_COURSE.Where(x => x.ROLE_USER == "Admin") == null)
+                {
+                    USER_COURSE u = new USER_COURSE();
+                    u.ROLE_USER = "Admin";
+                    u.USERNAME = "admin";
+                    u.PASSWORD = mahoa("admin123");
+                    u.EMAIL_USER = "admin@gmail.com";
+                    db.USER_COURSE.Add(u);
+                    db.SaveChanges();
+                }
                 USER_COURSE user = new USER_COURSE();
                 user.ROLE_USER = "Student";
                 user.USERNAME = rgt.Username;
@@ -86,7 +87,7 @@ namespace QL_KhoaHocOnl.Controllers
                         cookie.Values["Password"] = Password;
                         cookie.Values["ID"] = (db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.ID_USER).FirstOrDefault()).ToString();
                         Session["Fullname"] = db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.FULLNAME_USER).FirstOrDefault();
-                        Session["CartItem"] = db.CART_OF_USER.Join(db.COURSEs, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
+                        Session["CartItem"] = db.CART_OF_USER.Join(db.COURSE, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
                         cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(cookie);
 
