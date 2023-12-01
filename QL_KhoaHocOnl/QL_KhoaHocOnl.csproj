@@ -61,6 +61,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -322,15 +323,15 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\QL_COURSE.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>QL_COURSE.edmx</DependentUpon>
+      <LastGenOutput>QL_COURSE.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\QL_COURSE.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>QL_COURSE.edmx</DependentUpon>
+      <LastGenOutput>QL_COURSE.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -450,12 +451,12 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\QL_COURSE.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>QL_COURSE.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\QL_COURSE.edmx.diagram">
+      <DependentUpon>QL_COURSE.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -539,6 +540,8 @@
     <Content Include="Web.Config" />
     <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Course\DetailLesson.cshtml" />
+    <Content Include="Views\Quizz\SelectQuizz.cshtml" />
+    <Content Include="Views\Quizz\QuizTest.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>
@@ -557,65 +560,79 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuizzController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Answer.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ARTICLE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CART_OF_USER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Choice.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\COMMENT_LESSON.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FEEDBACK.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GRADES.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\GRADE.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LESSON.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORDER_COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QUIZZES.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\QL_COURSE.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_COURSE.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QL_COURSE.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QL_COURSE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_COURSE.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Question.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Quiz.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TEACHER.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TYPE_COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER_COURSE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>QL_COURSE.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CartVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\RegisterVM.cs" />
+    <Compile Include="ViewModel\UserVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -689,6 +706,7 @@
     <Folder Include="Views\Type_Course\" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

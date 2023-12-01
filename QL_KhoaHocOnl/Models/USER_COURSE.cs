@@ -17,9 +17,9 @@ namespace QL_KhoaHocOnl.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USER_COURSE()
         {
-            this.ARTICLE = new HashSet<ARTICLE>();
+            this.ARTICLEs = new HashSet<ARTICLE>();
             this.CART_OF_USER = new HashSet<CART_OF_USER>();
-            this.GRADES = new HashSet<GRADES>();
+            this.GRADES = new HashSet<GRADE>();
             this.ORDER_COURSE = new HashSet<ORDER_COURSE>();
         }
     
@@ -35,11 +35,11 @@ namespace QL_KhoaHocOnl.Models
         public string STATUS_USER { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ARTICLE> ARTICLE { get; set; }
+        public virtual ICollection<ARTICLE> ARTICLEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CART_OF_USER> CART_OF_USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GRADES> GRADES { get; set; }
+        public virtual ICollection<GRADE> GRADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_COURSE> ORDER_COURSE { get; set; }
     }

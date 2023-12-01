@@ -12,20 +12,12 @@ namespace QL_KhoaHocOnl.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CART_OF_USER
+    public partial class Choice
     {
-        public int ID_USER { get; set; }
-        public string ID_COURSE { get; set; }
+        public int ChoiceID { get; set; }
+        public string ChoiceText { get; set; }
+        public Nullable<int> QuestionID { get; set; }
     
-        public virtual USER_COURSE USER_COURSE { get; set; }
-
-        public CART_OF_USER() { }
-        public CART_OF_USER(string Course, int id)
-        {
-            ID_USER = id;
-            ID_COURSE = Course;
-        }
+        public virtual Question Question { get; set; }
     }
-
-   
 }

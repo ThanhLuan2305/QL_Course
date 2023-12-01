@@ -87,7 +87,7 @@ namespace QL_KhoaHocOnl.Controllers
                         cookie.Values["Password"] = Password;
                         cookie.Values["ID"] = (db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.ID_USER).FirstOrDefault()).ToString();
                         Session["Fullname"] = db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.FULLNAME_USER).FirstOrDefault();
-                        Session["CartItem"] = db.CART_OF_USER.Join(db.COURSE, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
+                        Session["CartItem"] = db.CART_OF_USER.Join(db.COURSEs, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
                         cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(cookie);
 

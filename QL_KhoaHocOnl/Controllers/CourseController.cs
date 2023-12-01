@@ -13,7 +13,7 @@ namespace QL_KhoaHocOnl.Controllers
         QL_COURSEEntities db = new QL_COURSEEntities();
         public ActionResult Index(string search = "", string sort = "", int page = 1)
         {
-            List<COURSE> list = db.COURSE.Where(x=>x.NAME_COURSE.Contains(search)).ToList();
+            List<COURSE> list = db.COURSEs.Where(x=>x.NAME_COURSE.Contains(search)).ToList();
             ViewBag.TB = search;
 
             //Sort
@@ -38,20 +38,20 @@ namespace QL_KhoaHocOnl.Controllers
         }
         public ActionResult Detail(string id)
         {
-            COURSE course = db.COURSE.Where(c => c.ID_COURSE == id).FirstOrDefault();
+            COURSE course = db.COURSEs.Where(c => c.ID_COURSE == id).FirstOrDefault();
             Session["ID"] = id;
             return View(course);
         }
         public ActionResult Lesson(string id)
         {
-            List<LESSON> lst = db.LESSON.Where(c => c.ID_COURSE == id).ToList();
+            List<LESSON> lst = db.LESSONs.Where(c => c.ID_COURSE == id).ToList();
             int i = lst.Count;
             ViewBag.Count = i;
             return View(lst);
         }
         public ActionResult DetailLesson(string id)
         {
-            LESSON ls = db.LESSON.Where(x => x.ID_LESSON == id).FirstOrDefault();
+            LESSON ls = db.LESSONs.Where(x => x.ID_LESSON == id).FirstOrDefault();
             return View(ls);
         }
     }

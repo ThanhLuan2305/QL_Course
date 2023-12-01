@@ -12,15 +12,12 @@ namespace QL_KhoaHocOnl.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GRADES
+    public partial class Answer
     {
-        public string GRADEID { get; set; }
-        public int ID_USER { get; set; }
-        public string ID_COURSE { get; set; }
-        public string QUIZID { get; set; }
-        public Nullable<double> GRADE { get; set; }
+        public int AnswerID { get; set; }
+        public string AnswerText { get; set; }
+        public Nullable<int> QuestionID { get; set; }
     
-        public virtual COURSE COURSE { get; set; }
-        public virtual USER_COURSE USER_COURSE { get; set; }
+        public virtual Question Question { get; set; }
     }
 }
