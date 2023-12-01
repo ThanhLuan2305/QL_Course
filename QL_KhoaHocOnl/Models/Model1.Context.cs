@@ -12,6 +12,8 @@ namespace QL_KhoaHocOnl.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class QL_COURSEEntities : DbContext
     {
@@ -37,5 +39,15 @@ namespace QL_KhoaHocOnl.Models
         public virtual DbSet<TEACHER> TEACHER { get; set; }
         public virtual DbSet<TYPE_COURSE> TYPE_COURSE { get; set; }
         public virtual DbSet<USER_COURSE> USER_COURSE { get; set; }
+    
+        public virtual int PRO_UPDATE_COUNTLESSONS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PRO_UPDATE_COUNTLESSONS");
+        }
+    
+        public virtual int PRO_UPDATE_USER_COUNT_COURSE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PRO_UPDATE_USER_COUNT_COURSE");
+        }
     }
 }

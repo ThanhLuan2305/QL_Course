@@ -1,0 +1,92 @@
+﻿@model QL_KhoaHocOnl.Models.LESSON
+
+@{
+    ViewBag.Title = "Add Lesson";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        <form class="row g-3">
+            <div class="card mb-4">
+                <div class="card-header text-center font-bold " style="font-weight:bold">Thêm Bài Học Mới</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a>Mã Bài Học</a>
+                            <span class="">@Html.TextBoxFor(model => model.ID_LESSON, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.ID_LESSON, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            <a>Tên Bài Học</a>
+                            <div class="row">
+                                @{
+                                    QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                                    var course = DB.COURSE.ToList();
+                                    <select class="form-control-color col-md-6 rounded-" name="ID_COURSE" style="width:80%;margin-left:10px">
+                                        <option selected>...</option>
+                                        @foreach (var item in course)
+                                        {
+                                            <option value="@item.ID_COURSE">@item.NAME_COURSE</option>
+                                        }
+                                    </select>
+                                }
+                                @Html.ValidationMessageFor(model => model.ID_COURSE, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-md-6">
+                            <a>Tiêu Đề</a>
+                            <span class="">@Html.TextBoxFor(model => model.TITLE_LESSON, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.TITLE_LESSON)
+                        </div>
+                        <div class="col-md-6">
+                            <a>Mô Tả</a>
+                            <span class="">@Html.TextBoxFor(model => model.DESCRIPTION_LESSON, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.DESCRIPTION_LESSON)
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-md-6">
+                            <a>Hình Ảnh</a>
+                            <span class="">@Html.TextBoxFor(model => model.THUMBNAIL, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.THUMBNAIL)
+                        </div>
+                        <div class="col-md-6">
+                            <a>Liên Kết Bài Học</a>
+                            <span class="">@Html.TextBoxFor(model => model.LINK_LESSON, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.LINK_LESSON)
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-top:10px">
+                            <div class="col-md-6">
+                                <a>Ngày Tạo</a>
+                                <span class="">@Html.TextBoxFor(model => model.CREATED_AT, new { @class = "form-control" })</span>
+                                @Html.ValidationMessageFor(model => model.CREATED_AT)
+                            </div>
+                            <div class="col-md-6">
+                                <a>Update Gần Nhất</a>
+                                <span class="">@Html.TextBoxFor(model => model.UPDATED_AT, new { @class = "form-control" })</span>
+                                @Html.ValidationMessageFor(model => model.UPDATED_AT)
+                            </div>
+                        </div>*@
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary " />
+                    </div>
+                    <div style="float:right" class="col">
+                        <a class="btn btn-primary" href="/Admin/Home/Course">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+}

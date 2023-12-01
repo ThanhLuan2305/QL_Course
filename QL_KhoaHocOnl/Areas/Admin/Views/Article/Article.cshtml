@@ -1,0 +1,150 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.ARTICLE>
+
+@{
+    ViewBag.Title = "Article";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+<link href="~/Content/CSS/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+    $(function () {
+        $("#tblCourse").dataTable();
+        $('[id*=btnEdit]').on('click', function () {
+            var tds = $(this).closest('tr').find('td');
+            $('#hfId').val($(tds).eq(0).html());
+            $('#txtID_USER').val($(tds).eq(2).html());
+            $('#txtTITLE').val($(tds).eq(1).html());
+            var contentValue = $(tds).eq(4).find('.d-inline-block.text-truncate').text();
+            $('#txtCONTENT').val(contentValue);
+            var statusArticleValue = $(tds).eq(5).find('.badge.bg-success').text();
+            $('#txtSTATUS_ARTICLE').val(statusArticleValue);
+            var thumbnailSrc = $(tds).eq(3).find('img').attr('src');
+            var filename = thumbnailSrc.substring(thumbnailSrc.lastIndexOf('/') + 1);
+            $('#txtTHUMBNAIL').val(filename);
+            $('#txtTYPE_ARTICLE').val($(tds).eq(6).html());
+            $('#myModal').modal('show');
+        });
+    });
+</script>
+
+<div class="card card-body">
+
+    <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <i class="bi bi-plus"></i> Thêm bài viết
+        </button>
+    </div>
+    <table class="table table-hover table-bordered" id="tblCourse">
+        <thead>
+            <tr>
+
+                <th>
+                    Id
+                </th>
+                <th>
+                    Tiêu đề
+                </th>
+                <th>
+                    Id người viết
+                </th>
+                <th>
+                    Ảnh
+                </th>
+                <th>
+                    Nội dung
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>
+                    Loại
+                </th>
+                <th>
+                    Ngày tạo
+                </th>
+                <th>
+                    Cập nhật gần nhất
+                </th>
+                <th>
+                    Tác vụ
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TITLE)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ID_USER)</td>
+                    <td><img width="70" height="70" src="~/Images/@Html.DisplayFor(modelItem => item.THUMBNAIL)" /></td>
+                    <td><span class="d-inline-block text-truncate" style="max-width: 350px;">@Html.DisplayFor(modelItem => item.CONTENT)</span></td>
+                    <td><span class="badge bg-success">@Html.DisplayFor(modelItem => item.STATUS_ARTICLE)</span></td>
+                    <td>@Html.DisplayFor(modelItem => item.TYPE_ARTICLE)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CREATED_AT)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UPDATED_AT)</td>
+                    <td>
+                        <div class="d-flex">
+                            <a class='btn btn-outline-secondary me-2' id='btnEdit'><i class="bi bi-pencil"></i></a>
+                            <a href="@Url.Action("DeleteArticle", "Article")/@item.ID" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
+                               class='btn btn-outline-secondary me-2' id='btnDelete' style='margin-left:5px'><i class="bi bi-trash3"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@using (Html.BeginForm("Article", "Article", FormMethod.Post))
+{
+    <div id="myModal" class="modal w-100" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="max-width: 1000px !important" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm bài viết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Ảnh:</label>
+                        <input type="text" id="txtTHUMBNAIL" name="THUMBNAIL" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="hfId" name="ID" />
+                        <label>Người viết:</label>
+                        <input type="text" id="txtID_USER" name="ID_USER" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tiêu đề:</label>
+                        <input type="text" id="txtTITLE" name="TITLE" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nội dung:</label>
+                        <textarea class="w-100" id="txtCONTENT" name="CONTENT" rows="8"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>trạng thái:</label>
+                        <input type="text" id="txtSTATUS_ARTICLE" name="STATUS_ARTICLE" value="" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Loại bài viết:</label>
+                        <input type="text" id="txtTYPE_ARTICLE" name="TYPE_ARTICLE" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

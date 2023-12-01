@@ -1,0 +1,115 @@
+﻿@model QL_KhoaHocOnl.Models.LESSON
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID_LESSON)
+        @*<div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" style="text-decoration:none"><a href="/ListLessons">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Thông tin Bài Học</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>*@
+
+        <form class="row g-3">
+            <div class="card mb-4">
+                <div class="card-header text-center font-bold " style="font-weight:bold">Chỉnh Sửa Bài Học</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 rounded-pill">
+                            <a>Mã Bài Học</a>
+                            @*@Html.TextBoxFor(model => model.ID_COURSE, new { @readonly = "readonly" })*@
+                            <span class="" id="basic-addon1">@Html.TextBoxFor(model => model.ID_LESSON, new { @readonly = true, @class = "form-control" })</span>
+                        </div>
+                        <div class="col-md-6">
+                            <a>Khóa Học</a>
+                            <div class="row-cols-6">
+                                @{
+                                   QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                                    var coursess = DB.COURSE.ToList();
+                                    <select name="ID_COURSE" class="form-control-color col-md-6 rounded" style="width:100%">
+                                        <option selected>...</option>
+                                        @foreach (var itemcourse in coursess)
+                                        {
+                                            <option value="@itemcourse.ID_COURSE" @Html.Raw(itemcourse.ID_COURSE == Model.ID_COURSE ? "Selected" : "")>@itemcourse.NAME_COURSE</option>
+                                        }
+                                    </select>
+                                }
+                                @Html.ValidationMessageFor(model => model.ID_COURSE)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*@Html.LabelFor(model => model.TITLE_LESSON, "Tiêu Đề Bài Học", new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-6" style="width:50%">
+                            <a>Tiêu Đề Bài Học</a>
+                            @Html.TextBoxFor(model => model.TITLE_LESSON, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TITLE_LESSON, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6" style="width:50%">
+                            <a>Mô Tả về Khóa Học</a>
+                            @Html.TextBoxFor(model => model.DESCRIPTION_LESSON, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DESCRIPTION_LESSON, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*@Html.LabelFor(model => model.DESCRIPTION_COURSE, "Mô Tả ngắn về Khóa Học", new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-6">
+                            <a>Hình Ảnh Bài Học</a>
+                            @Html.TextBoxFor(model => model.THUMBNAIL, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.THUMBNAIL, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            <a>Link Bài Học</a>
+                            <div class="input-group-prepend">
+                                <span class="">@Html.TextBoxFor(model => model.LINK_LESSON, new { @class = "form-control" })</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LINK_LESSON)
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-top: 10px">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CREATED_AT_COURSE,"Ngày Tạo Khóa Học", new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.CREATED_AT_COURSE)
+                                @Html.ValidationMessageFor(model => model.CREATED_AT_COURSE)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.UPDATE_AT_COURSE, "NGÀY UPDATE", new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.UPDATE_AT_COURSE)
+                                @Html.ValidationMessageFor(model => model.UPDATE_AT_COURSE)
+                            </div>
+                        </div>*@
+                    <div class="row" style="margin-top:15px;">
+                        <div class="form-group row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                            <div style="float:right" class="col">
+                                <a class="btn btn-primary" href="/Admin/Lesson/ListLESSON">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+}

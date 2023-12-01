@@ -1,0 +1,128 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
+
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; align-items:center">Quản Lý Khóa Học - ADMIN</h2>
+<div class="row" style="flex: none; display: block;">
+    <a style=" color:white; width:11%" href="/Admin/Home/AddCourse" class="btn btn-danger col-9">Thêm mới Khóa Học</a>
+    <form class="d-flex flex-row align-items-center flex-wrap col-3" action="/Admin/Home/Course" style="float: right">
+        @*<label for="search" class="mx-2 my-1">Search</label>*@
+        <input type="search" class="form-control w-auto" id="search" name="search" value="@ViewBag.Search" placeholder="Search" />
+        <button type="submit" class="btn btn-primary mx-2">Tìm</button>
+    </form>
+
+</div>
+<div style="clear:both"></div>
+
+<div class="table-responsive">
+    <table class=" table table-hover">
+        <thead class="">
+            <tr>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.NAME_COURSE)*@
+                    <p>Mã Course</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.NAME_COURSE)*@
+                    <p>Tên Course</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.PRICE_COURSE)*@
+                    <p>Giá Tiền</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.STATUS_COURSE)*@
+                    <p>Trạng Thái</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.THUMBNAIL)*@
+                    <p>Hình Ảnh</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.COUNT_LESSON_COURSE)*@
+                    <p>Số lượng</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.LEVEL_COURSE)*@
+                    <p>Cấp Bậc</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.TYPE_COURSE.TEN_TYPECOURSE)*@
+                    <p>Loại Course</p>
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.TYPE_COURSE.TEN_TYPECOURSE)*@
+                    <p>GV Thuộc</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID_COURSE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME_COURSE)
+                </td>
+                <td>
+                    <p>@string.Format("{0:#,0}", item.PRICE_COURSE) VNĐ</p>
+                </td>
+                <td>
+                    @if (item.STATUS_COURSE == "Hoạt Động")
+                    {
+                        <span class="badge badge-sm bg-success ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_COURSE)</span>
+                    }
+                    else if (item.STATUS_COURSE == "Ngưng Hoạt Động")
+                    {
+                        <span class="badge badge-sm bg-danger ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_COURSE)</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-sm bg-warning ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_COURSE)</span>
+                    }
+
+                </td>
+                <td>
+                    <img src="/Content/Clients/assets/img/@Html.DisplayFor(modelItem => item.THUMBNAIL)" style="width: 100px; height:120px" />
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)</p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LEVEL_COURSE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TYPE_COURSE.NAME_TYPECOURSE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TEACHER.NAME_TEACHER)
+                </td>
+                <td>
+                    <button class="btn btn-success ">
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.MA_COURSE, @style="color:white" })|*@
+                        <a style="color: white; text-decoration: none" href="/Admin/Home/Edit?id=@item.ID_COURSE"><i class="bi bi-pencil"></i></a>
+                    </button>
+                    <button class="btn btn-primary ">
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.MA_COURSE, @style="color:white" })|*@
+                        <a style="color: white; text-decoration: none" href="/Admin/Home/Detail/@item.ID_COURSE"><i class="bi bi-eye"></i></a>
+                    </button>
+                    @*@Html.ActionLink("Detail", "Detail", new { id = item.MA_COURSE })|*@
+                    <button class="btn btn-danger ">
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.MA_COURSE, @style="color:white" })|*@
+                        <a style="color:white; text-decoration:none " onclick="if(confirm('Bạn có chắc chắn muốn xóa Khóa Học @item.NAME_COURSE của Giáo Viên @item.TEACHER.NAME_TEACHER không?')== true ){location.href= '/Admin/Home/Delete/@item.ID_COURSE'}"><i class="bi bi-trash3"></i></a>
+                    </button>
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.MA_COURSE })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+</div>

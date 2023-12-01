@@ -1,0 +1,86 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+    <div class="sidebar-brand d-none d-md-flex">
+        <svg class="sidebar-brand-full" width="118" height="46" alt="PHUCLASHOP Logo">
+            <img src="~/Assets/Clients/assets/img/Phuclashop.png" style="width:100px;height:46px;margin-right:100px"></img>
+            @*<use xlink:href="~/Assets/Clients/assets/brand/coreui.svg#full"></use>
+                <use xlink:href="~/Assets/Clients/assets/brand/coreui.svg#signet"></use>*@
+        </svg>
+
+    </div>
+    <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Home/index">
+                <svg class="nav-icon">
+                    <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-speedometer"></use>
+                </svg> Dashboard<span class="badge badge-sm bg-danger ms-auto">UPDATE</span>
+            </a>
+        </li>
+        <li class="nav-title">Main</li>
+        <li class="nav-group">
+            <a class="nav-link nav-group-toggle" href="#">
+                <svg class="nav-icon">
+                    <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-pencil"></use>
+                </svg> Quản Lí
+            </a>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="/Admin/Home/Course"><span class="nav-icon"></span> Khóa Học</a></li>
+            </ul>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="/Admin/GiangVien/ListTeacher"><span class="nav-icon"></span> Giảng Viên</a></li>
+            </ul>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="/Admin/Lesson/ListLesson"><span class="nav-icon"></span> Bài Học</a></li>
+            </ul>
+        </li>
+        <li class="nav-group">
+            <a class="nav-link nav-group-toggle" href="#">
+                <svg class="nav-icon">
+                    <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-cursor"></use>
+                </svg> Tùy chỉnh
+            </a>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="/Admin/User/UserCourse"><span class="nav-icon"></span>Người Dùng</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Admin/Article/Article"><span class="nav-icon"></span> Bài Viết</a></li>
+                @*<li class="nav-item"><a class="nav-link" href="buttons/dropdowns.html"><span class="nav-icon"></span>Phân Quyền </a></li>*@
+            </ul>
+        </li>
+        @*<li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <svg class="nav-icon">
+                        <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-chart-pie"></use>
+                    </svg> Doanh thu <span class="badge badge-sm bg-danger ms-auto">Update</span>
+                </a>
+            </li>*@
+        @*<li class="nav-group">
+                <a class="nav-link nav-group-toggle" href="#">
+                    <i class="nav-icon fa-solid fa-bell fa-shake"></i> Thông báo
+                </a>
+                <ul class="nav-group-items">
+                    <li class="nav-item"><a class="nav-link" href="notifications/alerts.html"><span class="nav-icon"></span> Tạo Thông Báo</a></li>
+                </ul>
+            </li>*@
+        <li class="nav-divider"></li>
+
+        <li class="nav-group">
+            <a class="nav-link nav-group-toggle" href="#">
+                <i class="nav-icon fa-solid fa-gear"></i> Cài Đặt
+            </a>
+            <ul class="nav-group-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html" target="_top">
+                        Logout
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html" target="_top">
+                        Thay đổi PassWord
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+</div>
+
+
+

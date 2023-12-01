@@ -1,0 +1,96 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.TEACHER>
+
+@{
+    ViewBag.Title = "ListTeacher";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using System;
+@using System.Globalization;
+<h2 style="text-align:center; align-items:center">Quản Lý Giảng Viên - ADMIN</h2>
+<div class="row" style="flex: none; display: block;">
+    <a style=" color:white; width:11%" href="/Admin/GiangVien/AddTeacher" class="btn btn-danger col-9">Thêm mới Khóa Học</a>
+    <form class="d-flex flex-row align-items-center flex-wrap col-3" action="/Admin/GiangVien/ListTeacher" style="float: right">
+        @*<label for="search" class="mx-2 my-1">Search</label>*@
+        <input type="search" class="form-control w-auto" id="search" name="search" value="@ViewBag.Search" placeholder="Search" />
+        <button type="submit" class="btn btn-primary mx-2">Tìm</button>
+    </form>
+
+</div>
+<div style="clear:both"></div>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="">
+            <tr>
+                <th scope="col">
+                    <p>Mã Giảng Viên</p>
+                </th>
+                <th scope="col">
+                    <p>Tên Giảng Viên</p>
+                </th>
+                <th scope="col">
+                    <p>Trạng Thái</p>
+                </th>
+                <th scope="col">
+                    <p>Hình ảnh</p>
+                </th>
+                <th scope="col">
+                    <p>Ngày Tạo</p>
+                </th>
+                <th scope="col">
+                    <p>Cấp Bậc</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID_TEACHER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME_TEACHER)
+                </td>
+                <td>
+                    @if (item.STATUS_TEACHER == "Hoạt Động")
+                    {
+                        <span class="badge badge-sm bg-success ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_TEACHER)</span>
+                    }
+                    else if (item.STATUS_TEACHER == "Không Hoạt Động")
+                    {
+                        <span class="badge badge-sm bg-danger ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_TEACHER)</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-sm bg-warning ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_TEACHER)</span>
+                    }
+
+                </td>
+                <td>
+                    <img src="/Assets/Clients/assets/img/@Html.DisplayFor(modelItem => item.THUMBNAIL)" style="width: 100px; height:120px" />
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.D_CREATED).ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LEVEL_TEACHER)
+                </td>
+                <td>
+                    <button class="btn btn-success ">
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.MA_COURSE, @style="color:white" })|*@
+                        <a style="color: white; text-decoration: none" href="/Admin/GIANGVIEN/Edit?id=@item.ID_TEACHER"><i class="bi bi-pencil"></i></a>
+                    </button>
+                    <button class="btn btn-primary ">
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.MA_COURSE, @style="color:white" })|*@
+                        <a style="color: white; text-decoration: none" href="/Admin/GIANGVIEN/Detail/@item.ID_TEACHER"><i class="bi bi-eye"></i></a>
+                    </button>
+                    @*@Html.ActionLink("Detail", "Detail", new { id = item.MA_COURSE })|*@
+                    <button class="btn btn-danger ">
+                        <a style="color:white; text-decoration:none " onclick="if(confirm('Bạn có chắc chắn muốn xóa Giáo Viên @item.NAME_TEACHER không?')== true ){location.href= '/Admin/GIANGVIEN/Delete/@item.ID_TEACHER'}"><i class="bi bi-trash3"></i></a>
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

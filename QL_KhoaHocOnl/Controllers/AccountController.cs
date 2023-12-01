@@ -14,7 +14,11 @@ namespace QL_KhoaHocOnl.Controllers
     {
         // GET: Account
         QL_COURSEEntities db = new QL_COURSEEntities();
-
+        public ActionResult DetailUser()
+        {
+            
+            return View();
+        }
         public ActionResult Login()
         {
             // db.Products.Add(p);

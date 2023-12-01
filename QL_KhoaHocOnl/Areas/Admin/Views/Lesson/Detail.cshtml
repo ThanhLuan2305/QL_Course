@@ -1,0 +1,91 @@
+﻿@model QL_KhoaHocOnl.Models.LESSON
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using System;
+@using System.Globalization;
+<div style="align-items:center;justify-content:center">
+    <div class="card mb-4">
+        <div class="card-header text-center font-bold" style="font-weight:bold">Chi Tiết Bài Học </div>
+        <div class="row" style="margin:0 auto">
+            <div class="col-sm-12">
+                <div class="card col" style="width: 20rem; margin-top:5px">
+                    <a href="@Html.DisplayFor(model => model.LINK_LESSON)" target="_blank"><img class="card-img-top" src="/Assets/Clients/assets/img/@Html.DisplayFor(model => model.THUMBNAIL)" alt="Card IMG"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(model => model.TITLE_LESSON)</h5>
+                        <p class="card-text">@Html.DisplayFor(model => model.DESCRIPTION_LESSON)</p>
+                        <div class="row">
+                            <p>Khóa Học: <a href="/Admin/Home/Detail?id=@Model.COURSE.ID_COURSE" style="text-decoration:none">@Model.COURSE.NAME_COURSE</a></p>
+                            <p>Giảng Viên: <a href="/Admin/GIANGVIEN/Detail?id=@Model.COURSE.ID_TEACHER" style="text-decoration:none">@Model.COURSE.TEACHER.NAME_TEACHER</a></p>
+                            <p class="list-group-item" style="margin-left:15px">Ngày tạo Bài Học: @Convert.ToDateTime(Model.CREATED_AT).ToString("dd/MM/yyyy")</p>
+                            <p class="list-group-item" style="margin-left:15px">Update gần nhất: @Convert.ToDateTime(Model.UPDATED_AT).ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="card-body row">
+                            <a href="/Admin/Lesson/Edit?id=@Model.ID_LESSON" class="btn btn-primary col" style="text-decoration:none; float:left">Chỉnh Sửa</a>|
+                            <a href="@Html.DisplayFor(model => model.@LINK_LESSON)" target="_blank" class="btn btn-primary col" style="text-decoration:none;float:right">View Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h5>Các Bài Học có liên quan: @Model.COURSE.NAME_COURSE</h5>
+<div class="row">
+    @{
+        QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+        var list_LS = DB.LESSON.ToList();
+        foreach (var items in list_LS)
+        {
+            if (Model.ID_COURSE == items.ID_COURSE)
+            {
+                <div class="card col-sm-4 ">
+                    <div class="card-body">
+                        <div class="row ">
+                            <img class="card-img-top" style="width:auto;height:150px;margin:0 auto" src="/Assets/Clients/assets/img/@items.THUMBNAIL" alt="Card image cap">
+                        </div>
+                        <div class="row ">
+                            <h5 class="card-title">@items.TITLE_LESSON</h5>
+                            <p class="card-text">@items.DESCRIPTION_LESSON</p>
+                            <a href="/Admin/Lesson/Detail/@items.ID_LESSON" class=" btn btn-primary">View Lesson</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+<h5>Các Khóa Học khác: @Model.COURSE.NAME_COURSE</h5>
+<div class="row">
+    @{
+        var List_Course = DB.COURSE.ToList();
+        var check = 0;
+    }
+    @foreach (var item_course in List_Course)
+    {
+        check += 1;
+        if (check <= 5)
+        {
+            <div class="card col-sm-4 ">
+                <div class="card-body">
+                    <div class="row ">
+                        <img class="card-img-top" style="width:auto;height:150px;margin:0 auto" src="/Assets/Clients/assets/img/@item_course.THUMBNAIL" alt="Card image cap">
+                    </div>
+                    <div class="row ">
+                        <h5 class="card-title">@item_course.NAME_COURSE</h5>
+                        <p class="card-text">@item_course.DESCRIPTION_COURSE</p>
+                        <a href="/Admin/Home/Detail/?id=@item_course.ID_COURSE" class=" btn btn-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            break;
+        }
+
+    }
+</div>

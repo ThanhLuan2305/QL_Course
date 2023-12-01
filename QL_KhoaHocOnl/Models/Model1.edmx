@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_COURSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_COURSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ARTICLE">
           <Key>
             <PropertyRef Name="ID" />
@@ -290,6 +290,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PRO_UPDATE_COUNTLESSONS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PRO_UPDATE_USER_COUNT_COURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QL_COURSEModelStoreContainer">
           <EntitySet Name="ARTICLE" EntityType="Self.ARTICLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" Schema="dbo" store:Type="Tables" />
@@ -352,8 +354,7 @@
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_COURSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -727,6 +728,8 @@
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
           </AssociationSet>
+          <FunctionImport Name="PRO_UPDATE_COUNTLESSONS" />
+          <FunctionImport Name="PRO_UPDATE_USER_COUNT_COURSE" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -886,6 +889,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PRO_UPDATE_COUNTLESSONS" FunctionName="QL_COURSEModel.Store.PRO_UPDATE_COUNTLESSONS" />
+          <FunctionImportMapping FunctionImportName="PRO_UPDATE_USER_COUNT_COURSE" FunctionName="QL_COURSEModel.Store.PRO_UPDATE_USER_COUNT_COURSE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
