@@ -15,7 +15,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult ListTeacher(string search = "")
         {
-            List<TEACHER> listTeacher = db.TEACHER.Where(row => row.NAME_TEACHER.Contains(search)).ToList();
+            List<TEACHER> listTeacher = db.TEACHERs.Where(row => row.NAME_TEACHER.Contains(search)).ToList();
             ViewBag.Search = search;
             return View(listTeacher);
         }
@@ -58,7 +58,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                db.TEACHER.Add(teacher);
+                db.TEACHERs.Add(teacher);
                 db.SaveChanges();
                 return RedirectToAction("ListTeacher");
             }
@@ -72,7 +72,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Edit(string id = "")
         {
-            var coursemodel = db.TEACHER.Find(id);
+            var coursemodel = db.TEACHERs.Find(id);
             return View(coursemodel);
         }
         [HttpPost]
@@ -108,7 +108,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
             }
             // Lưu
             // tìm đối tượng sửa
-            var updateModel = db.TEACHER.Find(teacher.ID_TEACHER);
+            var updateModel = db.TEACHERs.Find(teacher.ID_TEACHER);
             // gắn giá trị mới cho đối tượng
             updateModel.NAME_TEACHER = teacher.NAME_TEACHER;
             updateModel.STATUS_TEACHER = teacher.STATUS_TEACHER;
@@ -130,7 +130,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Detail(string id = "")
         {
-            TEACHER teacher = db.TEACHER.Where(row => row.ID_TEACHER == id).FirstOrDefault();
+            TEACHER teacher = db.TEACHERs.Where(row => row.ID_TEACHER == id).FirstOrDefault();
             if (id == "")
             {
                 return HttpNotFound();
@@ -140,8 +140,8 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Delete(string id = "")
         {
-            var model = db.TEACHER.Find(id);
-            db.TEACHER.Remove(model);
+            var model = db.TEACHERs.Find(id);
+            db.TEACHERs.Remove(model);
             db.SaveChanges();
             return RedirectToAction("ListTeacher");
         }

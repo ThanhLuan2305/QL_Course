@@ -17,17 +17,17 @@ namespace QL_KhoaHocOnl.Controllers
         }
         public ActionResult CourseBasic()
         {
-            var list = db.COURSE.Where(x => x.LEVEL_COURSE.Contains("Cơ bản")).ToList();
+            var list = db.COURSEs.Where(x => x.LEVEL_COURSE.Contains("Cơ bản")).ToList();
             return View(list);
         }
         public ActionResult TeacherGS()
         {
-            var list = db.TEACHER.Where(x => x.LEVEL_TEACHER.Contains("Giáo Sư")).ToList();
+            var list = db.TEACHERs.Where(x => x.LEVEL_TEACHER.Contains("Giáo Sư")).ToList();
             return View(list);
         }
         public ActionResult BlogTop()
         {
-            var list = db.ARTICLE.Take(3).ToList();
+            var list = db.ARTICLEs.Take(3).ToList();
             return View(list);
         }
     }

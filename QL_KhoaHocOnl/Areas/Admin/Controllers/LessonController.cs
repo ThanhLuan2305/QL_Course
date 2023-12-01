@@ -15,14 +15,14 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         // GET: /Lesson/
         public ActionResult ListLESSON(string search = "")
         {
-            List<LESSON> listLesson = db.LESSON.Where(row => row.TITLE_LESSON.Contains(search)).ToList();
+            List<LESSON> listLesson = db.LESSONs.Where(row => row.TITLE_LESSON.Contains(search)).ToList();
             ViewBag.Search = search;
             return View(listLesson);
         }
         public ActionResult AddLesson()
         {
 
-            ViewBag.COURSE = db.COURSE.ToList();
+            ViewBag.COURSE = db.COURSEs.ToList();
             return View();
         }
         [HttpPost]
@@ -48,7 +48,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                db.LESSON.Add(lesson);
+                db.LESSONs.Add(lesson);
                 db.SaveChanges();
                 db.PRO_UPDATE_COUNTLESSONS(); 
                 return RedirectToAction("ListLESSON");
@@ -63,7 +63,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Edit(string id = "")
         {
-            var coursemodel = db.LESSON.Find(id);
+            var coursemodel = db.LESSONs.Find(id);
 
             return View(coursemodel);
         }
@@ -90,7 +90,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
                 ModelState.AddModelError("", "Tiêu đề không được trống");
                 return View(lesson);
             }
-            var updateModel = db.LESSON.Find(lesson.ID_LESSON);
+            var updateModel = db.LESSONs.Find(lesson.ID_LESSON);
             // gắn giá trị mới cho đối tượng
             updateModel.ID_COURSE = lesson.ID_COURSE;
             updateModel.TITLE_LESSON = lesson.TITLE_LESSON;
@@ -114,15 +114,15 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         }
         public ActionResult Delete(string id = "")
         {
-            var model = db.LESSON.Find(id);
-            db.LESSON.Remove(model);
+            var model = db.LESSONs.Find(id);
+            db.LESSONs.Remove(model);
             db.SaveChanges();
             db.PRO_UPDATE_COUNTLESSONS();
             return RedirectToAction("ListLESSON");
         }
         public ActionResult Detail(string id = "")
         {
-            LESSON lesson1 = db.LESSON.Where(row => row.ID_LESSON == id).FirstOrDefault();
+            LESSON lesson1 = db.LESSONs.Where(row => row.ID_LESSON == id).FirstOrDefault();
             if (id == "")
             {
                 return HttpNotFound();

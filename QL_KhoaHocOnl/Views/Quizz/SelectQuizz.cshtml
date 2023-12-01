@@ -1,0 +1,23 @@
+﻿@model QL_KhoaHocOnl.ViewModel.QuizVM
+
+@{
+    ViewBag.Title = "SelectQuizz";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="h-100 w-100" style="background-image: url('https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg');">
+    <div class="container d-flex justify-content-center">
+        <div class="w-50 mt-5">
+            <div class="card card-body mt-5">
+                <div class="panel-heading mb-2">Chọn nội dung câu hỏi:</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SelectQuizz", "Quizz", FormMethod.Post))
+                    {
+                        @Html.DropDownListFor(model => model.QuizID, Model.ListOfQuizz, new { @class = "form-control" })<br />
+                        <button type="submit" id="Enter" class="btn btn-success btn-lg" style="width:100%;"><span class="glyphicon glyphicon-ok"></span>Bắt đầu thôi </button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

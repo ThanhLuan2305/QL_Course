@@ -14,7 +14,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         {
             using (QL_COURSEEntities db = new QL_COURSEEntities())
             {
-                return View(db.ARTICLE.ToList());
+                return View(db.ARTICLEs.ToList());
             }
         }
 
@@ -26,7 +26,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
             {
                 if (ID > 0 && ID != null)
                 {
-                    ARTICLE ArticleUpdate = db.ARTICLE.Where(x => x.ID == ID).FirstOrDefault();
+                    ARTICLE ArticleUpdate = db.ARTICLEs.Where(x => x.ID == ID).FirstOrDefault();
                     ArticleUpdate.TITLE = TITLE;
                     ArticleUpdate.CONTENT = CONTENT;
                     ArticleUpdate.STATUS_ARTICLE = STATUS_ARTICLE;
@@ -38,10 +38,10 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
                 }
                 else
                 {
-                    db.ARTICLE.Add(new ARTICLE { ID_USER = ID_USER, TITLE = TITLE, CONTENT = CONTENT, STATUS_ARTICLE = STATUS_ARTICLE, THUMBNAIL = THUMBNAIL, TYPE_ARTICLE = TYPE_ARTICLE, UPDATED_AT = DateTime.Now, CREATED_AT = DateTime.Now });
+                    db.ARTICLEs.Add(new ARTICLE { ID_USER = ID_USER, TITLE = TITLE, CONTENT = CONTENT, STATUS_ARTICLE = STATUS_ARTICLE, THUMBNAIL = THUMBNAIL, TYPE_ARTICLE = TYPE_ARTICLE, UPDATED_AT = DateTime.Now, CREATED_AT = DateTime.Now });
                     db.SaveChanges();
                 }
-                return View(db.ARTICLE.ToList());
+                return View(db.ARTICLEs.ToList());
             }
         }
 
@@ -49,8 +49,8 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         {
             using (QL_COURSEEntities db = new QL_COURSEEntities())
             {
-                ARTICLE customer = db.ARTICLE.Where(x => x.ID == id).FirstOrDefault();
-                db.ARTICLE.Remove(customer);
+                ARTICLE customer = db.ARTICLEs.Where(x => x.ID == id).FirstOrDefault();
+                db.ARTICLEs.Remove(customer);
                 db.SaveChanges();
 
                 return RedirectToAction("Article");

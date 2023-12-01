@@ -12,23 +12,15 @@ namespace QL_KhoaHocOnl.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ORDER_COURSE
+    public partial class GRADE
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ORDER_COURSE()
-        {
-            this.FEEDBACKs = new HashSet<FEEDBACK>();
-        }
-    
-        public string ID_ORDER { get; set; }
-        public string ID_COURSE { get; set; }
+        public string GRADEID { get; set; }
         public int ID_USER { get; set; }
-        public string STATUS_ORDER { get; set; }
-        public System.DateTime TIME_AT_ORDER { get; set; }
+        public string ID_COURSE { get; set; }
+        public string QUIZID { get; set; }
+        public Nullable<double> GRADE1 { get; set; }
     
         public virtual COURSE COURSE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FEEDBACK> FEEDBACKs { get; set; }
         public virtual USER_COURSE USER_COURSE { get; set; }
     }
 }

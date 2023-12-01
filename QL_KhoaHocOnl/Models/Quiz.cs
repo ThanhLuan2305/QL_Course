@@ -12,19 +12,18 @@ namespace QL_KhoaHocOnl.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TYPE_COURSE
+    public partial class Quiz
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TYPE_COURSE()
+        public Quiz()
         {
-            this.COURSEs = new HashSet<COURSE>();
+            this.Questions = new HashSet<Question>();
         }
     
-        public string ID_TYPECOURSE { get; set; }
-        public string NAME_TYPECOURSE { get; set; }
-        public string THUMBNAIL { get; set; }
+        public int QuizID { get; set; }
+        public string QuizName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<COURSE> COURSEs { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

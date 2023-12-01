@@ -1,0 +1,124 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.ViewModel.QuestionVM>
+@using QL_KhoaHocOnl.ViewModel;
+@{
+    int count = 1, countR = 0;
+    QuizVM quizSelected = Session["SelectedQuiz"] as QuizVM;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="Quiz">
+        <h4 class="mt-4"> <span class="label label-info"><span class="text-muted">Câu hỏi về:</span> @quizSelected.QuizName</span> </h4>
+
+        @if (Model != null && Model.Any())
+        {
+
+            foreach (var question in Model)
+            {
+                <div class="BlockQ mt-4" style="border: 1px solid #bdbdbd; border-radius: 4px;background-color: #f0ffff; padding: 8px;">
+
+                    <div class="Question" style="padding: 2%;">
+                        <span class="label label-warning font-weight-bold"> @string.Format("{0}{1}.", "Câu. ", count)</span>
+                        <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@question.QuestionID</span>
+                        <p class=" font-weight-bold" style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@question.QuestionText</p>
+                    </div>
+
+                    <div class="Choices" style="margin-left: 8%;">
+
+                        @foreach (var choice in question.Choices)
+                        {
+                            <label class="radio-inline">
+                                <input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@choice.ChoiceText" style="margin-left: -16px;"> @choice.ChoiceText
+                            </label><br />
+                            countR++;
+                        }
+
+                    </div> <!--END Choices-->
+
+                    <div id="@string.Format("{0}{1}{2}", "Ans","Q", count)">
+
+
+                    </div>
+
+                </div>
+                count++;
+            }
+            <span id="countQuections" style="display:none;">@count</span>
+            <div class="d-flex">
+                <a href="/Quizz/SelectQuizz" class="btn btn-dark w-50 my-4">Thoát</a>
+                <button type="button" id="SubmitQuiz" class="btn btn-primary w-50 my-4">Nộp bài</button>
+            </div>
+
+
+        }
+
+    </div>
+
+</div>
+
+@section MyScritps
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#SubmitQuiz').on('click', function () {
+
+                //count Questions
+                var sel = $('#countQuections').text();
+
+                console.log(sel);
+
+                var resultQuiz = [], countQuestion = parseInt(sel), question = {}, j = 1;
+
+                for (var i = 1; i < countQuestion; i++) {
+                    question = {
+                        QuestionID: $('#ID_Q'+ i).text(),
+                        QuestionText: $('#Q' + i).text(),
+                        AnswerQ: $('input[name=inlineRadioOptions' + i + ']:checked').val()
+                    }
+
+                    resultQuiz.push(question);
+                }
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '@Url.Action("QuizTest", "Quizz")',
+                    data: { resultQuiz },
+
+                    success: function (response) {
+
+                        if (response.result.length > 0)
+                        {
+                            for(var i = 0; i <response.result.length; i++ )
+                            {
+                                if(response.result[i].isCorrect == true)
+                                {
+
+                                    $('#AnsQ' + j).html('<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Câu trả lời chính xác</div>');
+                                }
+                                else
+                                {
+                                    $('#AnsQ' + j).html('<div class="alert alert-danger" role="alert"> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Câu trả lời chưa chính xác - câu trả lời đúng là <b>' + response.result[i].AnswerQ + '</b></div>');
+                                }
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            alert("Lỗi");
+                        }
+
+
+                    },
+                    error: function (response) {
+                    }
+                });
+                console.log(resultQuiz);
+            });
+        });
+    </script>
+}

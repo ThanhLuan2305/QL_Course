@@ -24,9 +24,9 @@ namespace QL_KhoaHocOnl.ViewModel
             ID_USER = iduser;
             ID_COURSE = idCourse;
 
-            COURSE kh = db.COURSE.Single(item => item.ID_COURSE == ID_COURSE);
+            COURSE kh = db.COURSEs.Single(item => item.ID_COURSE == ID_COURSE);
             NAME_TYPECOURSE = db.TYPE_COURSE.Where(na => na.ID_TYPECOURSE == kh.ID_TYPECOURSE).Select(st => st.NAME_TYPECOURSE).FirstOrDefault();
-            NAME_TEACHER = db.TEACHER.Where(na => na.ID_TEACHER == kh.ID_TEACHER).Select(st => st.NAME_TEACHER).FirstOrDefault();
+            NAME_TEACHER = db.TEACHERs.Where(na => na.ID_TEACHER == kh.ID_TEACHER).Select(st => st.NAME_TEACHER).FirstOrDefault();
             NAME_COURSE = kh.NAME_COURSE;
             DESCRIPTION_COURSE = kh.DESCRIPTION_COURSE;
             PRICE_COURSE = kh.PRICE_COURSE;

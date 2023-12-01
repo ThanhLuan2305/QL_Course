@@ -14,7 +14,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var tongtien = (from orc in db.ORDER_COURSE
-                            join course in db.COURSE
+                            join course in db.COURSEs
                             on orc.ID_COURSE equals course.ID_COURSE
                             select course.PRICE_COURSE
                 ).ToList();
@@ -24,7 +24,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
             var SUser = (from user in db.USER_COURSE select user.ID_USER).ToList().Count();
             ViewBag.TongUser = SUser;
 
-            var feedback = (from fb in db.FEEDBACK select fb.RATE_FEEDBACK).Average();
+            var feedback = (from fb in db.FEEDBACKs select fb.RATE_FEEDBACK).Average();
             ViewBag.DanhGia = feedback;
 
             db.PRO_UPDATE_COUNTLESSONS();
@@ -32,7 +32,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         }
         public ActionResult Course(string search = "")
         {
-            List<COURSE> course = db.COURSE.Where(row => row.NAME_COURSE.Contains(search)).ToList();
+            List<COURSE> course = db.COURSEs.Where(row => row.NAME_COURSE.Contains(search)).ToList();
             ViewBag.Search = search;
             return View(course);
         }
@@ -40,7 +40,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         public ActionResult AddCourse()
         {
             ViewBag.TYPE_COURSE = db.TYPE_COURSE.ToList();
-            ViewBag.TEACHERs = db.TEACHER.ToList();
+            ViewBag.TEACHERs = db.TEACHERs.ToList();
             return View();
         }
         [HttpPost]
@@ -72,7 +72,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                db.COURSE.Add(course);
+                db.COURSEs.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Course");
             }
@@ -85,7 +85,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Detail(string id = "")
         {
-            COURSE course1 = db.COURSE.Where(row => row.ID_COURSE == id).FirstOrDefault();
+            COURSE course1 = db.COURSEs.Where(row => row.ID_COURSE == id).FirstOrDefault();
             if (id == "")
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
         public ActionResult Edit(string id = "")
         {
-            var coursemodel = db.COURSE.Find(id);
+            var coursemodel = db.COURSEs.Find(id);
             return View(coursemodel);
         }
         [HttpPost]
@@ -126,7 +126,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
             }
             // Lưu
             // tìm đối tượng sửa
-            var updateModel = db.COURSE.Find(course.ID_COURSE);
+            var updateModel = db.COURSEs.Find(course.ID_COURSE);
             // gắn giá trị mới cho đối tượng
             updateModel.NAME_COURSE = course.NAME_COURSE;
             updateModel.ID_TYPECOURSE = course.ID_TYPECOURSE;
@@ -151,8 +151,8 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         }
         public ActionResult Delete(string id = "")
         {
-            var model = db.COURSE.Find(id);
-            db.COURSE.Remove(model);
+            var model = db.COURSEs.Find(id);
+            db.COURSEs.Remove(model);
             db.SaveChanges();
             return RedirectToAction("Course");
         }
