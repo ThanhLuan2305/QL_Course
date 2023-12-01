@@ -35,7 +35,7 @@
                     {
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">@Session["Fullname"]</a>
+                            <a class="nav-link" href="/account/detailuser?id=@Int32.Parse(Request.Cookies["User"]["ID"])">@Session["Fullname"]</a>
                         </li>
 
                         <li class="nav-item">

@@ -14,10 +14,17 @@ namespace QL_KhoaHocOnl.Controllers
     {
         // GET: Account
         QL_COURSEEntities db = new QL_COURSEEntities();
-        public ActionResult DetailUser()
+        public ActionResult DetailUser(int id)
         {
-            
-            return View();
+            if (Request.Cookies["User"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                USER_COURSE u = db.USER_COURSE.Where(x => x.ID_USER == id).FirstOrDefault();  
+                return View(u);
+            }
         }
         public ActionResult Login()
         {
@@ -38,7 +45,7 @@ namespace QL_KhoaHocOnl.Controllers
             
             if (ModelState.IsValid)
             {
-                if (db.USER_COURSE.Where(x => x.ROLE_USER == "Admin") == null)
+                if (db.USER_COURSE.Where(x => x.ROLE_USER == "Admin").FirstOrDefault() == null)
                 {
                     USER_COURSE u = new USER_COURSE();
                     u.ROLE_USER = "Admin";
