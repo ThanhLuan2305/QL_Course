@@ -1,0 +1,97 @@
+﻿@model QL_KhoaHocOnl.Models.TEACHER
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using System;
+@using System.Globalization;
+<div>
+    <div class="card mb-4">
+        <div class="card-header text-center font-bold" style="font-weight:bold">Chi Tiết Giảng Viên</div>
+        <div class="row" style="margin:0 auto">
+            <div class="col-sm-12">
+                <div class="card col" style="width: 20rem; margin-top:5px">
+                    <img class="card-img-top" src="/Assets/Clients/assets/img/@Html.DisplayFor(model => model.THUMBNAIL)" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(model => model.NAME_TEACHER)</h5>
+                        <p class="card-text">@Html.DisplayFor(model => model.DESCRIPTION_TEACHER)</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Trạng Thái: @Html.DisplayFor(model => model.STATUS_TEACHER)</li>
+                        <li class="list-group-item">Cấp Bậc: @Html.DisplayFor(model => model.LEVEL_TEACHER)</li>
+                        <li class="list-group-item">Ngày tạo: @Convert.ToDateTime(Model.D_CREATED).ToString("dd/MM/yyyy")</li>
+                    </ul>
+                    <div class="card-body row">
+                        <a href="/Admin/GiangVien/Edit?id=@Model.ID_TEACHER" class="btn btn-primary col" style="text-decoration:none; float:left">Chỉnh Sửa</a>|
+                        <a href="/Admin/GiangVien/ListTeacher" class="btn btn-primary col" style="text-decoration:none;float:right">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h5>Các Khóa Học có liên quan đến Teacher: @Model.NAME_TEACHER</h5>
+<div class="row ">
+    @{var check = 0;}
+    @foreach (var items_Course in Model.COURSE)
+    {
+        if (items_Course.ID_TEACHER == Model.ID_TEACHER)
+        {
+            <div class="card col-sm-4 " style="width: 20rem;">
+                <div class="card-body">
+                    <div class="row">
+                        <img class="card-img-top" style="width:auto;height:100px;margin:0 auto" src="/Assets/Clients/assets/img/@items_Course.THUMBNAIL" alt="Card image cap">
+                    </div>
+                    <div class="row">
+                        <h5 class="card-title">@items_Course.NAME_COURSE</h5>
+                        <p class="card-text">@items_Course.DESCRIPTION_COURSE</p>
+                        <a href="/Admin/Home/Detail/@items_Course.ID_COURSE" class="btn btn-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
+        }
+        if (check == 3)
+        {
+            break;
+        }
+    }
+</div>
+<h5>Các Bài Học có liên quan đến Teacher: @Model.NAME_TEACHER</h5>
+<div class="row">
+    @{
+        QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+        var list_ls = DB.LESSON.ToList();
+        var idcourse = DB.COURSE.ToList();
+        var check_null = 0;
+        foreach (var itemls in list_ls)
+        {
+            foreach (var itemsc in idcourse)
+            {
+                if (itemls.ID_COURSE == itemsc.ID_COURSE && itemsc.ID_TEACHER == Model.ID_TEACHER)
+                {
+                    check_null += 1;
+                    <div class="card col-sm-4 " style="width: 20rem;">
+                        <div class="card-body">
+                            <div class="row">
+                                <img class="card-img-top" style="width:auto;height:100px;margin:0 auto" src="/Assets/Clients/assets/img/@itemls.THUMBNAIL" alt="Card image cap">
+                            </div>
+                            <div class="row">
+                                <h5 class="card-title">@itemls.TITLE_LESSON</h5>
+                                <p class="card-text">@itemls.DESCRIPTION_LESSON</p>
+                                <a href="/Admin/Lesson/Detail/@itemls.ID_LESSON" class="btn btn-primary">View Course</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        if (check_null == 0)
+        {
+            <div class="row">
+                <p style="text-align:center">Bài Học đang trống, Vui lòng <a href="/Admin/Lesson/AddLesson" style="font-weight:bold;">Thêm Mới Bài Học</a> cho Giảng Viên</p>
+            </div>
+        }
+    }
+</div>

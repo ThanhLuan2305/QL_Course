@@ -1,0 +1,155 @@
+﻿@model QL_KhoaHocOnl.Models.COURSE
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID_COURSE)
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/Course">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thông tin Khóa Học</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <form class="row g-3">
+            <div class="card mb-4">
+                <div class="card-header text-center font-bold " style="font-weight:bold">Chỉnh Sửa Khóa Học</div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6 rounded-pill">
+                            <a>Mã Khóa Học</a>
+                            @*@Html.TextBoxFor(model => model.ID_COURSE, new { @readonly = "readonly" })*@
+                            <span class="" id="basic-addon1">@Html.TextBoxFor(model => model.ID_COURSE, new { @readonly = true, @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.ID_COURSE)
+                        </div>
+                        <div class="col-md-6">
+                            <a>Tên Khóa Học Mới</a>
+                            <span class="w-100">@Html.TextBoxFor(model => model.NAME_COURSE, new { @class = "form-control" })</span>
+                            @Html.ValidationMessageFor(model => model.NAME_COURSE)
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+
+                        <div class="col-md-6">
+                            <a>Loại Khóa Học</a>
+                            @*@Html.DropDownListFor(model => model.ID_TYPECOURSE, new SelectList(ViewBag.TYPE_COURSE, "ID_TYPECOURSE", "NAME_TYPECOURSE"), "Chọn Loại Khóa Học", new { @class = "form-control col-md-2" })*@
+                            @{
+                                QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                                var typecourse = DB.TYPE_COURSE.ToList();
+                                <select name="ID_TYPECOURSE" class="form-control-color col-md-4 rounded" style="width:50%">
+                                    <option selected>...</option>
+                                    @foreach (var item in typecourse)
+                                    {
+                                        <option value="@item.ID_TYPECOURSE" @Html.Raw(item.ID_TYPECOURSE == Model.ID_TYPECOURSE ? "Selected" : "")>@item.NAME_TYPECOURSE</option>
+                                    }
+                                </select>
+                            }
+                            @Html.ValidationMessageFor(model => model.ID_TYPECOURSE, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            <a>Giảng Viên</a>
+                            @*@Html.DropDownListFor(model => model.ID_TEACHER, new SelectList(ViewBag.TEACHERs, "NAME_TEACHER", "ID_TEACHER"), "Chọn Giảng Viên", new { @class = "form-control col-md-2" })*@
+                            @{
+                                QL_KhoaHocOnl.Models.QL_COURSEEntities DBGV = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                                var gv = DBGV.TEACHER.ToList();
+                                <select class="form-control-color col-md-4 rounded" name="ID_TEACHER" style="width:50%">
+                                    <option>...</option>
+                                    @foreach (var itemgv in gv)
+                                    {
+                                        <option value="@itemgv.ID_TEACHER" @Html.Raw(itemgv.ID_TEACHER == Model.ID_TEACHER ? "Selected" : "")>@itemgv.NAME_TEACHER</option>
+                                    }
+                                </select>
+                            }
+                            @Html.ValidationMessageFor(model => model.ID_TEACHER, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*@Html.LabelFor(model => model.DESCRIPTION_COURSE, "Mô Tả ngắn về Khóa Học", new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-6">
+                            <a>Mô Tả về Khóa Học</a>
+                            @Html.TextBoxFor(model => model.DESCRIPTION_COURSE, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DESCRIPTION_COURSE, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            <a>Tình Trạng Khóa Học</a>
+                            <div class="input-group-prepend w-100">
+                                <span class="">@Html.TextBoxFor(model => model.STATUS_COURSE, new { @class = "form-control" })</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.STATUS_COURSE)
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-6">
+                            @*<input type="file" value="Chọn Tệp"/>*@
+                            <a>Hình ảnh Khóa Học (.JPG .PNG)</a>
+                            <div class="input-group-prepend">
+                                <span class="">@Html.TextBoxFor(model => model.THUMBNAIL, new { @class = "form-control" })</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.THUMBNAIL)
+                        </div>
+                        <div class="col-md-6">
+                            <a>Số Lượng Bài Học</a>
+                            <div class="input-group-prepend">
+                                <span class="">@Html.TextBoxFor(model => model.COUNT_LESSON_COURSE, new { @readonly = true, @class = "form-control" })</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.COUNT_LESSON_COURSE)
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-6">
+                            <a>Cấp Độ Khóa Học</a>
+                            <div class="input-group-prepend">
+                                <span class="">@Html.TextBoxFor(model => model.LEVEL_COURSE, new { @class = "form-control" })</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LEVEL_COURSE)
+                        </div>
+                        <div class="col-md-6">
+                            <a>Giá Tiền</a>
+                            <div class="input-group">
+                                <span class="">@Html.TextBoxFor(model => model.PRICE_COURSE, new { @class = "form-control" })</span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.PRICE_COURSE)
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-top: 10px">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CREATED_AT_COURSE,"Ngày Tạo Khóa Học", new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.CREATED_AT_COURSE)
+                                @Html.ValidationMessageFor(model => model.CREATED_AT_COURSE)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.UPDATE_AT_COURSE, "NGÀY UPDATE", new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.UPDATE_AT_COURSE)
+                                @Html.ValidationMessageFor(model => model.UPDATE_AT_COURSE)
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <div style="float:right" class="col">
+                    <a class="btn btn-primary" href="/Admin/Home/Course">Back to List</a>
+                </div>
+            </div>
+
+
+    </div>
+}

@@ -1,0 +1,147 @@
+﻿@model QL_KhoaHocOnl.Models.COURSE
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4">
+    <div class="card-header text-center font-bold " style="font-weight:bold">Chi Tiết Khóa Học</div>
+    <div class="row" style="display:flex">
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top" src="~/Assets/Clients/assets/img/@Html.DisplayFor(model => model.THUMBNAIL)" alt="HÌNH ẢNH">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(model => model.NAME_COURSE)</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.DESCRIPTION_COURSE)</p>
+                    <div class="row" style="display:flex">
+                        <div class="col">
+                            <p style="font-weight:bold">
+                                LEVEL: @{if (@Html.DisplayFor(model => model.LEVEL_COURSE).ToString() == "BASIC")
+                                    {
+                                        <span style="color:green">@Html.DisplayFor(model => model.LEVEL_COURSE)</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:red">@Html.DisplayFor(model => model.LEVEL_COURSE)</span>
+                                    }
+                                }
+                            </p>
+                            <p class="">Loại KH: @Html.DisplayFor(model => model.TYPE_COURSE.NAME_TYPECOURSE)</p>
+
+                        </div>
+                        <div class="col">
+                            <p class="" style="font-weight:bold">
+                                Trạng Thái: @{if (@Html.DisplayFor(model => model.STATUS_COURSE).ToString() == "Hoạt Động")
+                                    {
+                                        <span style="color:green">@Html.DisplayFor(model => model.STATUS_COURSE)</span>
+                                    }
+                                    else if (@Html.DisplayFor(model => model.STATUS_COURSE).ToString() == "Ngưng Hoạt Động")
+                                    {
+                                        <span style="color:red">@Html.DisplayFor(model => model.STATUS_COURSE)</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color: orange ">@Html.DisplayFor(model => model.STATUS_COURSE)</span>
+                                    }
+                                }
+                            </p>
+                            <p class="card-text">Tổng số bài học: @Html.DisplayFor(model => model.COUNT_LESSON_COURSE) </p>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container">
+                            <div class="row" style="display:flex">
+                                <div class="col text-center">
+                                    @{if (@Html.DisplayFor(model => model.STATUS_COURSE).ToString() == "Hoạt Động")
+                                        {
+                                            <button class="btn btn-success" style="margin-bottom:5px ;color:white; width:100%">@string.Format("{0:#,0}", Model.PRICE_COURSE) VNĐ</button>
+                                        }
+                                        else if (@Html.DisplayFor(model => model.STATUS_COURSE).ToString() == "Ngưng Hoạt Động")
+                                        {
+                                            <button class="btn btn-light" style="margin-bottom:5px ;color:red; width:100%;font-weight:bold">KHÔNG HOẠT ĐỘNG <i class="fa-solid fa-circle-exclamation"></i></button>
+                                            @*<button class="btn btn-warning" style="margin-bottom:5px ;color:white; width:100%">@string.Format("{0:#,0}", Model.PRICE_COURSE) VNĐ</button>*@
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-warning" style="margin-bottom:5px ;color:white; width:100%">@string.Format("{0:#,0}", Model.PRICE_COURSE) VNĐ</button>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <a class="btn btn-primary" href="/Admin/Home/Edit?id=@Model.ID_COURSE">Chỉnh sửa</a>
+                        <a class="btn btn-primary" href="/Admin/Home/Course">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card" style="height:auto">
+                <img class="card-img-top" height="614px" src="~/Assets/Clients/assets/img/@Html.DisplayFor(model => model.TEACHER.THUMBNAIL)" alt="HÌNH ẢNH">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @if (@Html.DisplayFor(model => model.TEACHER.LEVEL_TEACHER).ToString() == "Giáo Sư" || @Html.DisplayFor(model => model.TEACHER.LEVEL_TEACHER).ToString() == "Phó Giáo Sư")
+                        {
+                            <p><span class="btn btn-danger font-bold " style="color:white; font-weight:bold">PRO </span><a class="font-bold" style="text-align:center;text-decoration: none; align-items:center">@Html.DisplayFor(model => model.TEACHER.NAME_TEACHER)</a></p>
+                        }
+                        else if (@Html.DisplayFor(model => model.TEACHER.LEVEL_TEACHER).ToString() == "Tiến Sĩ")
+                        {
+                            <p><span class="btn btn-success font-bold " style="color:white; font-weight:bold">INTER </span><a class="font-bold" style="text-align:center;text-decoration: none; align-items:center">@Html.DisplayFor(model => model.TEACHER.NAME_TEACHER)</a></p>
+                        }
+                        else
+                        {
+                            <p><span class="btn btn-warning font-bold " style="color:white; font-weight:bold">MAS </span><a class="font-bold" style="text-align:center;text-decoration: none; align-items:center">@Html.DisplayFor(model => model.TEACHER.NAME_TEACHER)</a></p>
+                        }
+                    </h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.TEACHER.DESCRIPTION_TEACHER)</p>
+                    <div class="container">
+                        <a class="btn btn-primary w-100" style="margin-left: 0; " href="/Admin/GiangVien/Detail/@Html.DisplayFor(model => model.ID_TEACHER)">Xem Chi Tiết Giảng Viên</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-sm-4 ">
+                <div class="card">
+                    <img class="card-img-top" src="~/Assets/Clients/assets/img/@Html.DisplayFor(model => model.TYPE_COURSE.THUMBNAIL)" alt="HÌNH ẢNH">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(model => model.TYPE_COURSE.ID_TYPECOURSE)</h5>
+                        <p class="card-text">@Html.DisplayFor(model => model.TYPE_COURSE.NAME_TYPECOURSE)</p>
+                        <div class="footer">
+                            <a class="btn btn-primary" href="#">Chỉnh sửa</a>
+                            <a class="btn btn-primary" href="/Home/Course">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="col-sm-4">
+            <div class="row">
+                @foreach (var lesson in Model.LESSON)
+                {
+                    if (lesson.ID_COURSE == Model.ID_COURSE)
+                    {
+                        <div class="card col-sm-6" style="width: 14rem;">
+                            <div class="card-body">
+                                <div class="row">
+                                    <img class="card-img-top" style="width:auto;height:100px;margin:0 auto" src="~/Assets/Clients/assets/img/@lesson.THUMBNAIL" alt="Card image cap">
+                                </div>
+                                <div class="row">
+                                    <h5 class="card-title">@lesson.TITLE_LESSON</h5>
+                                    <p class="card-text">@lesson.DESCRIPTION_LESSON</p>
+                                    <a href="/Admin/Lesson/Detail/?id=@lesson.ID_LESSON" class="btn btn-primary">View Lesson</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/Assets/Clients/vendors/coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="~/Assets/Clients/vendors/simplebar/js/simplebar.min.js"></script>

@@ -1,0 +1,91 @@
+﻿@model QL_KhoaHocOnl.Models.USER_COURSE
+
+@{
+    ViewBag.Title = "DetailUser";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>DetailUser</h2>
+
+<div>
+    <h4>USER_COURSE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FULLNAME_USER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FULLNAME_USER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIRTHDAY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIRTHDAY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMBER_OF_COURSE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMBER_OF_COURSE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL_USER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL_USER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHONE_USER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PHONE_USER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLE_USER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLE_USER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATUS_USER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUS_USER)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_USER }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

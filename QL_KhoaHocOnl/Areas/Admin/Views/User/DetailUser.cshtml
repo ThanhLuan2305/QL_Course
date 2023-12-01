@@ -1,0 +1,134 @@
+﻿@model QL_KhoaHocOnl.Models.USER_COURSE
+
+@{
+    ViewBag.Title = "DetailUser";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section style="background-color: #eee;">
+    <div class="card card-body">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <span class="breadcrumb-item active" aria-current="page">Thông tin chi tiết</span>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <div class="text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@Html.DisplayFor(model => model.FULLNAME_USER)</h5>
+                        <p class="text-muted mb-1">Vai trò  <span class="font-weight-bold">@Html.DisplayFor(model => model.ROLE_USER)</span></p>
+                        <p class="text-muted">Trạng thái <span class="font-weight-bold">@Html.DisplayFor(model => model.STATUS_USER)</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class=" mb-4">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Họ tên</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.FULLNAME_USER)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Tên đăng nhập</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.USERNAME)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mật khẩu</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.PASSWORD)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.EMAIL_USER)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Số điện thoại</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.PHONE_USER)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ngày sinh</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    @Convert.ToDateTime(Model.BIRTHDAY).ToString("dd/MM/yyyy")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-body">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <span class="breadcrumb-item active" aria-current="page">Khóa học đã đăng ký</span>
+                </nav>
+            </div>
+        </div>
+        <div class="row ">
+            @{var check = 0;
+                QL_KhoaHocOnl.Models.QL_COURSEEntities db = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                var courses = db.COURSE.ToList();
+                var Orders = db.ORDER_COURSE.ToList();
+            }
+            @foreach (var items_Course in courses)
+            {
+                foreach (var items_orders in Orders)
+                {
+                    if (Model.ID_USER == items_orders.ID_USER && items_orders.ID_COURSE == items_Course.ID_COURSE)
+                    {
+                        <div class="col-lg-4">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <img class="object-fit-cover" width="100%" height="300px" src="/Assets/Clients/assets/img/@items_Course.THUMBNAIL" alt="THUMBNAIL">
+                                    </div>
+                                    <div class="row">
+                                        <h5 class="card-title my-2 font-weight-bold">@items_Course.NAME_COURSE</h5>
+                                        <p class="card-text text-sm">@items_Course.DESCRIPTION_COURSE</p>
+                                        <a href="/Admin/Home/Detail/@items_Course.ID_COURSE" class="btn btn-primary">View Course</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            }
+        </div>
+
+    </div>
+</section>

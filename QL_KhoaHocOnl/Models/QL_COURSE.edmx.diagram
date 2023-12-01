@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d9038278665649e0afa44120c3184bb9" Name="Diagram1">
+      <Diagram DiagramId="84dc06b491ab49fc955079b455c31102" Name="Diagram1">
         <EntityTypeShape EntityType="QL_COURSEModel.Answer" Width="1.5" PointX="14.25" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.ARTICLE" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.CART_OF_USER" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
@@ -21,10 +21,10 @@
         <EntityTypeShape EntityType="QL_COURSEModel.TEACHER" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.TYPE_COURSE" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.USER_COURSE" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="QL_COURSEModel.FK__Answers__Questio__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_COURSEModel.FK_Answers_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_ARTICLE_USER" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_CART_OF_USER_USER_COURSE" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_COURSEModel.FK__Choices__Questio__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_COURSEModel.FK_Choices_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_CM_LS" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_COURSE_TEACHER" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_COURSE_TYPE_COURSE" ManuallyRouted="false" />
@@ -34,7 +34,7 @@
         <AssociationConnector Association="QL_COURSEModel.FK_FEEDBACK_ORDER_COURSE" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.FK_GRADES_USER_COURSE" ManuallyRouted="false" />
         <AssociationConnector Association="QL_COURSEModel.ORDER_COURSE_USER_COURSE" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_COURSEModel.FK__Questions__QuizI__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_COURSEModel.FK_Questions_Quiz" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
