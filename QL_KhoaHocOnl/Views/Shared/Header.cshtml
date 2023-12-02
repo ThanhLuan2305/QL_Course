@@ -13,14 +13,15 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="/home/index">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/course/index">Khóa học</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/teacher/index">Teachers</a></li>
+                    <li id="callTeacher" class="nav-item"><a class="nav-link" href="/teacher/teacherapi">Giảng viên</a></li>
                     <li class="nav-item"><a class="nav-link" href="/blog/index">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Quizz/SelectQuizz">QUIZZE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact/index">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Quizz/SelectQuizz">Kiểm tra</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng (@ViewBag.TotalQuantity)</a></li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-top:5px">
                         <form class="d-flex flex-row flex-wrap"
                               action="/course/index">
                             <input type="search"
@@ -35,12 +36,31 @@
                     @if (Request.Cookies["User"] != null)
                     {
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/account/detailuser?id=@Int32.Parse(Request.Cookies["User"]["ID"])">@Session["Fullname"]</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/account/Logout">Đăng xuất</a>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="avatar avatar-md"><img style="width:50px; height:50px; border-radius:50%" class="avatar-img" src="~/Assets/Clients/assets/img/avatars/8.jpg" alt="user@email.com"></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end pt-0 " style="padding:10px 0; left:-60px!important">
+                                <div class="dropdown-header bg-light py-2">
+                                    <div class="fw-semibold text-white">Tài khoản</div>
+                                </div>
+                                <a class="dropdown-item" href="/account/detailuser?id=@Int32.Parse(Request.Cookies["User"]["ID"])">
+                                    <svg style="width:20px; height:20px" class="icon me-2">
+                                        <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-user"></use>
+                                    </svg> Thông tin
+                                </a>
+                                <a class="dropdown-item" href="/order/checkout">
+                                    <svg style="width:20px; height:20px" class="icon me-2">
+                                        <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-user"></use>
+                                    </svg> Khóa học
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/account/Logout">
+                                    <svg style="width:20px; height:20px" class="icon me-2">
+                                        <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-account-logout"></use>
+                                    </svg> Đăng xuất
+                                </a>
+                            </div>
                         </li>
                     }
                     else
@@ -52,8 +72,9 @@
                             <a class="nav-link" href="/account/Register">Đăng ký</a>
                         </li>
                     }
+
                 </ul>
-            </div>
+        </div>
         </div>
     </nav>
 </header>

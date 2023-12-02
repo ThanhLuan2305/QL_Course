@@ -41,8 +41,8 @@
                 <div class="course-meta-bot">
                     <div class="row">
                         <div class="col-6" style="text-align:center; margin:0 !important;">
-                            <p>
-                                @Html.DisplayFor(modelItem => item.PRICE_COURSE, new { @class = "fixmargin" }) VND
+                            <p style="font-weight:600; margin:10px 0 !important; color:red">
+                                @string.Format("{0:0,0 VND}", item.PRICE_COURSE)
                             </p>
                         </div>
                         <div class="col-6">

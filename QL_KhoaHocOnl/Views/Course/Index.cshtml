@@ -13,7 +13,8 @@
         font-weight:500;
     }
     .fixmargin {
-        margin: 0 !important;
+        margin: 10px !important;
+        font-weight: 600;
     }
     h2 {
         margin: 5px 0 !important
@@ -79,12 +80,20 @@
                         <div class="course-meta-bot">
                             <div class="row">
                                 <div class="col-6" style="text-align:center; margin:0 !important;">
-                                    <p>
-                                        @Html.DisplayFor(modelItem => item.PRICE_COURSE, new { @class = "fixmargin" }) VND
+                                    <p class="fixmargin text-danger">
+                                        @string.Format("{0:0,0 VND}", item.PRICE_COURSE)
                                     </p>
                                 </div>
                                 @{
-                                    if (Session["checkCart"] != "0")
+                                    if (Request.Cookies["User"] != null && Session["checkCart"] != "0")
+                                    {
+                                        Session["checkCart"] = "0";
+                                        <script>
+
+                                            window.alert("Sản phẩm đã mua");
+                                        </script>
+                                    }
+                                    else if (Session["checkCart"] != "0")
                                     {
                                         Session["checkCart"] = "0";
                                         <script>

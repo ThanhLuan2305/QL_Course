@@ -18,11 +18,5 @@ namespace QL_KhoaHocOnl.Models
         public string ID_COURSE { get; set; }
     
         public virtual USER_COURSE USER_COURSE { get; set; }
-        public CART_OF_USER() { }
-        public CART_OF_USER(string Course, int id)
-        {
-            ID_USER = id;
-            ID_COURSE = Course;
-        }
     }
 }

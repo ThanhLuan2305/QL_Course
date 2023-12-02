@@ -1,11 +1,11 @@
 ﻿@model QL_KhoaHocOnl.Models.USER_COURSE
 
 @{
-    ViewBag.Title = "DetailUser";
+    ViewBag.Title = "Detail User";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<div class="container">
+<div class="container mt-4">
     <section style="background-color: #eee;">
         <div class="card card-body">
             <div class="row">
@@ -44,7 +44,7 @@
                                     <p class="mb-0">Tên đăng nhập</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.USERNAME)</p>
+                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.USERNAME) </p>
                                 </div>
                             </div>
                             <hr>
@@ -53,7 +53,7 @@
                                     <p class="mb-0">Mật khẩu</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.PASSWORD)</p>
+                                    <p class="text-muted mb-0">*************@*@Html.DisplayFor(model => model.PASSWORD)*@ <span class="mx-3"><a href="/Account/ChangePassword?id=@Int32.Parse(Request.Cookies["User"]["ID"])">Đổi mật khẩu</a></span></p>
                                 </div>
                             </div>
                             <hr>
@@ -71,7 +71,19 @@
                                     <p class="mb-0">Số điện thoại</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.PHONE_USER)</p>
+
+                                    @if (@Html.DisplayFor(model => model.PHONE_USER) == null)
+                                    {
+                                        <p class="text-muted mb-0">
+                                            Chưa có thông tin
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-0">
+                                            @Html.DisplayFor(model => model.PHONE_USER)
+                                        </p>
+                                    }
                                 </div>
                             </div>
                             <hr>
@@ -80,13 +92,25 @@
                                     <p class="mb-0">Ngày sinh</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-                                        @Convert.ToDateTime(Model.BIRTHDAY).ToString("dd/MM/yyyy")
-                                    </p>
+                                    @if (@Convert.ToDateTime(Model.BIRTHDAY).ToString("dd/MM/yyyy") == null)
+                                    {
+                                        <p class="text-muted mb-0">
+                                            Chưa có thông tin
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                <p class="text-muted mb-0">
+                                    @Convert.ToDateTime(Model.BIRTHDAY).ToString("dd/MM/yyyy")
+                                </p>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <a href="/account/edit?id=@Int32.Parse(Request.Cookies["User"]["ID"])">Chỉnh sử thông tin</a>
                 </div>
             </div>
         </div>
@@ -102,7 +126,7 @@
             <div class="row ">
                 @{var check = 0;
                     QL_KhoaHocOnl.Models.QL_COURSEEntities db = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-                    var courses = db.COURSE.ToList();
+                    var courses = db.COURSEs.ToList();
                     var Orders = db.ORDER_COURSE.ToList();
                 }
                 @foreach (var items_Course in courses)
@@ -133,8 +157,8 @@
 
         </div>
     </section>
-    <p>
-        @Html.ActionLink("Back to List", "Index", "Home")
+    <p class="mt-4">
+        <a class="btn btn-primary" href="/Home/Index">Quay lại</a>
     </p>
 </div>
 

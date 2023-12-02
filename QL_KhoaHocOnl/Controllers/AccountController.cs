@@ -26,6 +26,43 @@ namespace QL_KhoaHocOnl.Controllers
                 return View(u);
             }
         }
+        public ActionResult Edit(int id)
+        {
+            var user = db.USER_COURSE.Find(id); 
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Edit(USER_COURSE u)
+        {
+            if (string.IsNullOrEmpty(u.FULLNAME_USER) == true)
+            {
+                ModelState.AddModelError("", "Tài Khoản không được trống");
+                return View();
+            }
+            if (u.BIRTHDAY == null)
+            {
+                ModelState.AddModelError("", "Ngày sinh không được trống");
+                return View();
+            }
+            if (string.IsNullOrEmpty(u.PHONE_USER) == true)
+            {
+                ModelState.AddModelError("", "Số điện thoại không được trống");
+                return View();
+            }
+            if (string.IsNullOrEmpty(u.STATUS_USER) == true)
+            {
+                ModelState.AddModelError("", "Trạng thái  không được trống");
+                return View();
+            }
+
+            var user = db.USER_COURSE.Find(u.ID_USER);
+            user.FULLNAME_USER = u.FULLNAME_USER;
+            user.BIRTHDAY = u.BIRTHDAY;
+            user.PHONE_USER = u.PHONE_USER;
+            user.STATUS_USER = u.STATUS_USER;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Login()
         {
             // db.Products.Add(p);
@@ -42,7 +79,6 @@ namespace QL_KhoaHocOnl.Controllers
         [HttpPost]
         public ActionResult Register(RegisterVM rgt)
         {
-            
             if (ModelState.IsValid)
             {
                 if (db.USER_COURSE.Where(x => x.ROLE_USER == "Admin").FirstOrDefault() == null)
@@ -133,7 +169,27 @@ namespace QL_KhoaHocOnl.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(PassWordVM p)
+        {
+            string pass = mahoa(p.OldPassword);
+            var u = db.USER_COURSE.Where(x => x.PASSWORD == pass).FirstOrDefault();
+            if (u == null)
+            {
+                ModelState.AddModelError("", "Mật khẩu củ không đúng");
+                return View();
+            }
+            else
+            {
+                u.PASSWORD = mahoa(p.NewPassword);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+        }
         public string mahoa(string pass)
         {
             string HashPass = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(pass.Trim(), "SHA1");

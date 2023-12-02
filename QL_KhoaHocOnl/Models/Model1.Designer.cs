@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Batolo\Desktop\web_moi\QL_Course\QL_KhoaHocOnl\Models\QL_COURSE.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Document\Hoc&Code\HocTap\HK5_Nam3\LTW\DoAn\DoAn\QL_KhoaHocOnline-main\QL_KhoaHocOnl\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

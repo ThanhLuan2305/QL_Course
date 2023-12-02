@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.Models.TEACHER>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Teacher";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 <div class="all-title-box">
     <div class="container text-center" style="padding:0 7rem;">
-        <h1>Teachers<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+        <h1>Giảng viên<span class="m_1">Đội ngủ giảng viên luôn làm việc hết mình, sôi nổi, nhiệt tình với mọi người</span></h1>
     </div>
 </div>
+
 <div id="teachers" class="section wb">
     <div class="container" style="padding:0 7rem;">
         <div class="row">
@@ -32,7 +33,7 @@
                         <div class="team-content">
                             <h3 class="title">  @Html.ActionLink(item.NAME_TEACHER, "Detail", new { id = item.ID_TEACHER })</h3>
                             <span class="post"> @Html.DisplayFor(modelItem => item.LEVEL_TEACHER)</span>
-                        </div>                                      
+                        </div>
                     </div>
                 </div>
             }

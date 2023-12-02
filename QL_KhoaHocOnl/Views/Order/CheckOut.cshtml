@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.ViewModel.CartVM>
 
 @{
-    ViewBag.Title = "Cart";
+    ViewBag.Title = "CheckOut";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
+
 @if (Session["ViewCart"] == null)
 {
-    <div class="container" style="text-align:center; height: 500px">
-        <h1 class="text-danger">@ViewBag.NoCart</h1>
-    </div>
-    
+    <p style="padding-left:20px;">@ViewBag.NoCart</p>
 }
 else
 {
@@ -18,7 +16,7 @@ else
         <!-- Shopping cart table -->
         <div class="card">
             <div class="card-header">
-                <h2>Giỏ Hàng</h2>
+                <h2>KHOÁ HỌC ĐÃ MUA</h2>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -49,32 +47,11 @@ else
                                         </div>
                                     </td>
                                     <td class="text-right font-weight-semibold align-middle p-4"> @Html.DisplayFor(modelItem => item.PRICE_COURSE)</td>
-                                    <td class="text-center align-middle px-0"><a href="@Url.Action("DeleteCart", "Cart",new { @idCourse = item.ID_COURSE})" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                <!-- / Shopping cart table -->
-
-                <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                    <div class="mt-4">
-                    </div>
-                    <div class="d-flex">
-                        <div class="text-right mt-4 mr-5">
-                        </div>
-                        <div class="text-right mt-4">
-                            <label class="text-muted font-weight-normal m-0">Total price</label>
-                            <div class="text-large"><strong>@ViewBag.Totalmoney</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="float-right">
-                    <a class="btn btn-lg btn-primary my-2" href="/Course/Index">Quay lại</a>
-                    <a class="btn btn-lg btn-success " href="@Url.Action("CheckOut", "Order")">Thanh toán</a>
-                </div>
-
             </div>
         </div>
     </div>

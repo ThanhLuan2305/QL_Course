@@ -1,0 +1,39 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.TEACHER>
+
+@{
+    ViewBag.Title = "TeacherApi";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="all-title-box">
+    <div class="container text-center" style="padding:0 7rem;">
+        <h1>Giảng viên<span class="m_1">Đội ngủ giảng viên luôn làm việc hết mình, sôi nổi, nhiệt tình với mọi người</span></h1>
+    </div>
+</div>
+
+<div id="teachers" class="section wb">
+    <div class="container" style="padding:0 7rem;">
+        <div class="row brandTable">
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+<!-- Button trigger modal -->
+<!-- Modal -->
+
+<script>
+    $(() => {
+        $('.brandTable').empty();
+        $.ajax({
+            type: 'GET',
+            url: '/api/teacherapi',
+            success: (responses) => {
+                for (var i = 0; i <= responses.length; i++) {
+                    const teachRow = responses[i];
+                    const strHTML = '<div class="col-lg-3 col-md-6 col-12"><div class="our-team"><div class="team-img"><img class="object-fit-cover" style="height:20rem" src="/Assets/images/' + teachRow.THUMBNAIL + '"><div class="social"><ul><li><a href="#" class="fa fa-facebook"></a></li><li><a href="#" class="fa fa-twitter"></a></li><li><a href="#" class="fa fa-linkedin"></a></li><li><a href="#" class="fa fa-skype"></a></li></ul></div></div><div class="team-content"><h3 class="title"><a href="/Teacher/Detail/' + teachRow.ID_TEACHER + '">' + teachRow.NAME_TEACHER + '</a></h3 ><span class="post">' + teachRow.LEVEL_TEACHER + '</span></div></div></div>'
+                    $('.brandTable').append(strHTML);
+                }
+            },
+            error: (err) => { console.log(err) }
+        })()
+    })
+</script> 

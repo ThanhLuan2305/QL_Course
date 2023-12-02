@@ -35,14 +35,6 @@
           <Property Name="ID_USER" Type="int" Nullable="false" />
           <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
         </EntityType>
-        <EntityType Name="Choices">
-          <Key>
-            <PropertyRef Name="ChoiceID" />
-          </Key>
-          <Property Name="ChoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ChoiceText" Type="nvarchar(max)" />
-          <Property Name="QuestionID" Type="int" />
-        </EntityType>
         <EntityType Name="COMMENT_LESSON">
           <Key>
             <PropertyRef Name="ID_COMMENT" />
@@ -68,6 +60,14 @@
           <Property Name="LEVEL_COURSE" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="CREATED_AT_COURSE" Type="datetime" />
           <Property Name="UPDATE_AT_COURSE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Choices">
+          <Key>
+            <PropertyRef Name="ChoiceID" />
+          </Key>
+          <Property Name="ChoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChoiceText" Type="nvarchar(max)" />
+          <Property Name="QuestionID" Type="int" />
         </EntityType>
         <EntityType Name="FEEDBACK">
           <Key>
@@ -129,16 +129,6 @@
           </Key>
           <Property Name="QuizID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuizName" Type="nvarchar" MaxLength="80" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TEACHER">
           <Key>
@@ -211,18 +201,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Choices_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
-          <End Role="Choices" Type="Self.Choices" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="QuestionID" />
-            </Principal>
-            <Dependent Role="Choices">
-              <PropertyRef Name="QuestionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CM_LS">
           <End Role="LESSON" Type="Self.LESSON" Multiplicity="1" />
           <End Role="COMMENT_LESSON" Type="Self.COMMENT_LESSON" Multiplicity="*" />
@@ -256,6 +234,18 @@
             </Principal>
             <Dependent Role="COURSE">
               <PropertyRef Name="ID_TYPECOURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Choices_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Choices" Type="Self.Choices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Choices">
+              <PropertyRef Name="QuestionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -343,53 +333,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="PRO_UPDATE_COUNTLESSONS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="PRO_UPDATE_USER_COUNT_COURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QL_COURSEModelStoreContainer">
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ARTICLE" EntityType="Self.ARTICLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Choices" EntityType="Self.Choices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMMENT_LESSON" EntityType="Self.COMMENT_LESSON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COURSE" EntityType="Self.COURSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Choices" EntityType="Self.Choices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FEEDBACK" EntityType="Self.FEEDBACK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GRADES" EntityType="Self.GRADES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LESSON" EntityType="Self.LESSON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quiz" EntityType="Self.Quiz" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEACHER" EntityType="Self.TEACHER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" Schema="dbo" store:Type="Tables" />
@@ -405,10 +363,6 @@
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
             <End Role="CART_OF_USER" EntitySet="CART_OF_USER" />
           </AssociationSet>
-          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="Choices" EntitySet="Choices" />
-          </AssociationSet>
           <AssociationSet Name="FK_CM_LS" Association="Self.FK_CM_LS">
             <End Role="LESSON" EntitySet="LESSON" />
             <End Role="COMMENT_LESSON" EntitySet="COMMENT_LESSON" />
@@ -420,6 +374,10 @@
           <AssociationSet Name="FK_COURSE_TYPE_COURSE" Association="Self.FK_COURSE_TYPE_COURSE">
             <End Role="TYPE_COURSE" EntitySet="TYPE_COURSE" />
             <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Choices" EntitySet="Choices" />
           </AssociationSet>
           <AssociationSet Name="FK_FEEDBACK_ORDER_COURSE" Association="Self.FK_FEEDBACK_ORDER_COURSE">
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
@@ -488,15 +446,6 @@
           <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="USER_COURSE" Relationship="Self.FK_CART_OF_USER_USER_COURSE" FromRole="CART_OF_USER" ToRole="USER_COURSE" />
         </EntityType>
-        <EntityType Name="Choice">
-          <Key>
-            <PropertyRef Name="ChoiceID" />
-          </Key>
-          <Property Name="ChoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChoiceText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="QuestionID" Type="Int32" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Choices_Questions" FromRole="Choices" ToRole="Questions" />
-        </EntityType>
         <EntityType Name="COMMENT_LESSON">
           <Key>
             <PropertyRef Name="ID_COMMENT" />
@@ -528,6 +477,15 @@
           <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_COURSE" FromRole="COURSE" ToRole="GRADES" />
           <NavigationProperty Name="LESSONs" Relationship="Self.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
           <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="COURSE" ToRole="ORDER_COURSE" />
+        </EntityType>
+        <EntityType Name="Choice">
+          <Key>
+            <PropertyRef Name="ChoiceID" />
+          </Key>
+          <Property Name="ChoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChoiceText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionID" Type="Int32" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Choices_Questions" FromRole="Choices" ToRole="Questions" />
         </EntityType>
         <EntityType Name="FEEDBACK">
           <Key>
@@ -601,16 +559,6 @@
           <Property Name="QuizID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuizName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Quiz" FromRole="Quiz" ToRole="Questions" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TEACHER">
           <Key>
@@ -689,18 +637,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Choices_Questions">
-          <End Role="Questions" Type="Self.Question" Multiplicity="0..1" />
-          <End Role="Choices" Type="Self.Choice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="QuestionID" />
-            </Principal>
-            <Dependent Role="Choices">
-              <PropertyRef Name="QuestionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CM_LS">
           <End Role="LESSON" Type="Self.LESSON" Multiplicity="1" />
           <End Role="COMMENT_LESSON" Type="Self.COMMENT_LESSON" Multiplicity="*" />
@@ -773,6 +709,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Choices_Questions">
+          <End Role="Questions" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="Choices" Type="Self.Choice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Choices">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FEEDBACK_ORDER_COURSE">
           <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="1" />
           <End Role="FEEDBACK" Type="Self.FEEDBACK" Multiplicity="*" />
@@ -825,16 +773,15 @@
           <EntitySet Name="Answers" EntityType="Self.Answer" />
           <EntitySet Name="ARTICLEs" EntityType="Self.ARTICLE" />
           <EntitySet Name="CART_OF_USER" EntityType="Self.CART_OF_USER" />
-          <EntitySet Name="Choices" EntityType="Self.Choice" />
           <EntitySet Name="COMMENT_LESSON" EntityType="Self.COMMENT_LESSON" />
           <EntitySet Name="COURSEs" EntityType="Self.COURSE" />
+          <EntitySet Name="Choices" EntityType="Self.Choice" />
           <EntitySet Name="FEEDBACKs" EntityType="Self.FEEDBACK" />
           <EntitySet Name="GRADES" EntityType="Self.GRADE" />
           <EntitySet Name="LESSONs" EntityType="Self.LESSON" />
           <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Quizs" EntityType="Self.Quiz" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TEACHERs" EntityType="Self.TEACHER" />
           <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" />
           <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" />
@@ -849,10 +796,6 @@
           <AssociationSet Name="FK_CART_OF_USER_USER_COURSE" Association="Self.FK_CART_OF_USER_USER_COURSE">
             <End Role="USER_COURSE" EntitySet="USER_COURSE" />
             <End Role="CART_OF_USER" EntitySet="CART_OF_USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="Choices" EntitySet="Choices" />
           </AssociationSet>
           <AssociationSet Name="FK_CM_LS" Association="Self.FK_CM_LS">
             <End Role="LESSON" EntitySet="LESSONs" />
@@ -878,6 +821,10 @@
             <End Role="COURSE" EntitySet="COURSEs" />
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
           </AssociationSet>
+          <AssociationSet Name="FK_Choices_Questions" Association="Self.FK_Choices_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Choices" EntitySet="Choices" />
+          </AssociationSet>
           <AssociationSet Name="FK_FEEDBACK_ORDER_COURSE" Association="Self.FK_FEEDBACK_ORDER_COURSE">
             <End Role="ORDER_COURSE" EntitySet="ORDER_COURSE" />
             <End Role="FEEDBACK" EntitySet="FEEDBACKs" />
@@ -896,48 +843,7 @@
           </AssociationSet>
           <FunctionImport Name="PRO_UPDATE_COUNTLESSONS" />
           <FunctionImport Name="PRO_UPDATE_USER_COUNT_COURSE" />
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QL_COURSEModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QL_COURSEModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -976,15 +882,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Choices">
-            <EntityTypeMapping TypeName="QL_COURSEModel.Choice">
-              <MappingFragment StoreEntitySet="Choices">
-                <ScalarProperty Name="ChoiceID" ColumnName="ChoiceID" />
-                <ScalarProperty Name="ChoiceText" ColumnName="ChoiceText" />
-                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="COMMENT_LESSON">
             <EntityTypeMapping TypeName="QL_COURSEModel.COMMENT_LESSON">
               <MappingFragment StoreEntitySet="COMMENT_LESSON">
@@ -1010,6 +907,15 @@
                 <ScalarProperty Name="LEVEL_COURSE" ColumnName="LEVEL_COURSE" />
                 <ScalarProperty Name="CREATED_AT_COURSE" ColumnName="CREATED_AT_COURSE" />
                 <ScalarProperty Name="UPDATE_AT_COURSE" ColumnName="UPDATE_AT_COURSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Choices">
+            <EntityTypeMapping TypeName="QL_COURSEModel.Choice">
+              <MappingFragment StoreEntitySet="Choices">
+                <ScalarProperty Name="ChoiceID" ColumnName="ChoiceID" />
+                <ScalarProperty Name="ChoiceText" ColumnName="ChoiceText" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1080,17 +986,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="QL_COURSEModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TEACHERs">
             <EntityTypeMapping TypeName="QL_COURSEModel.TEACHER">
               <MappingFragment StoreEntitySet="TEACHER">
@@ -1131,30 +1026,6 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="PRO_UPDATE_COUNTLESSONS" FunctionName="QL_COURSEModel.Store.PRO_UPDATE_COUNTLESSONS" />
           <FunctionImportMapping FunctionImportName="PRO_UPDATE_USER_COUNT_COURSE" FunctionName="QL_COURSEModel.Store.PRO_UPDATE_USER_COUNT_COURSE" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QL_COURSEModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QL_COURSEModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QL_COURSEModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QL_COURSEModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QL_COURSEModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QL_COURSEModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QL_COURSEModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QL_COURSEModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QL_COURSEModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -113,7 +113,7 @@
                                                              topuser.STATUS_USER
                                                          }
                                                         ).ToList().Take(10);
-                                        var course = (from cou in db.COURSE select cou.ID_COURSE).ToList().Count();
+                                        var course = (from cou in db.COURSEs select cou.ID_COURSE).ToList().Count();
 
                                         foreach (var item in top10user)
                                         {
