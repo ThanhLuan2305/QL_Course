@@ -35,7 +35,7 @@
 <h5>Các Khóa Học có liên quan đến Teacher: @Model.NAME_TEACHER</h5>
 <div class="row ">
     @{var check = 0;}
-    @foreach (var items_Course in Model.COURSE)
+    @foreach (var items_Course in Model.COURSEs)
     {
         if (items_Course.ID_TEACHER == Model.ID_TEACHER)
         {
@@ -62,8 +62,8 @@
 <div class="row">
     @{
         QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-        var list_ls = DB.LESSON.ToList();
-        var idcourse = DB.COURSE.ToList();
+        var list_ls = DB.LESSONs.ToList();
+        var idcourse = DB.COURSEs.ToList();
         var check_null = 0;
         foreach (var itemls in list_ls)
         {

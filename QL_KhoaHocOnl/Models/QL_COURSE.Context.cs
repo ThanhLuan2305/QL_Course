@@ -30,18 +30,20 @@ namespace QL_KhoaHocOnl.Models
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<ARTICLE> ARTICLEs { get; set; }
         public virtual DbSet<CART_OF_USER> CART_OF_USER { get; set; }
+        public virtual DbSet<Choice> Choices { get; set; }
         public virtual DbSet<COMMENT_LESSON> COMMENT_LESSON { get; set; }
         public virtual DbSet<COURSE> COURSEs { get; set; }
-        public virtual DbSet<Choice> Choices { get; set; }
         public virtual DbSet<FEEDBACK> FEEDBACKs { get; set; }
         public virtual DbSet<GRADE> GRADES { get; set; }
         public virtual DbSet<LESSON> LESSONs { get; set; }
         public virtual DbSet<ORDER_COURSE> ORDER_COURSE { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Quiz> Quizs { get; set; }
+        public virtual DbSet<QUIZZE> QUIZZES { get; set; }
         public virtual DbSet<TEACHER> TEACHERs { get; set; }
         public virtual DbSet<TYPE_COURSE> TYPE_COURSE { get; set; }
         public virtual DbSet<USER_COURSE> USER_COURSE { get; set; }
+        public virtual DbSet<vw_ARTICLE_WITH_USER> vw_ARTICLE_WITH_USER { get; set; }
     
         public virtual int PRO_UPDATE_COUNTLESSONS()
         {

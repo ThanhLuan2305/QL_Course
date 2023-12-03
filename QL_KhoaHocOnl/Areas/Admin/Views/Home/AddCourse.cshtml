@@ -54,7 +54,7 @@
                             <a>Giảng Viên</a>
                             @{
                                 QL_KhoaHocOnl.Models.QL_COURSEEntities DBGV = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-                                var gv = DBGV.TEACHER.ToList();
+                                var gv = DBGV.TEACHERs.ToList();
                                 <select class="form-control-color" name="ID_TEACHER" style="width:50%">
                                     <option selected>...</option>
                                     @foreach (var itemgv in gv)

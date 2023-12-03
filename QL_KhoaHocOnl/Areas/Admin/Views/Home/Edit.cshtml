@@ -63,7 +63,7 @@
                             @*@Html.DropDownListFor(model => model.ID_TEACHER, new SelectList(ViewBag.TEACHERs, "NAME_TEACHER", "ID_TEACHER"), "Chọn Giảng Viên", new { @class = "form-control col-md-2" })*@
                             @{
                                 QL_KhoaHocOnl.Models.QL_COURSEEntities DBGV = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-                                var gv = DBGV.TEACHER.ToList();
+                                var gv = DBGV.TEACHERs.ToList();
                                 <select class="form-control-color col-md-4 rounded" name="ID_TEACHER" style="width:50%">
                                     <option>...</option>
                                     @foreach (var itemgv in gv)

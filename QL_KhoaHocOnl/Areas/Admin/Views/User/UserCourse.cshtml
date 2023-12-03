@@ -6,6 +6,10 @@
 }
 
 <script type="text/javascript">
+    function formatDate(inputDate) {
+        var parts = inputDate.split('/');
+        return parts[2] + '-' + parts[1] + '-' + parts[0];
+    }
     $(function () {
         $("#tblUserCourse").dataTable();
         $('[id*=btnEditUserCourse]').on('click', function () {
@@ -14,12 +18,29 @@
             $('#txtFULLNAME_USER').val($(tds).eq(1).html());
             $('#txtUSERNAME').val($(tds).eq(2).html());
             $('#txtPASSWORD').val($(tds).eq(3).html());
-            $('#txtBIRTHDAY').val($(tds).eq(4).html());
+            var birthday = $(tds).eq(4).html();
+            var formattedBirthday = formatDate(birthday);
+            $('#txtBIRTHDAY').val(formattedBirthday);
             $('#txtEMAIL_USER').val($(tds).eq(5).html());
-            $('#txtPHONE_USER').val($(tds).eq(6).html());
-            $('#txtROLE_USER').val($(tds).eq(7).html());
-            $('#txtSTATUS_USER').val($(tds).eq(8).html());
+            $('#txtEMAIL_USER').val($(tds).eq(6).html());
+            $('#txtPHONE_USER').val($(tds).eq(7).html());
+            $('#txtROLE_USER').val($(tds).eq(8).html());
+            var statusValue = $(tds).eq(9).find('.badge.rounded-pill').text();
+            $('#txtSTATUS_USER').val(statusValue).change();
             $('#ModalUserCourse').modal('show');
+        });
+    });
+
+    $(function () {
+        $('[id*=btnCloseModal]').on('click', function () {
+            $('#ModalUserCourse').modal('hide')
+        });
+    });
+
+
+    $(function () {
+        $('.close').on('click', function () {
+            $('#ModalUserCourse').modal('hide');
         });
     });
 </script>
@@ -35,35 +56,35 @@
     <table class="table table-hover table-bordered" id="tblUserCourse">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ID_USER)
+                <th class="d-none">
+                    id
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FULLNAME_USER)
+                    Họ tên
+                </th>
+                <th class="d-none">
+                    Mật khẩu
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PASSWORD)
+                    Tên đăng nhập
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.USERNAME)
+                    Ngày sinh
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BIRTHDAY)
+                    Số lượng khóa học
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NUMBER_OF_COURSE)
+                    Email
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EMAIL_USER)
+                    SDT
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PHONE_USER)
+                    role
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ROLE_USER)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.STATUS_USER)
+                    trạng thái
                 </th>
                 <th>Tác vụ</th>
             </tr>
@@ -72,26 +93,16 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ID_USER)</td>
+                    <td class="d-none">@Html.DisplayFor(modelItem => item.ID_USER)</td>
                     <td>@Html.DisplayFor(modelItem => item.FULLNAME_USER)</td>
-                    <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
+                    <td class="d-none">@Html.DisplayFor(modelItem => item.PASSWORD)</td>
                     <td>@Html.DisplayFor(modelItem => item.USERNAME)</td>
-                    <td>@Html.DisplayFor(modelItem => item.BIRTHDAY)</td>
+                    <td>@Convert.ToDateTime(item.BIRTHDAY).ToString("dd/MM/yyyy")</td>
                     <td>@Html.DisplayFor(modelItem => item.NUMBER_OF_COURSE)</td>
                     <td>@Html.DisplayFor(modelItem => item.EMAIL_USER)</td>
                     <td>@Html.DisplayFor(modelItem => item.PHONE_USER)</td>
                     <td>@Html.DisplayFor(modelItem => item.ROLE_USER)</td>
-                    <td>
-                        @{if (@Html.DisplayFor(modelItem => item.STATUS_USER).ToString() == "Active")
-                            {
-                                <span style="color:green">@Html.DisplayFor(modelItem => item.STATUS_USER)</span>
-                            }
-                            else
-                            {
-                                <span style="color:red">@Html.DisplayFor(modelItem => item.STATUS_USER)</span>
-                            }
-
-                        }
+                    <td>@{if (@Html.DisplayFor(modelItem => item.STATUS_USER).ToString() == "active"){<span class="badge rounded-pill bg-success p-2">@Html.DisplayFor(modelItem => item.STATUS_USER)</span>}else{<span class="badge rounded-pill bg-danger p-2">@Html.DisplayFor(modelItem => item.STATUS_USER)</span>}}
                     </td>
                     <td>
                         <div class="d-flex">
@@ -99,7 +110,6 @@
                             <a class='btn btn-outline-secondary me-2' href="@Url.Action("DetailUser", "User")/@item.ID_USER"><i class="bi bi-card-list"></i></a>
                             <a href="@Url.Action("DeleteUserCourse","User")/@item.ID_USER" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
                                class='btn btn-outline-secondary me-2' id='btnDelete' style='margin-left:5px'><i class="bi bi-trash3"></i></a>
-
                         </div>
                     </td>
                 </tr>
@@ -132,7 +142,7 @@
                     </div>
                     <div class="form-group">
                         <label>password:</label>
-                        <input type="password" id="txtPASSWORD" name="PASSWORD" value="" class="form-control" />
+                        <input type="text" id="txtPASSWORD" name="PASSWORD" value="" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label>Ngày sinh:</label>
@@ -153,11 +163,14 @@
 
                     <div class="form-group">
                         <label>Trạng thái:</label>
-                        <input type="text" id="txtSTATUS_USER" name="STATUS_USER" value="" class="form-control" />
+                        <select id="txtSTATUS_USER" class="form-control" name="STATUS_USER">
+                            <option value="active">active</option>
+                            <option value="inactive">inactive</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="button" id="btnCloseModal" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
             </div>

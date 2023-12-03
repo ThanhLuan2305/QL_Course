@@ -101,7 +101,7 @@
         <div class="row ">
             @{var check = 0;
                 QL_KhoaHocOnl.Models.QL_COURSEEntities db = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-                var courses = db.COURSE.ToList();
+                var courses = db.COURSEs.ToList();
                 var Orders = db.ORDER_COURSE.ToList();
             }
             @foreach (var items_Course in courses)

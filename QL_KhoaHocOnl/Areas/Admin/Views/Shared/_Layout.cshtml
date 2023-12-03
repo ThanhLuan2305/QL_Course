@@ -173,6 +173,11 @@
     <script src="~/Assets/Clients/vendors/coreui/utils/js/coreui-utils.js"></script>
     <script src="~/Assets/Clients/js/main.js"></script>
     <script>
+        $(function () {
+            $('[id*=btnCloseModal]').on('click', function () {
+                $('#ModalUserCourse').modal('hide')
+            });
+        });
     </script>
 </body>
 </html>

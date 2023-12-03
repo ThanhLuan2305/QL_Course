@@ -14,7 +14,7 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         {
             using (QL_COURSEEntities db = new QL_COURSEEntities())
             {
-                return View(db.ARTICLEs.ToList());
+                return View(db.vw_ARTICLE_WITH_USER.ToList());
             }
         }
 
