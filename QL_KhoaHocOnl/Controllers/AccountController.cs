@@ -109,15 +109,16 @@ namespace QL_KhoaHocOnl.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string Username, string Password)
+        public ActionResult Login(LoginVM lg)
         {
-            Password = mahoa(Password);
-            string role = db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.ROLE_USER).FirstOrDefault();
-            if (ModelState.IsValid)
+            
+            if (ModelState. IsValid)
             {
+                string HP = mahoa(lg.Password);
+                string role = db.USER_COURSE.Where(x => x.USERNAME == lg.Username).Select(x => x.ROLE_USER).FirstOrDefault();
                 if (role == "Admin")
                 {
-                    if (db.USER_COURSE.Where(x => x.USERNAME == Username).Where(x => x.PASSWORD == Password).FirstOrDefault() != null)
+                    if (db.USER_COURSE.Where(x => x.USERNAME == lg.Username).Where(x => x.PASSWORD == HP).FirstOrDefault() != null)
                     {
 
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
@@ -127,13 +128,13 @@ namespace QL_KhoaHocOnl.Controllers
                 }
                 else
                 {
-                    if (db.USER_COURSE.Where(x => x.USERNAME == Username).Where(x => x.PASSWORD == Password).FirstOrDefault() != null)
+                    if (db.USER_COURSE.Where(x => x.USERNAME == lg.Username).Where(x => x.PASSWORD == HP).FirstOrDefault() != null)
                     {
                         HttpCookie cookie = new HttpCookie("User");
-                        cookie.Values["Username"] = Username;
-                        cookie.Values["Password"] = Password;
-                        cookie.Values["ID"] = (db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.ID_USER).FirstOrDefault()).ToString();
-                        Session["Fullname"] = db.USER_COURSE.Where(x => x.USERNAME == Username).Select(x => x.FULLNAME_USER).FirstOrDefault();
+                        cookie.Values["Username"] = lg.Username;
+                        cookie.Values["Password"] = HP;
+                        cookie.Values["ID"] = (db.USER_COURSE.Where(x => x.USERNAME == lg.Username).Select(x => x.ID_USER).FirstOrDefault()).ToString();
+                        Session["Fullname"] = db.USER_COURSE.Where(x => x.USERNAME == lg.Username).Select(x => x.FULLNAME_USER).FirstOrDefault();
                         Session["CartItem"] = db.CART_OF_USER.Join(db.COURSEs, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
                         cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(cookie);
@@ -142,6 +143,7 @@ namespace QL_KhoaHocOnl.Controllers
                     }
                     else
                     {
+                        ViewBag.Check = "Tài khoản hoặc mật khẩu không đúng!"; 
                         return View();
                     }
 

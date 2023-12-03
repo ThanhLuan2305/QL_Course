@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.ViewModel.CartVM>
 
 @{
-    ViewBag.Title = "CheckOut";
+    ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-
-@if (Session["ViewCart"] == null)
+@if (Session["ViewOrder"] == null)
 {
     <p style="padding-left:20px;">@ViewBag.NoCart</p>
 }

@@ -39,6 +39,7 @@ namespace QL_KhoaHocOnl.Models
         public virtual DbSet<ORDER_COURSE> ORDER_COURSE { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Quiz> Quizs { get; set; }
+        public virtual DbSet<QUIZZE> QUIZZES { get; set; }
         public virtual DbSet<TEACHER> TEACHERs { get; set; }
         public virtual DbSet<TYPE_COURSE> TYPE_COURSE { get; set; }
         public virtual DbSet<USER_COURSE> USER_COURSE { get; set; }

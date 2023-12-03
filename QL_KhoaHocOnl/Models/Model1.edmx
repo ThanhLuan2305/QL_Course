@@ -130,6 +130,18 @@
           <Property Name="QuizID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuizName" Type="nvarchar" MaxLength="80" />
         </EntityType>
+        <EntityType Name="QUIZZES">
+          <Key>
+            <PropertyRef Name="QUIZID" />
+          </Key>
+          <Property Name="QUIZID" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="ID_COURSE" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="QUESTION" Type="nvarchar(max)" />
+          <Property Name="DUEDATE_QUIZ" Type="datetime" />
+          <Property Name="ANSWER_TRUE" Type="nvarchar(max)" />
+          <Property Name="ANSWER_FALSE" Type="nvarchar(max)" />
+          <Property Name="POINTS_QUIZ" Type="float" />
+        </EntityType>
         <EntityType Name="TEACHER">
           <Key>
             <PropertyRef Name="ID_TEACHER" />
@@ -309,6 +321,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QUIZZES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="QUIZZES" Type="Self.QUIZZES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="QUIZZES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ORDER_COURSE_COURSE">
           <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
           <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
@@ -348,6 +372,7 @@
           <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quiz" EntityType="Self.Quiz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEACHER" EntityType="Self.TEACHER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" Schema="dbo" store:Type="Tables" />
@@ -398,6 +423,10 @@
           <AssociationSet Name="FK_Questions_Quiz" Association="Self.FK_Questions_Quiz">
             <End Role="Quiz" EntitySet="Quiz" />
             <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUIZZES_COURSE" Association="Self.FK_QUIZZES_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="QUIZZES" EntitySet="QUIZZES" />
           </AssociationSet>
           <AssociationSet Name="ORDER_COURSE_COURSE" Association="Self.ORDER_COURSE_COURSE">
             <End Role="COURSE" EntitySet="COURSE" />
@@ -476,6 +505,7 @@
           <NavigationProperty Name="TYPE_COURSE" Relationship="Self.FK_COURSE_TYPE_COURSE" FromRole="COURSE" ToRole="TYPE_COURSE" />
           <NavigationProperty Name="GRADES" Relationship="Self.FK_GRADES_COURSE" FromRole="COURSE" ToRole="GRADES" />
           <NavigationProperty Name="LESSONs" Relationship="Self.FK_LESSON_COURSE" FromRole="COURSE" ToRole="LESSON" />
+          <NavigationProperty Name="QUIZZES" Relationship="Self.FK_QUIZZES_COURSE" FromRole="COURSE" ToRole="QUIZZES" />
           <NavigationProperty Name="ORDER_COURSE" Relationship="Self.ORDER_COURSE_COURSE" FromRole="COURSE" ToRole="ORDER_COURSE" />
         </EntityType>
         <EntityType Name="Choice">
@@ -559,6 +589,19 @@
           <Property Name="QuizID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuizName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Quiz" FromRole="Quiz" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="QUIZZE">
+          <Key>
+            <PropertyRef Name="QUIZID" />
+          </Key>
+          <Property Name="QUIZID" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COURSE" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QUESTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DUEDATE_QUIZ" Type="DateTime" Precision="3" />
+          <Property Name="ANSWER_TRUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ANSWER_FALSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="POINTS_QUIZ" Type="Double" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_QUIZZES_COURSE" FromRole="QUIZZES" ToRole="COURSE" />
         </EntityType>
         <EntityType Name="TEACHER">
           <Key>
@@ -697,6 +740,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QUIZZES_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="QUIZZES" Type="Self.QUIZZE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="ID_COURSE" />
+            </Principal>
+            <Dependent Role="QUIZZES">
+              <PropertyRef Name="ID_COURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ORDER_COURSE_COURSE">
           <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
           <End Role="ORDER_COURSE" Type="Self.ORDER_COURSE" Multiplicity="*" />
@@ -782,6 +837,7 @@
           <EntitySet Name="ORDER_COURSE" EntityType="Self.ORDER_COURSE" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Quizs" EntityType="Self.Quiz" />
+          <EntitySet Name="QUIZZES" EntityType="Self.QUIZZE" />
           <EntitySet Name="TEACHERs" EntityType="Self.TEACHER" />
           <EntitySet Name="TYPE_COURSE" EntityType="Self.TYPE_COURSE" />
           <EntitySet Name="USER_COURSE" EntityType="Self.USER_COURSE" />
@@ -816,6 +872,10 @@
           <AssociationSet Name="FK_LESSON_COURSE" Association="Self.FK_LESSON_COURSE">
             <End Role="COURSE" EntitySet="COURSEs" />
             <End Role="LESSON" EntitySet="LESSONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUIZZES_COURSE" Association="Self.FK_QUIZZES_COURSE">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="QUIZZES" EntitySet="QUIZZES" />
           </AssociationSet>
           <AssociationSet Name="ORDER_COURSE_COURSE" Association="Self.ORDER_COURSE_COURSE">
             <End Role="COURSE" EntitySet="COURSEs" />
@@ -983,6 +1043,19 @@
               <MappingFragment StoreEntitySet="Quiz">
                 <ScalarProperty Name="QuizID" ColumnName="QuizID" />
                 <ScalarProperty Name="QuizName" ColumnName="QuizName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUIZZES">
+            <EntityTypeMapping TypeName="QL_COURSEModel.QUIZZE">
+              <MappingFragment StoreEntitySet="QUIZZES">
+                <ScalarProperty Name="QUIZID" ColumnName="QUIZID" />
+                <ScalarProperty Name="ID_COURSE" ColumnName="ID_COURSE" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="DUEDATE_QUIZ" ColumnName="DUEDATE_QUIZ" />
+                <ScalarProperty Name="ANSWER_TRUE" ColumnName="ANSWER_TRUE" />
+                <ScalarProperty Name="ANSWER_FALSE" ColumnName="ANSWER_FALSE" />
+                <ScalarProperty Name="POINTS_QUIZ" ColumnName="POINTS_QUIZ" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

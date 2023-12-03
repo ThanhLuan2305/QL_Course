@@ -19,6 +19,7 @@ namespace QL_KhoaHocOnl.Models
         {
             this.GRADES = new HashSet<GRADE>();
             this.LESSONs = new HashSet<LESSON>();
+            this.QUIZZES = new HashSet<QUIZZE>();
             this.ORDER_COURSE = new HashSet<ORDER_COURSE>();
         }
     
@@ -41,6 +42,8 @@ namespace QL_KhoaHocOnl.Models
         public virtual ICollection<GRADE> GRADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LESSON> LESSONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QUIZZE> QUIZZES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_COURSE> ORDER_COURSE { get; set; }
     }

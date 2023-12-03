@@ -50,24 +50,31 @@
                         </p>
                     </div>
                     @{
-                        if (Request.Cookies["User"] != null && Session["checkCart"] != "0")
+                        if (Request.Cookies["User"] != null && !Session["checkCart"].Equals("0"))
                         {
                             Session["checkCart"] = "0";
-                            <script>window.alert("Sản phẩm đã mua");</script>
-                        }
-                        else if (Session["checkCart"] != "0")
-                        {
-                            Session["checkCart"] = "0";
-                            <script>window.alert("Sản phẩm đã có trong giỏ hàng");</script>
+                            <script>
+
+                                window.alert("Sản phẩm đã mua");
+                            </script>
                         }
                         else
                         {
-                            <div class="col-6">
-                                <a href="@Url.Action("AddCart", "Cart", new { @idCourse = item.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
-                            </div>
+                            if (!Session["checkCart"].Equals("0"))
+                            {
+                                Session["checkCart"] = "0";
+                                <script>
+                                    window.alert("Sản phẩm đã có trong giỏ hàng");
+                                </script>
+                            }
+                            else
+                            {
+                                <div class="col-6">
+                                    <a href="@Url.Action("AddCart", "Cart", new { @idCourse = item.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
+                                </div>
+                            }
                         }
                     }
-
                 </div>
             </div>
         </div>
