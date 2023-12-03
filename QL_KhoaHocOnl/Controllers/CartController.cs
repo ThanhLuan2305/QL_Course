@@ -34,7 +34,7 @@ namespace QL_KhoaHocOnl.Controllers
             {
                 listCourse = new List<CartVM>();
                 Session["ViewCart"] = listCourse;
-            }
+            } 
             return listCourse;
         }
 
@@ -101,7 +101,7 @@ namespace QL_KhoaHocOnl.Controllers
         {
             List<CART_OF_USER> listCart = GetCart();
             List<CartVM> listCourse = GetViewCart();
-
+            
             if (Request.Cookies["User"] != null)
             {
                 int id = Int32.Parse(Request.Cookies["User"]["ID"]);
