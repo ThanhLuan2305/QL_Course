@@ -99,7 +99,7 @@ namespace QL_KhoaHocOnl.Controllers
                 user.FULLNAME_USER=rgt.Fullname;
                 db.USER_COURSE.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
             else
             {
