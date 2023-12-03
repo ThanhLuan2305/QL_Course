@@ -8,10 +8,11 @@ namespace QL_KhoaHocOnl.ViewModel
 {
     public class LoginVM
     {
-        [Required(ErrorMessage = "Username cannot be blank")]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
         public string Username { get; set; }
+
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Password cannot be blank")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         public string Password { get; set; }
     }
 }
