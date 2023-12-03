@@ -8,17 +8,17 @@ namespace QL_KhoaHocOnl.ViewModel
 {
     public class RegisterVM
     {
-        [Required(ErrorMessage = "Username cannot be blank")]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Password cannot be blank")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Confirm Password cannot be blank")]
-        [Compare("Password", ErrorMessage = "Password and ConfirmPassword do not match")]
+        [Required(ErrorMessage = "Nhập lại mật khẩu không được để trống")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không khớp")]
         public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage = "Email cannot be blank")]
+        [Required(ErrorMessage = "Email không được để trống")]
         [EmailAddress(ErrorMessage = "")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Username cannot be blank")]
+        [Required(ErrorMessage = "Họ tên không được để trống")]
         public string Fullname { get; set; }
     }
 }
