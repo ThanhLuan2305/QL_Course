@@ -1782,6 +1782,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Order\CheckOut.cshtml" />
+    <Content Include="Views\Cart\CartEmtity.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>
