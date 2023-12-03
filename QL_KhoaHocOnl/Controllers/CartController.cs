@@ -13,7 +13,6 @@ namespace QL_KhoaHocOnl.Controllers
     {
         QL_COURSEEntities db = new QL_COURSEEntities();
         // GET: Cart
-
         public List<CART_OF_USER> GetCart()
         {
             List<CART_OF_USER> listCart = Session["CartItem"] as List<CART_OF_USER>;
@@ -40,6 +39,7 @@ namespace QL_KhoaHocOnl.Controllers
 
         public ActionResult AddCart(string idCourse)
         {
+            Session["checkCart"] = "0";
             List<CART_OF_USER> listCart = GetCart();
             List<CartVM> listCourse = GetViewCart();
             CartVM course = listCourse.Where(item => item.ID_COURSE == idCourse).FirstOrDefault();
@@ -68,6 +68,7 @@ namespace QL_KhoaHocOnl.Controllers
                 }
                 else
                 {
+
                     CartVM itemcourse = new CartVM(idCourse, 0);
                     listCourse.Add(itemcourse);
                 }

@@ -24,7 +24,7 @@ namespace QL_KhoaHocOnl.Controllers
             return listCart;
         }
 
-        public List<CartVM> GetViewOrder()
+        public List<CartVM> GetViewCart()
         {
             List<CartVM> listCourse = Session["ViewOrder"] as List<CartVM>;
             Session["ViewOrder"] = listCourse;
@@ -36,13 +36,13 @@ namespace QL_KhoaHocOnl.Controllers
             return listCourse;
         }
 
-
         public ActionResult CheckOut()
         {
+
             if (Request.Cookies["User"] != null)
             {
                 List<CART_OF_USER> listCart = GetCart();
-                List<CartVM> listOrder = GetViewOrder();
+                List<CartVM> listCourse = GetViewCart();
                 int idUser = Int32.Parse(Request.Cookies["User"]["ID"]);
                 List<CART_OF_USER> listCourseUserNow = listCart.Where(item => item.ID_USER == idUser).ToList();
                 if (listCourseUserNow != null)
@@ -60,37 +60,21 @@ namespace QL_KhoaHocOnl.Controllers
                         db.ORDER_COURSE.Add(orderNew);
                         db.SaveChanges();
 
-                        CartVM itemcourse = new CartVM(item.ID_COURSE, idUser);
-                        listOrder.Add(itemcourse);
-
                         CART_OF_USER delItem = db.CART_OF_USER.Where(x => x.ID_COURSE == item.ID_COURSE).Where(x => x.ID_USER == idUser).FirstOrDefault();
+
                         db.CART_OF_USER.Remove(delItem);
                         db.SaveChanges();
                         listCart.Remove(delItem);
                     }
-                    Session["ViewCart"] = null;
                     Session["CartItem"] = null;
-                    return RedirectToAction("Order");
+                    return View(listCourse);
                 }
                 else
                     return RedirectToAction("Cart", "Cart");
-            }
-            else
-                return RedirectToAction("Login", "AccountController");
-        }
 
-        public ActionResult Order()
-        {
-            if (Session["ViewOrder"] == null)
-            {
-                ViewBag.NoCart = "Chưa mua khoá học";
             }
             else
-            {
-                List<CartVM> listOrder = GetViewOrder();
-                return View(listOrder);
-            }
-            return View();
+                return RedirectToAction("Login", "Account");
         }
     }
 }

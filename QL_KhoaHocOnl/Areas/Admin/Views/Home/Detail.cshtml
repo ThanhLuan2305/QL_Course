@@ -10,7 +10,7 @@
     <div class="row" style="display:flex">
         <div class="col-sm-4">
             <div class="card">
-                <img class="card-img-top" src="~/Assets/Clients/assets/img/@Html.DisplayFor(model => model.THUMBNAIL)" alt="HÌNH ẢNH">
+                <img class="card-img-top" src="~/Assets/images/@Html.DisplayFor(model => model.THUMBNAIL)" alt="HÌNH ẢNH">
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(model => model.NAME_COURSE)</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.DESCRIPTION_COURSE)</p>
@@ -82,7 +82,7 @@
 
         <div class="col-sm-4">
             <div class="card" style="height:auto">
-                <img class="card-img-top" height="614px" src="~/Assets/Clients/assets/img/@Html.DisplayFor(model => model.TEACHER.THUMBNAIL)" alt="HÌNH ẢNH">
+                <img class="card-img-top" height="614px" src="~/Assets/images/@Html.DisplayFor(model => model.TEACHER.THUMBNAIL)" alt="HÌNH ẢNH">
                 <div class="card-body">
                     <h5 class="card-title">
                         @if (@Html.DisplayFor(model => model.TEACHER.LEVEL_TEACHER).ToString() == "Giáo Sư" || @Html.DisplayFor(model => model.TEACHER.LEVEL_TEACHER).ToString() == "Phó Giáo Sư")
@@ -120,14 +120,14 @@
             </div>*@
         <div class="col-sm-4">
             <div class="row">
-                @foreach (var lesson in Model.LESSON)
+                @foreach (var lesson in Model.LESSONs)
                 {
                     if (lesson.ID_COURSE == Model.ID_COURSE)
                     {
                         <div class="card col-sm-6" style="width: 14rem;">
                             <div class="card-body">
                                 <div class="row">
-                                    <img class="card-img-top" style="width:auto;height:100px;margin:0 auto" src="~/Assets/Clients/assets/img/@lesson.THUMBNAIL" alt="Card image cap">
+                                    <img class="card-img-top" style="width:auto;height:100px;margin:0 auto" src="~/Assets/images/@lesson.THUMBNAIL" alt="Card image cap">
                                 </div>
                                 <div class="row">
                                     <h5 class="card-title">@lesson.TITLE_LESSON</h5>

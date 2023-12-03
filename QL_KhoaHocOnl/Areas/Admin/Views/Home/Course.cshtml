@@ -73,11 +73,11 @@
                     <p>@string.Format("{0:#,0}", item.PRICE_COURSE) VNĐ</p>
                 </td>
                 <td>
-                    @if (item.STATUS_COURSE == "Hoạt Động")
+                    @if (item.STATUS_COURSE == "ACTIVE")
                     {
                         <span class="badge badge-sm bg-success ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_COURSE)</span>
                     }
-                    else if (item.STATUS_COURSE == "Ngưng Hoạt Động")
+                    else if (item.STATUS_COURSE == "INACTIVE")
                     {
                         <span class="badge badge-sm bg-danger ms-auto" style="text-align:center; align-items:center">@Html.DisplayFor(modelItem => item.STATUS_COURSE)</span>
                     }
@@ -88,7 +88,7 @@
 
                 </td>
                 <td>
-                    <img src="/Content/Clients/assets/img/@Html.DisplayFor(modelItem => item.THUMBNAIL)" style="width: 100px; height:120px" />
+                    <img src="~/Assets/images/@Html.DisplayFor(modelItem => item.THUMBNAIL)" style="width: 100px; height:120px" />
                 </td>
                 <td>
                     <p>@Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)</p>
