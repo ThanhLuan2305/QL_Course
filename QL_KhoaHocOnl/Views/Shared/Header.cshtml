@@ -1,4 +1,6 @@
-﻿<header class="top-navbar">
+﻿<!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<header class="top-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -17,15 +19,24 @@
                     <li class="nav-item"><a class="nav-link" href="/blog/index">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact/index">Liên hệ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Quizz/SelectQuizz">Kiểm tra</a></li>
-                    @{if (Session["Quantity"] == "0")
-                        {
-                            <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng</a></li>
-                        }
-                        else
-                        {
-                            <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng (@Session["Quantity"])</a></li>
-                        }
-                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Cart/Cart">
+                            <i class="bi bi-cart3 position-relative" style="font-size: 1.4em;">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                                    @{ if (@ViewBag.TotalQuantity == null)
+                                        {
+                                            <span>0</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@ViewBag.TotalQuantity</span>
+                                        }
+                                    }
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </i>
+                        </a>
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
