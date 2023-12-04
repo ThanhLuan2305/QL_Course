@@ -21,7 +21,6 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Article(string THUMBNAIL, int? ID, int ID_USER, string TITLE, string CONTENT, string STATUS_ARTICLE, string TYPE_ARTICLE)
         {
-            System.Diagnostics.Debug.WriteLine(ID);
             using (QL_COURSEEntities db = new QL_COURSEEntities())
             {
                 if (ID > 0 && ID != null)

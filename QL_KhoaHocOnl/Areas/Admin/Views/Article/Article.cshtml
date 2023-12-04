@@ -29,6 +29,20 @@
             $('#myModal').modal('show');
         });
     });
+
+    
+    $(function () {
+        $('[id*=btnCloseModal]').on('click', function () {
+            $('#myModal').modal('hide')
+        });
+    });
+
+
+    $(function () {
+        $('.close').on('click', function () {
+            $('#myModal').modal('hide');
+        });
+    });
 </script>
 
 <div class="card card-body">
@@ -85,8 +99,8 @@
                     <td><span class="d-inline-block text-truncate" style="max-width: 350px;">@Html.DisplayFor(modelItem => item.CONTENT)</span></td>
                     <td><span class="badge bg-success">@Html.DisplayFor(modelItem => item.STATUS_ARTICLE)</span></td>
                     <td>@Html.DisplayFor(modelItem => item.TYPE_ARTICLE)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CREATED_AT)</td>
-                    <td>@Html.DisplayFor(modelItem => item.UPDATED_AT)</td>
+                    <td>@Convert.ToDateTime(item.CREATED_AT).ToString("dd/MM/yyyy")</td>
+                    <td>@Convert.ToDateTime(item.UPDATED_AT).ToString("dd/MM/yyyy")</td>
                     <td>
                         <div class="d-flex">
                             <a class='btn btn-outline-secondary me-2' id='btnEdit'><i class="bi bi-pencil"></i></a>
@@ -119,7 +133,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" id="hfId" name="ID" />
-                        <label>Người viết:</label>
+                        <label>Id người dùng:</label>
                         <input type="text" id="txtID_USER" name="ID_USER" value="" class="form-control" />
                     </div>
                     <div class="form-group">
@@ -141,7 +155,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="button" class="btn btn-secondary" id="btnCloseModal" data-dismiss="modal">Thoát</button>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
             </div>
