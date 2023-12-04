@@ -37,7 +37,7 @@
 <div class="row">
     @{
         QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-        var list_LS = DB.LESSONs.ToList();
+        var list_LS = DB.LESSON.ToList();
         foreach (var items in list_LS)
         {
             if (Model.ID_COURSE == items.ID_COURSE)
@@ -61,7 +61,7 @@
 <h5>Các Khóa Học khác: @Model.COURSE.NAME_COURSE</h5>
 <div class="row">
     @{
-        var List_Course = DB.COURSEs.ToList();
+        var List_Course = DB.COURSE.ToList();
         var check = 0;
     }
     @foreach (var item_course in List_Course)

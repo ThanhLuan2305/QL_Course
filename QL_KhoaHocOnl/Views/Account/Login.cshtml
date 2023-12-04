@@ -35,7 +35,6 @@
                                         <input type="password" id="form2Example22" class="form-control" name="Password" />
                                         @Html.ValidationMessageFor(temp => temp.Password, "", new { @class = "text-danger" })
                                     </div>
-                                    <p class="text-danger">@ViewBag.Check</p>  
                                     <div class="text-center">
                                         <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100" type="submit">
                                             Đăng nhập
@@ -46,7 +45,7 @@
                                         <p class="mb-0 me-2">Bạn chưa có tài khoản?</p>
                                         <a href="/Account/Register" class="btn btn-outline-danger">Đăng ký ngay</a>
                                     </div>
-                                }
+                                    }
                             </div>
                             </div>
                     </div>

@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
-<style>
-    .fixmargin {
-        margin: 10px !important;
-        font-weight: 600;
-</style>
+
 
 @foreach (var item in Model)
 {
@@ -45,36 +41,12 @@
             <div class="course-meta-bot">
                 <div class="row">
                     <div class="col-6" style="text-align:center; margin:0 !important;">
-                        <p class="fixmargin text-danger">
+                        <p style="font-weight:600; margin:10px 0 !important; color:red">
                             @string.Format("{0:0,0 VND}", item.PRICE_COURSE)
                         </p>
                     </div>
-                    @*@{
-            if (Request.Cookies["User"] != null && !Session["checkCart"].Equals("0"))
-            {
-                Session["checkCart"] = "0";
-                <script>
-
-                    window.alert("Sản phẩm đã mua");
-                </script>
-            }
-            else
-            {
-                if (!Session["checkCart"].Equals("0"))
-                {
-                    Session["checkCart"] = "0";
-                    <script>
-                        window.alert("Sản phẩm đã có trong giỏ hàng");
-                    </script>
-                }
-                else
-                {
-
-                }
-            }
-        }*@
                     <div class="col-6">
-                        <a href="@Url.Action("AddCart", "Cart", new { @idCourse = item.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
+                        <a href="#" class="btn btn-success">Thêm giỏ hàng</a>
                     </div>
                 </div>
             </div>

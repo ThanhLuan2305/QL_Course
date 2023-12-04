@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QL_KhoaHocOnl.Models.ARTICLE>
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.vw_ARTICLE_WITH_USER>
 
 @{
     ViewBag.Title = "Article";
@@ -10,6 +10,7 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/modernizr-2.6.2.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script type="text/javascript">
     $(function () {
         $("#tblCourse").dataTable();
@@ -29,6 +30,18 @@
             $('#myModal').modal('show');
         });
     });
+    
+    $(function () {
+        $('[id*=btnCloseModal]').on('click', function () {
+            $('#myModal').modal('hide')
+        });
+    });
+
+    $(function () {
+        $('.close').on('click', function () {
+            $('#myModal').modal('hide');
+        });
+    });
 </script>
 
 <div class="card card-body">
@@ -42,14 +55,14 @@
         <thead>
             <tr>
 
-                <th>
+                <th class="d-none">
                     Id
                 </th>
                 <th>
                     Tiêu đề
                 </th>
                 <th>
-                    Id người viết
+                    người viết
                 </th>
                 <th>
                     Ảnh
@@ -67,7 +80,7 @@
                     Ngày tạo
                 </th>
                 <th>
-                    Cập nhật gần nhất
+                    ngày sửa
                 </th>
                 <th>
                     Tác vụ
@@ -78,15 +91,15 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                    <td class="d-none">@Html.DisplayFor(modelItem => item.ID)</td>
                     <td>@Html.DisplayFor(modelItem => item.TITLE)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ID_USER)</td>
-                    <td><img width="70" height="70" src="~/Assets/images/@Html.DisplayFor(modelItem => item.THUMBNAIL)" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                    <td><img width="70" height="70" src="~/Images/@Html.DisplayFor(modelItem => item.THUMBNAIL)" /></td>
                     <td><span class="d-inline-block text-truncate" style="max-width: 350px;">@Html.DisplayFor(modelItem => item.CONTENT)</span></td>
                     <td><span class="badge bg-success">@Html.DisplayFor(modelItem => item.STATUS_ARTICLE)</span></td>
                     <td>@Html.DisplayFor(modelItem => item.TYPE_ARTICLE)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CREATED_AT)</td>
-                    <td>@Html.DisplayFor(modelItem => item.UPDATED_AT)</td>
+                    <td>@Convert.ToDateTime(item.CREATED_AT).ToString("dd/MM/yyyy")</td>
+                    <td>@Convert.ToDateTime(item.UPDATED_AT).ToString("dd/MM/yyyy")</td>
                     <td>
                         <div class="d-flex">
                             <a class='btn btn-outline-secondary me-2' id='btnEdit'><i class="bi bi-pencil"></i></a>
@@ -98,7 +111,6 @@
             }
         </tbody>
     </table>
-
 </div>
 
 @using (Html.BeginForm("Article", "Article", FormMethod.Post))
@@ -120,7 +132,18 @@
                     <div class="form-group">
                         <input type="hidden" id="hfId" name="ID" />
                         <label>Người viết:</label>
-                        <input type="text" id="txtID_USER" name="ID_USER" value="" class="form-control" />
+                        @{
+                            QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
+                            var course = DB.USER_COURSE.ToList();
+                            <select class="form-control" name="txtID_USER">
+                                <option selected>Lựa chọn</option>
+                                @foreach (var item in course)
+                                {
+                                    <option value="@item.ID_USER">@item.USERNAME</option>
+                                }
+                            </select>
+                        }
+                        @*<input type="text" id="txtID_USER" name="ID_USER" value="" class="form-control" />*@
                     </div>
                     <div class="form-group">
                         <label>Tiêu đề:</label>
@@ -141,7 +164,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="button" id="btnCloseModal" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
             </div>
