@@ -7,15 +7,18 @@
 <style>
     p {
         margin: 0 !important;
-        margin-bottom:5px ;
+        margin-bottom: 5px;
     }
+
     span {
-        font-weight:500;
+        font-weight: 500;
     }
+
     .fixmargin {
         margin: 10px !important;
         font-weight: 600;
     }
+
     h2 {
         margin: 5px 0 !important
     }
@@ -34,7 +37,7 @@
                     Sắp xếp
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item course-title" style="color:black !important"  href="/course/index?Sort=Up">Giá tăng dần</a></li>
+                    <li><a class="dropdown-item course-title" style="color:black !important" href="/course/index?Sort=Up">Giá tăng dần</a></li>
                     <li><a class="dropdown-item course-title" style="color:black !important" href="/course/index?Sort=Down">Giá giẩm dần</a></li>
                 </ul>
             </div>
@@ -85,7 +88,7 @@
                                     </p>
                                 </div>
                                 @{
-                                    if (Request.Cookies["User"] != null && Session["checkCart"] != "0")
+                                    if (Session["checkCart"] == "1")
                                     {
                                         Session["checkCart"] = "0";
                                         <script>
@@ -93,7 +96,7 @@
                                             window.alert("Sản phẩm đã mua");
                                         </script>
                                     }
-                                    else if (Session["checkCart"] != "0")
+                                    else if (Session["checkCart"] == "2")
                                     {
                                         Session["checkCart"] = "0";
                                         <script>
@@ -160,10 +163,10 @@
             </ul>
         </div>
         @*
-        @Html.DisplayFor(modelItem => item.STATUS_COURSE)
-        @Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)
-        @Html.DisplayFor(modelItem => item.LEVEL_COURSE)
-        @Html.DisplayFor(modelItem => item.CREATED_AT_COURSE)
-        @Html.DisplayFor(modelItem => item.UPDATE_AT_COURSE)*@
+            @Html.DisplayFor(modelItem => item.STATUS_COURSE)
+            @Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)
+            @Html.DisplayFor(modelItem => item.LEVEL_COURSE)
+            @Html.DisplayFor(modelItem => item.CREATED_AT_COURSE)
+            @Html.DisplayFor(modelItem => item.UPDATE_AT_COURSE)*@
     </div><!-- end container -->
 </div><!-- end section -->

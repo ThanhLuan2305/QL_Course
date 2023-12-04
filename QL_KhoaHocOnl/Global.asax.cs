@@ -46,16 +46,12 @@ namespace QL_KhoaHocOnl
                     }
                     Session["ViewCart"] = listCourse;
 
-                    List<ORDER_COURSE> listOrder = db.ORDER_COURSE.Where(x => x.ID_USER == id).ToList();
-
-                    List<CartVM> listCourseOrder = new List<CartVM>();
-                    foreach (var item in listOrder)
-                    {
-                        CartVM itemcourse = new CartVM(item.ID_COURSE, item.ID_USER);
-                        listCourseOrder.Add(itemcourse);
-                    }
-                    Session["ViewOrder"] = listCourseOrder;
+                    Session["Quantity"] = db.CART_OF_USER.Where(x => x.ID_USER == id).ToList().Count();
                 }
+            }
+            else
+            {
+                HttpCookie cookie = new HttpCookie("User");
             }
         }
     }

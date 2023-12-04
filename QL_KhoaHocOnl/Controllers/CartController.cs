@@ -62,7 +62,7 @@ namespace QL_KhoaHocOnl.Controllers
                     }
                     else
                     {
-                        Session["checkCart"] = "-1";
+                        Session["checkCart"] = "1";
                         return RedirectToAction("Index", "Course");
                     }
                 }
@@ -75,7 +75,7 @@ namespace QL_KhoaHocOnl.Controllers
             }
             else
             {
-                Session["checkCart"] = "-1";
+                Session["checkCart"] = "2";
                 return RedirectToAction("Index", "Course");
             }
             return RedirectToAction("Cart");
@@ -83,18 +83,20 @@ namespace QL_KhoaHocOnl.Controllers
 
         public ActionResult Cart()
         {
+            List<CartVM> listCourse = GetViewCart();
             if (Session["ViewCart"] == null)
             {
                 ViewBag.NoCart = "Không có sản phẩm trong giỏ hàng";
             }
             else
             {
-                List<CartVM> listCourse = GetViewCart();
+               
+                Session["Quantity"] = totalQuantity().ToString();
                 ViewBag.Totalmoney = totalMoney();
-                ViewBag.TotalQuantity = totalQuantity();
+                //ViewBag.TotalQuantity = totalQuantity();
                 return View(listCourse);
             }
-            return View();
+            return View(listCourse);
         }
         public ActionResult DeleteCart(string idCourse)
         {
@@ -116,7 +118,8 @@ namespace QL_KhoaHocOnl.Controllers
                     listCourse.RemoveAll(item => item.ID_COURSE == idCourse);
                 }
             }
-
+            if (listCart.Count() == 0)
+                Session["ViewCart"] = null;
             return RedirectToAction("Cart");
         }
 

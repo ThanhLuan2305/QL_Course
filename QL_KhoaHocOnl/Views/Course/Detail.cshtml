@@ -44,8 +44,7 @@
                 <img src="~/Assets/images/@Model.THUMBNAIL" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h4 class="card-text">Học ngay giá chỉ: <span class="text-danger">@Model.PRICE_COURSE VND</span></h4>
-                    <a href="#" class="btn btn-primary">Mua ngay</a>
-                    <a href="#" class="btn btn-success">Thêm giỏ hàng</a>
+                    <a href="@Url.Action("AddCart", "Cart", new { @idCourse = @Model.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
                 </div>
             </div>
         </div>

@@ -138,7 +138,10 @@ namespace QL_KhoaHocOnl.Controllers
                         Session["CartItem"] = db.CART_OF_USER.Join(db.COURSEs, x => x.ID_COURSE, y => y.ID_COURSE, (x, y) => new { x, y }).ToList();
                         cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(cookie);
-
+                        int id = int.Parse(cookie.Values["ID"]);
+                        Session["Quantity"] = db.CART_OF_USER.Where(x => x.ID_USER == id).ToList().Count();
+                        if (Session["ViewCart"] != null)
+                            Session["ViewCart"] = null;
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -165,6 +168,9 @@ namespace QL_KhoaHocOnl.Controllers
                 Response.Cookies.Set(cookie);
 
                 Session.Abandon();
+
+                Session["checkCart"] = "0";
+                Session["Quantity"] = "0";
                 if (Request.Cookies["User"] == null)
                     return RedirectToAction("Index", "Home");
                 return RedirectToAction("Login", "Account");

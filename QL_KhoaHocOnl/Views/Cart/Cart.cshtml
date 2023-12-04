@@ -7,9 +7,9 @@
 
 
 
-@if (Session["ViewCart"] == null)
+@if (Model.Count() == 0)
 {
-    <div class="w-100 h-100 d-flex justify-content-center pt-5" style="background: rgb(252,176,69); background: linear-gradient(90deg, rgba(252,176,69,0.5354516806722689) 0%, rgba(253,232,29,0.15730042016806722) 0%); " >
+    <div class="w-100 h-100 d-flex justify-content-center pt-5" style="background: rgb(252,176,69); background: linear-gradient(90deg, rgba(252,176,69,0.5354516806722689) 0%, rgba(253,232,29,0.15730042016806722) 0%); ">
         <div class="w-25 mt-5">
             <svg viewBox="656 573 264 182" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect id="bg-line" stroke="none" fill-opacity="0.2" fill="#FFE100" fill-rule="evenodd" x="656" y="624" width="206" height="38" rx="19"></rect>
@@ -93,16 +93,18 @@ else
                                         <div class="media align-items-center">
                                             <img src="~/Assets/images/@Html.DisplayFor(modelItem => item.THUMBNAIL)" class="d-block ui-w-40 ui-bordered mr-4 img-cart" alt="">
                                             <div class="media-body">
-                                                <a href="#" class="d-block text-dark"> @Html.DisplayFor(modelItem => item.NAME_COURSE)</a>
-                                                <small>
-                                                    <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
-                                                    <span class="text-muted">Size: </span> EU 37 &nbsp;
-                                                    <span class="text-muted">Ships from: </span> China
-                                                </small>
+                                                <h1>
+                                                    <a href="#" class="d-block text-dark"> @Html.DisplayFor(modelItem => item.NAME_COURSE)</a>
+                                                </h1>
+                                                <p>@Html.DisplayFor(modelItem => item.DESCRIPTION_COURSE)</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="text-right font-weight-semibold align-middle p-4"> @Html.DisplayFor(modelItem => item.PRICE_COURSE)</td>
+                                    <td class="text-right font-weight-semibold align-middle p-2">
+                                        <p class="text-danger">
+                                            @string.Format("{0:0,0 VND}", item.PRICE_COURSE)
+                                        </p>
+                                    </td>
                                     <td class="text-center align-middle px-0"><a href="@Url.Action("DeleteCart", "Cart",new { @idCourse = item.ID_COURSE})" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
                                 </tr>
                             }
@@ -119,7 +121,12 @@ else
                         </div>
                         <div class="text-right mt-4">
                             <label class="text-muted font-weight-normal m-0">Total price</label>
-                            <div class="text-large"><strong>@ViewBag.Totalmoney</strong></div>
+                            <div class="text-large">
+                                <strong>
+                                    @string.Format("{0:0,0 VND}", @ViewBag.Totalmoney)
+
+                                </strong>
+                            </div>
                         </div>
                     </div>
                 </div>

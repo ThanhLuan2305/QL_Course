@@ -24,27 +24,13 @@ namespace QL_KhoaHocOnl.Controllers
             return listCart;
         }
 
-        public List<CartVM> GetViewCart()
-        {
-            List<CartVM> listCourse = Session["ViewOrder"] as List<CartVM>;
-            Session["ViewOrder"] = listCourse;
-            if (listCourse == null)
-            {
-                listCourse = new List<CartVM>();
-                Session["ViewOrder"] = listCourse;
-            }
-            return listCourse;
-        }
-
         public ActionResult CheckOut()
         {
-
             if (Request.Cookies["User"] != null)
             {
                 List<CART_OF_USER> listCart = GetCart();
-                List<CartVM> listCourse = GetViewCart();
                 int idUser = Int32.Parse(Request.Cookies["User"]["ID"]);
-                List<CART_OF_USER> listCourseUserNow = listCart.Where(item => item.ID_USER == idUser).ToList();
+                List<CART_OF_USER> listCourseUserNow = db.CART_OF_USER.Where(item => item.ID_USER == idUser).ToList();
                 if (listCourseUserNow != null)
                 {
                     foreach (var item in listCourseUserNow)
@@ -59,22 +45,43 @@ namespace QL_KhoaHocOnl.Controllers
 
                         db.ORDER_COURSE.Add(orderNew);
                         db.SaveChanges();
-
-                        CART_OF_USER delItem = db.CART_OF_USER.Where(x => x.ID_COURSE == item.ID_COURSE).Where(x => x.ID_USER == idUser).FirstOrDefault();
-
+                        CART_OF_USER delItem = db.CART_OF_USER.Where(x => x.ID_COURSE == item.ID_COURSE).Where(x => x.ID_USER == item.ID_USER).FirstOrDefault();
                         db.CART_OF_USER.Remove(delItem);
                         db.SaveChanges();
-                        listCart.Remove(delItem);
                     }
+                    Session["Quantity"] = "0";
+                    Session["ViewCart"] = null;
                     Session["CartItem"] = null;
-                    return View(listCourse);
+                    return RedirectToAction("Order");
                 }
                 else
                     return RedirectToAction("Cart", "Cart");
-
             }
             else
                 return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult Order()
+        {
+
+            int idUser = Int32.Parse(Request.Cookies["User"]["ID"]);
+            List<ORDER_COURSE> orderUser = db.ORDER_COURSE.Where(item => item.ID_USER == idUser).ToList();
+            List<COURSE> ListOrder = new List<COURSE>();
+            foreach (var item in orderUser)
+            {
+                foreach (var itemCouse in db.COURSEs.ToList())
+                {
+                    if (itemCouse.ID_COURSE == item.ID_COURSE)
+                        ListOrder.Add(itemCouse);
+                }
+            }
+            if (ListOrder == null)
+            {
+                ViewBag.NoCart = "Chưa mua khoá học";
+                return View();
+            }
+            else
+                return View(ListOrder);
         }
     }
 }

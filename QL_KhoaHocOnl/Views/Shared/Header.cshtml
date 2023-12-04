@@ -17,7 +17,15 @@
                     <li class="nav-item"><a class="nav-link" href="/blog/index">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact/index">Liên hệ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Quizz/SelectQuizz">Kiểm tra</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng (@ViewBag.TotalQuantity)</a></li>
+                    @{if (Session["Quantity"] == "0")
+                        {
+                            <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" href="/Cart/Cart">Giỏ hàng (@Session["Quantity"])</a></li>
+                        }
+                    }
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -36,7 +44,7 @@
                     @if (Request.Cookies["User"] != null)
                     {
 
-                        <li class="nav-item dropdown" >
+                        <li class="nav-item dropdown">
                             <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar avatar-md"><img style="width:50px; height:50px; border-radius:50%" class="avatar-img" src="~/Assets/Clients/assets/img/avatars/8.jpg" alt="user@email.com"></div>
                             </a>
@@ -48,11 +56,6 @@
                                     <svg style="width:20px; height:20px" class="icon me-2">
                                         <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-user"></use>
                                     </svg> Thông tin
-                                </a>
-                                <a class="dropdown-item" href="/order/checkout">
-                                    <svg style="width:20px; height:20px" class="icon me-2 class="icon me-2">
-                                        <use xlink:href="~/Assets/Clients/vendors/coreui/icons/svg/free.svg#cil-task"></use>
-                                    </svg>Khóa học
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/account/Logout">
@@ -74,7 +77,7 @@
                     }
 
                 </ul>
-        </div>
+            </div>
         </div>
     </nav>
 </header>
