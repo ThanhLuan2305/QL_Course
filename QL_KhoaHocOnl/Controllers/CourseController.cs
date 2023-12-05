@@ -51,7 +51,9 @@ namespace QL_KhoaHocOnl.Controllers
         }
         public ActionResult Lesson(string id)
         {
-            List<LESSON> lst = db.LESSONs.Where(c => c.ID_COURSE == id).ToList();
+            //List<LESSON> lst = db.LESSONs.Where(c => c.ID_COURSE == id).ToList();
+            // Áp dụng function
+            var lst = db.fn_ShowAllLesson(id).ToList();
             int i = lst.Count;
             ViewBag.Count = i;
             return View(lst);

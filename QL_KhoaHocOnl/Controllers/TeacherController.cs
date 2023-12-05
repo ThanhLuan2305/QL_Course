@@ -29,5 +29,10 @@ namespace QL_KHOnl_CF.Controllers
             TEACHER t = db.TEACHERs.Where(x => x.ID_TEACHER == id).FirstOrDefault();    
             return View(teacher);
         }
+        public ActionResult CourseOfTeacher(string id)
+        {
+            var lst = db.FN_ShowCourseOfTeacher(id).ToList();  
+            return View(lst);
+        }
     }
 }

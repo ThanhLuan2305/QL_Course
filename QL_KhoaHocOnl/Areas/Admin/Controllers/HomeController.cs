@@ -72,7 +72,8 @@ namespace QL_KhoaHocOnl.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                db.COURSEs.Add(course);
+                //db.COURSEs.Add(course);
+                db.AddNewCourse(course.ID_COURSE, course.ID_TYPECOURSE, course.ID_TEACHER, course.NAME_COURSE, course.DESCRIPTION_COURSE, course.PRICE_COURSE, course.STATUS_COURSE, course.THUMBNAIL, course.COUNT_LESSON_COURSE, course.LEVEL_COURSE);
                 db.SaveChanges();
                 return RedirectToAction("Course");
             }

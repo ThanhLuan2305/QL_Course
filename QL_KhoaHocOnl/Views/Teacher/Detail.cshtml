@@ -17,7 +17,16 @@
             <p>Mô tả: @Model.DESCRIPTION_TEACHER</p>
         </div>
     </div>
+    <hr />
+    <div class="row marginTopM">
+        <div class="title marginBotM">
+            <h3 style="text-align:center">Khóa học của giáo viên </h3>
+        </div>
+        @{
 
+            Html.RenderAction("CourseOfTeacher");
+        }
+    </div><!-- end row -->
     <p class="mt-2">
         <a class="btn btn-primary" href="\course\index">Quay lai</a>
     </p>

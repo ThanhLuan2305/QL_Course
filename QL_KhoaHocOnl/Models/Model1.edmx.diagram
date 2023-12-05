@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ee833127580443ddade0f0ae2a43cbff" Name="Diagram1">
+      <Diagram DiagramId="f011665d14284a20bc6c0c2c01a18e00" Name="Diagram1">
         <EntityTypeShape EntityType="QL_COURSEModel.Answer" Width="1.5" PointX="14.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.ARTICLE" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.CART_OF_USER" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="QL_COURSEModel.Question" Width="1.5" PointX="12" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.Quiz" Width="1.5" PointX="9.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.QUIZZE" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_COURSEModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.TEACHER" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.TYPE_COURSE" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_COURSEModel.USER_COURSE" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />

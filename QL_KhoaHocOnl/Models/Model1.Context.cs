@@ -40,9 +40,83 @@ namespace QL_KhoaHocOnl.Models
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Quiz> Quizs { get; set; }
         public virtual DbSet<QUIZZE> QUIZZES { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TEACHER> TEACHERs { get; set; }
         public virtual DbSet<TYPE_COURSE> TYPE_COURSE { get; set; }
         public virtual DbSet<USER_COURSE> USER_COURSE { get; set; }
+    
+        [DbFunction("QL_COURSEEntities", "fn_ShowAllLesson")]
+        public virtual IQueryable<fn_ShowAllLesson_Result> fn_ShowAllLesson(string iD_COURSE)
+        {
+            var iD_COURSEParameter = iD_COURSE != null ?
+                new ObjectParameter("ID_COURSE", iD_COURSE) :
+                new ObjectParameter("ID_COURSE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_ShowAllLesson_Result>("[QL_COURSEEntities].[fn_ShowAllLesson](@ID_COURSE)", iD_COURSEParameter);
+        }
+    
+        public virtual int AddNewCourse(string iD_COURSE, string iD_TYPECOURSE, string iD_TEACHER, string nAME_COURSE, string dESCRIPTION_COURSE, Nullable<double> pRICE_COURSE, string sTATUS_COURSE, string tHUMBNAIL, Nullable<int> cOUNT_LESSON_COURSE, string lEVEL_COURSE)
+        {
+            var iD_COURSEParameter = iD_COURSE != null ?
+                new ObjectParameter("ID_COURSE", iD_COURSE) :
+                new ObjectParameter("ID_COURSE", typeof(string));
+    
+            var iD_TYPECOURSEParameter = iD_TYPECOURSE != null ?
+                new ObjectParameter("ID_TYPECOURSE", iD_TYPECOURSE) :
+                new ObjectParameter("ID_TYPECOURSE", typeof(string));
+    
+            var iD_TEACHERParameter = iD_TEACHER != null ?
+                new ObjectParameter("ID_TEACHER", iD_TEACHER) :
+                new ObjectParameter("ID_TEACHER", typeof(string));
+    
+            var nAME_COURSEParameter = nAME_COURSE != null ?
+                new ObjectParameter("NAME_COURSE", nAME_COURSE) :
+                new ObjectParameter("NAME_COURSE", typeof(string));
+    
+            var dESCRIPTION_COURSEParameter = dESCRIPTION_COURSE != null ?
+                new ObjectParameter("DESCRIPTION_COURSE", dESCRIPTION_COURSE) :
+                new ObjectParameter("DESCRIPTION_COURSE", typeof(string));
+    
+            var pRICE_COURSEParameter = pRICE_COURSE.HasValue ?
+                new ObjectParameter("PRICE_COURSE", pRICE_COURSE) :
+                new ObjectParameter("PRICE_COURSE", typeof(double));
+    
+            var sTATUS_COURSEParameter = sTATUS_COURSE != null ?
+                new ObjectParameter("STATUS_COURSE", sTATUS_COURSE) :
+                new ObjectParameter("STATUS_COURSE", typeof(string));
+    
+            var tHUMBNAILParameter = tHUMBNAIL != null ?
+                new ObjectParameter("THUMBNAIL", tHUMBNAIL) :
+                new ObjectParameter("THUMBNAIL", typeof(string));
+    
+            var cOUNT_LESSON_COURSEParameter = cOUNT_LESSON_COURSE.HasValue ?
+                new ObjectParameter("COUNT_LESSON_COURSE", cOUNT_LESSON_COURSE) :
+                new ObjectParameter("COUNT_LESSON_COURSE", typeof(int));
+    
+            var lEVEL_COURSEParameter = lEVEL_COURSE != null ?
+                new ObjectParameter("LEVEL_COURSE", lEVEL_COURSE) :
+                new ObjectParameter("LEVEL_COURSE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewCourse", iD_COURSEParameter, iD_TYPECOURSEParameter, iD_TEACHERParameter, nAME_COURSEParameter, dESCRIPTION_COURSEParameter, pRICE_COURSEParameter, sTATUS_COURSEParameter, tHUMBNAILParameter, cOUNT_LESSON_COURSEParameter, lEVEL_COURSEParameter);
+        }
+    
+        public virtual ObjectResult<GetLesson_Result> GetLesson(string iD_LESSON)
+        {
+            var iD_LESSONParameter = iD_LESSON != null ?
+                new ObjectParameter("ID_LESSON", iD_LESSON) :
+                new ObjectParameter("ID_LESSON", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLesson_Result>("GetLesson", iD_LESSONParameter);
+        }
+    
+        public virtual int PRO_ShowCourseOfTeacher(string iD_TEACHER)
+        {
+            var iD_TEACHERParameter = iD_TEACHER != null ?
+                new ObjectParameter("ID_TEACHER", iD_TEACHER) :
+                new ObjectParameter("ID_TEACHER", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PRO_ShowCourseOfTeacher", iD_TEACHERParameter);
+        }
     
         public virtual int PRO_UPDATE_COUNTLESSONS()
         {
@@ -52,6 +126,119 @@ namespace QL_KhoaHocOnl.Models
         public virtual int PRO_UPDATE_USER_COUNT_COURSE()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PRO_UPDATE_USER_COUNT_COURSE");
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        [DbFunction("QL_COURSEEntities", "FN_ShowCourseOfTeacher")]
+        public virtual IQueryable<FN_ShowCourseOfTeacher_Result> FN_ShowCourseOfTeacher(string iD_TEACHER)
+        {
+            var iD_TEACHERParameter = iD_TEACHER != null ?
+                new ObjectParameter("ID_TEACHER", iD_TEACHER) :
+                new ObjectParameter("ID_TEACHER", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_ShowCourseOfTeacher_Result>("[QL_COURSEEntities].[FN_ShowCourseOfTeacher](@ID_TEACHER)", iD_TEACHERParameter);
         }
     }
 }

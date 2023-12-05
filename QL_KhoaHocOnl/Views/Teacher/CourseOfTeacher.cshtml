@@ -1,15 +1,13 @@
-﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
-
-
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.FN_ShowCourseOfTeacher_Result>
 <style>
     .fixmargin {
         margin: 10px !important;
         font-weight: 600;
     }
 </style>
-
 @foreach (var item in Model)
 {
+
     <div class="col-lg-4 col-md-6 col-12 mb-4">
         <div class="course-item">
             <div class="image-blog">
@@ -28,21 +26,6 @@
                     {
                         <p style="height:50px">@item.DESCRIPTION_COURSE</p>
                     }
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <p> Cấp: <span class="text-primary">@item.LEVEL_COURSE</span></p>
-                    </div>
-                    <div class="col-6">
-                        @if (@item.STATUS_COURSE == "ACTIVE")
-                        {
-                            <p>Tình trạng: <span class="text-success">@item.STATUS_COURSE</span> </p>
-                        }
-                        else
-                        {
-                            <p>Tình trạng: <span class="text-danger">@item.STATUS_COURSE</span> </p>
-                        }
-                    </div>
                 </div>
             </div>
             <div class="course-meta-bot">
@@ -79,4 +62,5 @@
             </div>
         </div>
     </div><!-- end col -->
+
 }
