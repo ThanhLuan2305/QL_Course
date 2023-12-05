@@ -27,7 +27,7 @@
                             <div class="row">
                                 @{
                                     QL_KhoaHocOnl.Models.QL_COURSEEntities DB = new QL_KhoaHocOnl.Models.QL_COURSEEntities();
-                                    var course = DB.COURSE.ToList();
+                                    var course = DB.COURSEs.ToList();
                                     <select class="form-control-color col-md-6 rounded-" name="ID_COURSE" style="width:80%;margin-left:10px">
                                         <option selected>...</option>
                                         @foreach (var item in course)

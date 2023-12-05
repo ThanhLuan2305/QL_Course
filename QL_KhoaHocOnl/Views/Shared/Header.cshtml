@@ -23,13 +23,13 @@
                         <a class="nav-link" href="/Cart/Cart">
                             <i class="bi bi-cart3 position-relative" style="font-size: 1.4em;">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
-                                    @{ if (@ViewBag.TotalQuantity == null)
+                                    @{ if (Session["Quantity"] == null)
                                         {
                                             <span>0</span>
                                         }
                                         else
                                         {
-                                            <span>@ViewBag.TotalQuantity</span>
+                                            <span>@Session["Quantity"]</span>
                                         }
                                     }
                                     <span class="visually-hidden">unread messages</span>

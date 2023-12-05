@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
+
+
 <style>
     .fixmargin {
         margin: 10px !important;
         font-weight: 600;
+    }
 </style>
 
 @foreach (var item in Model)
@@ -50,29 +53,29 @@
                         </p>
                     </div>
                     @*@{
-            if (Request.Cookies["User"] != null && !Session["checkCart"].Equals("0"))
-            {
-                Session["checkCart"] = "0";
-                <script>
+                            if (Request.Cookies["User"] != null && !Session["checkCart"].Equals("0"))
+                            {
+                                Session["checkCart"] = "0";
+                                <script>
 
-                    window.alert("Sản phẩm đã mua");
-                </script>
-            }
-            else
-            {
-                if (!Session["checkCart"].Equals("0"))
-                {
-                    Session["checkCart"] = "0";
-                    <script>
-                        window.alert("Sản phẩm đã có trong giỏ hàng");
-                    </script>
-                }
-                else
-                {
+                                    window.alert("Sản phẩm đã mua");
+                                </script>
+                            }
+                            else
+                            {
+                                if (!Session["checkCart"].Equals("0"))
+                                {
+                                    Session["checkCart"] = "0";
+                                    <script>
+                                        window.alert("Sản phẩm đã có trong giỏ hàng");
+                                    </script>
+                                }
+                                else
+                                {
 
-                }
-            }
-        }*@
+                                }
+                            }
+                        }*@
                     <div class="col-6">
                         <a href="@Url.Action("AddCart", "Cart", new { @idCourse = item.ID_COURSE })" class="btn btn-success">Thêm giỏ hàng</a>
                     </div>

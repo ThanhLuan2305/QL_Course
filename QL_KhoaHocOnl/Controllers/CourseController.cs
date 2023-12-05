@@ -15,16 +15,23 @@ namespace QL_KhoaHocOnl.Controllers
         {
             List<COURSE> list = db.COURSEs.Where(x=>x.NAME_COURSE.Contains(search)).ToList();
             ViewBag.TB = search;
-
             //Sort
             ViewBag.Sort = sort;    
             if (sort == "Up")
             {
                 list = list.OrderBy(x => x.PRICE_COURSE).ToList();
             }
-            else
+            else if (sort == "Down")
             {
                 list = list.OrderByDescending(x => x.PRICE_COURSE).ToList();
+            }
+            else if (sort == "UpAz")
+            {
+                list = list.OrderBy(x => x.NAME_COURSE).ToList();
+            }
+            else
+            {
+                list = list.OrderByDescending(x => x.NAME_COURSE).ToList();
             }
 
             // Paging 
@@ -52,6 +59,16 @@ namespace QL_KhoaHocOnl.Controllers
         public ActionResult DetailLesson(string id)
         {
             LESSON ls = db.LESSONs.Where(x => x.ID_LESSON == id).FirstOrDefault();
+            return View(ls);
+        }
+        public ActionResult TypeCoursePartial ()
+        {
+            List<TYPE_COURSE> ls = db.TYPE_COURSE.ToList();
+            return View(ls);
+        }
+        public ActionResult FillCourse(string id)
+        {
+            List<COURSE> ls = db.COURSEs.Where(x => x.ID_TYPECOURSE == id).ToList();
             return View(ls);
         }
     }

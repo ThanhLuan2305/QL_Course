@@ -42,7 +42,7 @@ namespace QL_KhoaHocOnl.Controllers
             Session["checkCart"] = "0";
             List<CART_OF_USER> listCart = GetCart();
             List<CartVM> listCourse = GetViewCart();
-            CartVM course = listCourse.Where(item => item.ID_COURSE == idCourse).FirstOrDefault();
+            CartVM course = listCourse.Where(item => item.ID_COURSE == idCourse).FirstOrDefault(); 
             if (course == null)
             {
                 if (Request.Cookies["User"] != null)
@@ -91,9 +91,9 @@ namespace QL_KhoaHocOnl.Controllers
             else
             {
                
-                Session["Quantity"] = totalQuantity().ToString();
+                Session["Quantity"] = totalQuantity();
                 ViewBag.Totalmoney = totalMoney();
-                //ViewBag.TotalQuantity = totalQuantity();
+                ViewBag.TotalQuantity = totalQuantity();
                 return View(listCourse);
             }
             return View(listCourse);
@@ -102,7 +102,7 @@ namespace QL_KhoaHocOnl.Controllers
         {
             List<CART_OF_USER> listCart = GetCart();
             List<CartVM> listCourse = GetViewCart();
-
+           
             if (Request.Cookies["User"] != null)
             {
                 int id = Int32.Parse(Request.Cookies["User"]["ID"]);

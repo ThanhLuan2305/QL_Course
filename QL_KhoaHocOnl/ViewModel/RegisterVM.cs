@@ -11,6 +11,7 @@ namespace QL_KhoaHocOnl.ViewModel
         [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
         public string Username { get; set; }
         [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [StringLength(50, MinimumLength = 8, ErrorMessage ="Mật khẩu phải dài từ 8 ký tự trở lên")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Nhập lại mật khẩu không được để trống")]
         [Compare("Password", ErrorMessage = "Mật khẩu không khớp")]

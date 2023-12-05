@@ -1,0 +1,11 @@
+﻿@model IEnumerable<QL_KhoaHocOnl.Models.TYPE_COURSE>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a class="dropdown-item course-title" style="color:black !important" href="/course/fillcourse/?id=@item.ID_TYPECOURSE">
+            @Html.DisplayFor(modelItem => item.NAME_TYPECOURSE)
+        </a>
+    </li>
+   
+}

@@ -1,31 +1,12 @@
 ﻿@model IEnumerable<QL_KhoaHocOnl.Models.COURSE>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "FillCourse";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
-<style>
-    p {
-        margin: 0 !important;
-        margin-bottom: 5px;
-    }
-
-    span {
-        font-weight: 500;
-    }
-
-    .fixmargin {
-        margin: 10px !important;
-        font-weight: 600;
-    }
-
-    h2 {
-        margin: 5px 0 !important
-    }
-</style>
 <div class="all-title-box">
     <div class="container text-center">
-        <h1>Khóa học<span class="m_1">Ở đây có rất nhiều khóa học hay cho bạn khám phá!</span></h1>
+        <h1>Khóa học theo loại<span class="m_1">Ở đây có rất nhiều khóa học hay cho bạn khám phá!</span></h1>
     </div>
 </div>
 <div id="overviews" class="section wb">
@@ -121,17 +102,12 @@
                                     if (Session["checkCart"] == "1")
                                     {
                                         Session["checkCart"] = "0";
-                                        <script>
-
-                                            window.alert("Sản phẩm đã mua");
-                                        </script>
+                                        <script>window.alert("Sản phẩm đã mua");</script>
                                     }
                                     else if (Session["checkCart"] == "2")
                                     {
                                         Session["checkCart"] = "0";
-                                        <script>
-                                            window.alert("Sản phẩm đã có trong giỏ hàng");
-                                        </script>
+                                        <script>window.alert("Sản phẩm đã có trong giỏ hàng");</script>
                                     }
                                     else
                                     {
@@ -146,57 +122,7 @@
                 </div><!-- end col -->
             }
         </div><!-- end row -->
-        <div style="width:50%; margin:20px auto;text-align:center">
-            @{
-                int PrevPage = ViewBag.Page - 1;
-                if (PrevPage <= 0)
-                {
-                    PrevPage = 1;
-                }
-                int NextPage = ViewBag.Page + 1;
-                if (NextPage > ViewBag.NoOfPages)
-                {
-                    NextPage = ViewBag.NoOfPages;
-                }
-            }
-            <ul class="pagination justify-content-center align-items-center">
-                <li class="page-item">
-                    <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@PrevPage">
-                        «
-                    </a>
-                </li>
-                @for (int i = 0; i < ViewBag.NoOfPages; i++)
-                {
-                    if (i + 1 == ViewBag.Page)
-                    {
-                        <li class="page-item active">
-                            <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@(i+1)">
-                                @(i+1)
-                            </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@(i+1)">
-                                @(i+1)
-                            </a>
-                        </li>
-                    }
-
-                }
-                <li class="page-item">
-                    <a class="page-link" href="/course/index?Sort=@ViewBag.Sort&page=@NextPage">
-                        »
-                    </a>
-                </li>
-            </ul>
-        </div>
-        @*
-            @Html.DisplayFor(modelItem => item.STATUS_COURSE)
-            @Html.DisplayFor(modelItem => item.COUNT_LESSON_COURSE)
-            @Html.DisplayFor(modelItem => item.LEVEL_COURSE)
-            @Html.DisplayFor(modelItem => item.CREATED_AT_COURSE)
-            @Html.DisplayFor(modelItem => item.UPDATE_AT_COURSE)*@
-    </div><!-- end container -->
-</div><!-- end section -->
+        <a class="btn btn-primary" href="/course/index">Quay lại</a>
+    </div>
+</div>
+        
